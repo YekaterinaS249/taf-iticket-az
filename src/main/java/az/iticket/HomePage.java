@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class  HomePage  extends BasePage {
-    private final String HOME_URL = "https://iticket.az/ru";
     private final String SEARCH_BUTTON = "//button[contains(@class,'search')]";
     private final String CART_BUTTON = "//button[@class='cart ico-btn']";
     private final String AUTH_BUTTON = "//button[starts-with(@class,'profile')]";
@@ -14,7 +13,7 @@ public class  HomePage  extends BasePage {
        super(driver);
     }
     public void openHomePage() {
-        driver.get(HOME_URL);
+        driver.get(BASE_URL);
     }
     public void clickSearchButton() {
         driver.findElement(By.xpath(SEARCH_BUTTON)).click();
