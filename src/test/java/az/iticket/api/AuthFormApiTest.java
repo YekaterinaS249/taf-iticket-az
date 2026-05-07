@@ -10,7 +10,7 @@ public class AuthFormApiTest {
 
     @Test
     public void testLoginWithValidCredentials() {
-        String email = "jmvqyppvieuhfsnhax@kjkpc.net";
+        String email = "cqqgslqadspnhazzkz@vtmpj.com";
         String password = "test1234";
         String body = """
                 {
@@ -54,7 +54,6 @@ public class AuthFormApiTest {
 
     @Test
     public void WithoutEmailTest() {
-        String URL = "https://api.iticket.az/ru/v5/user/auth/token";
         Faker faker = new Faker();
         String email = "";
         String password = faker.internet().password();
@@ -70,7 +69,7 @@ public class AuthFormApiTest {
                 .header("Content-Type", "application/json")
                 .body(body)
                 .when()
-                .post(URL)
+                .post(Endpoints.LOGIN_URL)
                 .then()
                 .statusCode(422)
                 .body("response[0].messages[0]", equalTo("Поле e-mail адрес обязательно для заполнения."));
@@ -79,7 +78,7 @@ public class AuthFormApiTest {
 
     @Test
     public void wrongPasswordTest() {
-        String email = "y04150568@gmail.com";
+        String email = "cqqgslqadspnhazzkz@vtmpj.com";
         String password = "12345678";
 
         String body = """
@@ -103,7 +102,7 @@ public class AuthFormApiTest {
     public void wrongEmailTest() {
         Faker faker = new Faker();
         String email = faker.internet().emailAddress();
-        String password = "katya199";
+        String password = "test1234";
         System.out.println("Email: " + email);
 
         String body = """
@@ -147,7 +146,7 @@ public class AuthFormApiTest {
 
     @Test
     public void loginWithEmailWithoutAtSymbolTest() {
-        String email = "y04150568gmail.com";
+        String email = "cqqgslqadspnhazzkzvtmpj.com";
         String password = "katya199";
         String body = """
                 {
@@ -169,7 +168,7 @@ public class AuthFormApiTest {
 
     @Test
     public void loginWithEmailWithoutDomenTest() {
-        String email = "y04150568@";
+        String email = "cqqgslqadspnhazzkz@";
         String password = "katya199";
         String body = """
                 {
@@ -211,8 +210,8 @@ public class AuthFormApiTest {
 
     @Test
     public void loginWithShortPasswordTest() {
-        String email = "y04150568@gmail.com";
-        String password = "k";
+        String email = "cqqgslqadspnhazzkz@vtmpj.com";
+        String password = "t";
         String body = """
                 {
                 "email": "%s",
@@ -232,8 +231,8 @@ public class AuthFormApiTest {
 
     @Test
     public void loginWithInvalidLenghtTest() {
-        String email = "y04150568@gmail.com";
-        String password = "katya19";
+        String email = "cqqgslqadspnhazzkz@vtmpj.com";
+        String password = "test123";
         String body = """
                 {
                 "email": "%s",
@@ -253,8 +252,8 @@ public class AuthFormApiTest {
 
     @Test
     public void loginWithLongPasswordTest() {
-        String email = "y04150568@gmail.com";
-        String password = "katya1997";
+        String email = "cqqgslqadspnhazzkz@vtmpj.com";
+        String password = "test12345";
         String body = """
                 {
                 "email": "%s",
@@ -273,7 +272,7 @@ public class AuthFormApiTest {
 
     @Test
     public void loginWithPasswordOnlySpacesTest() {
-        String email = "silantyevayekaterina@gmail.gom";
+        String email = "cqqgslqadspnhazzkz@vtmpj.com";
         String password = "        ";
         String body = """
                 {
@@ -295,7 +294,7 @@ public class AuthFormApiTest {
     @Test
     public void loginWithEmailOnlySpacesTest() {
         String email = "                               ";
-        String password = "katya199";
+        String password = "test1234";
         String body = """
                 {
                 "email": "%s",
