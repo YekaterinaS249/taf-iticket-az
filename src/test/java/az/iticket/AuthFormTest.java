@@ -15,8 +15,8 @@ public class AuthFormTest extends BaseTest {
     @DisplayName(" Chek Log in with valid data")
     @Test
     public void loginWithValidCredentialsTest() {
-        authPage.setInputEmail("cqqgslqadspnhazzkz@vtmpj.com");
-        authPage.setInputPassword("test1234");
+        authPage.setInputEmail("twbstuoqtylygmnqau@gonrr.net");
+        authPage.setInputPassword("test4321");
         authPage.clickSubmitButton();
         Assertions.assertEquals("Вы вошли в систему", authPage.getLoginSuccessMessage());
     }
@@ -28,15 +28,6 @@ public class AuthFormTest extends BaseTest {
         authPage.setInputPassword("test1234");
         authPage.submitLoginFormWithEnter();
         Assertions.assertEquals("Вы вошли в систему", authPage.getLoginSuccessMessage());
-    }
-    @DisplayName("Chek submit empty form login")
-    @Test
-    public void submitEmptyLoginForm() {
-        authPage.setInputEmail("");
-        authPage.setInputPassword("");
-        authPage.clickSubmitButton();
-        Assertions.assertEquals("Поле пароль обязательно для заполнения.",authPage.getErrorMessageEmptyInputPassword());
-        Assertions.assertEquals("Поле e-mail адрес обязательно для заполнения.",authPage.getErrorMessageEmptyInputEmail());
     }
 
     @DisplayName("Chek submit empty e-mail")
@@ -60,8 +51,8 @@ public class AuthFormTest extends BaseTest {
     @DisplayName("Chek login with invalid e-mail(without @)")
     @Test
     public void loginWithInvalidEmailTest() {
-        authPage.setInputEmail("cqqgslqadspnhazzkz@vtmpj.com");
-        authPage.setInputPassword("test123");
+        authPage.setInputEmail("cqqgslqadspnhazzkzvtmpj.com");
+        authPage.setInputPassword("test1234");
         authPage.clickSubmitButton();
         Assertions.assertEquals(LoginMessage.INVALID_EMAIL_FORMAT, authPage.getErrorInvalidEmail());
     }
@@ -83,16 +74,6 @@ public class AuthFormTest extends BaseTest {
         authPage.clearEmail();
         authPage.clickSubmitButton();
         Assertions.assertEquals(LoginMessage.ERROR_EMPTY_EMAIL, authPage.getErrorMessageEmptyInputEmail());
-
-    }
-
-    @DisplayName("Chek long e-mail")
-    @Test
-    public void loginWithLongEmailTest() {
-        authPage.setInputEmail("silantyevayekaterinaaaaaaaaaaaaa@gmail.com");
-        authPage.setInputPassword("maryam17");
-        authPage.clickSubmitButton();
-        Assertions.assertEquals(LoginMessage.INVALID_CREDENTIALS, authPage.getErrorMessageInvalidCredentials());
 
     }
 

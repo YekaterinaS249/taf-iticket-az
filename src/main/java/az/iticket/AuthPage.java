@@ -51,7 +51,7 @@ public class AuthPage extends BasePage {
     }
     public void clickCloseButton() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement closeButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(CLOSE_BUTTON)));
+        WebElement closeButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(CLOSE_BUTTON)));
         closeButton.click();
     }
     public String getErrorMessageEmptyInputEmail() {

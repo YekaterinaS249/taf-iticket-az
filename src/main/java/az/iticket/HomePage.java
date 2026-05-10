@@ -32,4 +32,22 @@ public class HomePage extends BasePage {
     public String getCopyRights() {
         return driver.findElement(By.xpath(COPY_RIGHTS)).getText();
     }
+
+    public boolean isDisplayedSearchButton() {
+        return driver.findElement(By.xpath(SEARCH_BUTTON)).isDisplayed();
+    }
+
+    public boolean isDisplayedAuthButton() {
+        return driver.findElement(By.xpath(AUTH_BUTTON)).isDisplayed();
+    }
+
+    public boolean isDisplayedCartButton() {
+        return driver.findElement(By.xpath(CART_BUTTON)).isDisplayed();
+    }
+
+    public boolean isDisplayedCopyRights() {
+        return driver.findElement(By.xpath(COPY_RIGHTS)).isDisplayed();
+    }
+
+
 }

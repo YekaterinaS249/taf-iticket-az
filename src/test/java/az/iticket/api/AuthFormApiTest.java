@@ -10,8 +10,8 @@ public class AuthFormApiTest {
 
     @Test
     public void testLoginWithValidCredentials() {
-        String email = "cqqgslqadspnhazzkz@vtmpj.com";
-        String password = "test1234";
+        String email = "twbstuoqtylygmnqau@gonrr.net";
+        String password = "test4321";
         String body = """
                 {
                 "email": "%s",
@@ -57,7 +57,6 @@ public class AuthFormApiTest {
         Faker faker = new Faker();
         String email = "";
         String password = faker.internet().password();
-        ;
         System.out.println("Password: " + password);
 
         String body = """
