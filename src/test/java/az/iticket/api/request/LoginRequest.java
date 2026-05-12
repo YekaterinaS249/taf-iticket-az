@@ -1,4 +1,4 @@
-package az.iticket.api.models.request;
+package az.iticket.api.request;
 
 public class LoginRequest {
     private String email;
