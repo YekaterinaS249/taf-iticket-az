@@ -1,5 +1,7 @@
 package az.iticket.api;
 
+import az.iticket.api.client.AuthApi;
+import az.iticket.api.models.request.LoginRequest;
 import net.datafaker.Faker;
 import org.junit.jupiter.api.Test;
 
@@ -10,19 +12,8 @@ public class AuthFormApiTest {
 
     @Test
     public void testLoginWithValidCredentials() {
-        String email = "twbstuoqtylygmnqau@gonrr.net";
-        String password = "test4321";
-        String body = """
-                {
-                "email": "%s",
-                "password": "%s"
-                }
-                """.formatted(email, password);
-        given()
-                .header("Content-Type", "application/json")
-                .body(body)
-                .when()
-                .post(Endpoints.LOGIN_URL)
+        LoginRequest loginRequest = new LoginRequest("twbstuoqtylygmnqau@gonrr.net","test4321");
+        AuthApi.login(loginRequest)
                 .then()
                 .statusCode(200)
                 .log().all();
@@ -34,19 +25,8 @@ public class AuthFormApiTest {
         Faker faker = new Faker();
         String email = faker.name().username() + "@test.com";
         String password = "";
-        System.out.println("Email: " + email);
-
-        String body = """
-                {
-                "email": "%s",
-                "password": "%s"
-                }
-                """.formatted(email, password);
-        given()
-                .header("Content-Type", "application/json")
-                .body(body)
-                .when()
-                .post(Endpoints.LOGIN_URL)
+        LoginRequest loginRequest = new LoginRequest(email,password);
+        AuthApi.login(loginRequest)
                 .then()
                 .statusCode(422)
                 .body("response[0].messages[0]", equalTo("Поле пароль обязательно для заполнения."));
@@ -57,18 +37,8 @@ public class AuthFormApiTest {
         Faker faker = new Faker();
         String email = "";
         String password = faker.internet().password();
-        System.out.println("Password: " + password);
-
-        String body = """
-                {
-                "email": "%s",
-                "password": "%s"
-                """.formatted(email, password);
-        given()
-                .header("Content-Type", "application/json")
-                .body(body)
-                .when()
-                .post(Endpoints.LOGIN_URL)
+        LoginRequest loginRequest = new LoginRequest(email,password);
+        AuthApi.login(loginRequest)
                 .then()
                 .statusCode(422)
                 .body("response[0].messages[0]", equalTo("Поле e-mail адрес обязательно для заполнения."));
@@ -77,21 +47,9 @@ public class AuthFormApiTest {
 
     @Test
     public void wrongPasswordTest() {
-        String email = "cqqgslqadspnhazzkz@vtmpj.com";
-        String password = "12345678";
+        LoginRequest loginRequest = new LoginRequest("cqqgslqadspnhazzkz@vtmpj.com","12345678");
 
-        String body = """
-                {
-                "email": "%s" ,
-                "password": "%s"
-                }
-                """.formatted(email, password);
-
-        given()
-                .header("Content-Type", "application/json")
-                .body(body)
-                .when()
-                .post(Endpoints.LOGIN_URL)
+        AuthApi.login(loginRequest)
                 .then()
                 .statusCode(403)
                 .body("response[0].messages[0]", equalTo("The provided credentials do not match our records."));
@@ -102,19 +60,8 @@ public class AuthFormApiTest {
         Faker faker = new Faker();
         String email = faker.internet().emailAddress();
         String password = "test1234";
-        System.out.println("Email: " + email);
-
-        String body = """
-                {
-                "email": "%s",
-                "password": "%s"
-                }
-                """.formatted(email, password);
-        given()
-                .header("Content-Type", "application/json")
-                .body(body)
-                .when()
-                .post(Endpoints.LOGIN_URL)
+        LoginRequest loginRequest = new LoginRequest(email,password);
+        AuthApi.login(loginRequest)
                 .then()
                 .statusCode(403)
                 .body("response[0].messages[0]", equalTo("The provided credentials do not match our records."));
@@ -124,84 +71,38 @@ public class AuthFormApiTest {
     public void loginWithoutEmailAndPasswordTest() {
         String email = "";
         String password = "";
-        String body = """
-                {
-                "email": "%s",
-                "password": "%s"
-                }
-                """.formatted(email, password);
-        given()
-                .header("Content-Type", "application/json")
-                .body(body)
-                .when()
-                .post(Endpoints.LOGIN_URL)
+        LoginRequest loginRequest = new LoginRequest(email,password);
+        AuthApi.login(loginRequest)
                 .then()
                 .statusCode(422)
                 .body("response[0].messages[0]", equalTo("Поле e-mail адрес обязательно для заполнения."))
                 .body("response[1].messages[0]", equalTo("Поле пароль обязательно для заполнения."));
 
-
     }
 
     @Test
     public void loginWithEmailWithoutAtSymbolTest() {
-        String email = "cqqgslqadspnhazzkzvtmpj.com";
-        String password = "katya199";
-        String body = """
-                {
-                "email": "%s",
-                "password": "%s"
-                }
-                """.formatted(email, password);
-        given()
-                .header("Content-Type", "application/json")
-                .body(body)
-                .when()
-                .post(Endpoints.LOGIN_URL)
-                .then()
+        LoginRequest loginRequest = new LoginRequest("cqqgslqadspnhazzkzvtmpj.com","katya199");
+                AuthApi.login(loginRequest)
+                        .then()
                 .statusCode(422)
                 .body("response[0].messages[0]", equalTo("Поле e-mail адрес должно быть действительным электронным адресом."));
-
-
     }
 
     @Test
     public void loginWithEmailWithoutDomenTest() {
-        String email = "cqqgslqadspnhazzkz@";
-        String password = "katya199";
-        String body = """
-                {
-                "email": "%s",
-                "password": "%s"
-                }
-                """.formatted(email, password);
-        given()
-                .header("Content-Type", "application/json")
-                .body(body)
-                .when()
-                .post(Endpoints.LOGIN_URL)
-                .then()
+        LoginRequest loginRequest = new LoginRequest("cqqgslqadspnhazzkz@","katya199");
+                AuthApi.login(loginRequest)
+                        .then()
                 .statusCode(422)
                 .body("response[0].messages[0]", equalTo("Поле e-mail адрес должно быть действительным электронным адресом."));
     }
 
     @Test
     public void loginWithLongEmailTest() {
-        String URL = "https://api.iticket.az/ru/v5/user/auth/token";
-        String email = "silantyevayekaterinaaaaaaaaaaaaa@gmail.com";
-        String password = "maryam17";
-        String body = """
-                {
-                "email": "%s",
-                "password": "%s"
-                }
-                """.formatted(email, password);
-        given()
-                .header("Content-Type", "application/json")
-                .body(body)
-                .when()
-                .post(URL)
-                .then()
+        LoginRequest loginRequest = new LoginRequest("silantyevayekaterinaaaaaaaaaaaaa@gmail.com","maryam17");
+                AuthApi.login(loginRequest)
+                        .then()
                 .statusCode(403)
                 .body("response[0].messages[0]", equalTo("The provided credentials do not match our records."));
 
@@ -209,20 +110,9 @@ public class AuthFormApiTest {
 
     @Test
     public void loginWithShortPasswordTest() {
-        String email = "cqqgslqadspnhazzkz@vtmpj.com";
-        String password = "t";
-        String body = """
-                {
-                "email": "%s",
-                "password": "%s"
-                }
-                """.formatted(email, password);
-        given()
-                .header("Content-Type", "application/json")
-                .body(body)
-                .when()
-                .post(Endpoints.LOGIN_URL)
-                .then()
+        LoginRequest loginRequest = new LoginRequest("cqqgslqadspnhazzkz@vtmpj.com","t");
+                AuthApi.login(loginRequest)
+                        .then()
                 .statusCode(422)
                 .body("response[0].messages[0]", equalTo("Количество символов в поле пароль должно быть не меньше 8."));
 
@@ -230,20 +120,9 @@ public class AuthFormApiTest {
 
     @Test
     public void loginWithInvalidLenghtTest() {
-        String email = "cqqgslqadspnhazzkz@vtmpj.com";
-        String password = "test123";
-        String body = """
-                {
-                "email": "%s",
-                "password": "%s"
-                }
-                """.formatted(email, password);
-        given()
-                .header("Content-Type", "application/json")
-                .body(body)
-                .when()
-                .post(Endpoints.LOGIN_URL)
-                .then()
+        LoginRequest loginRequest = new LoginRequest("cqqgslqadspnhazzkz@vtmpj.com","test123");
+                AuthApi.login(loginRequest)
+                        .then()
                 .statusCode(422)
                 .body("response[0].messages[0]", equalTo("Количество символов в поле пароль должно быть не меньше 8."));
 
@@ -251,39 +130,17 @@ public class AuthFormApiTest {
 
     @Test
     public void loginWithLongPasswordTest() {
-        String email = "cqqgslqadspnhazzkz@vtmpj.com";
-        String password = "test12345";
-        String body = """
-                {
-                "email": "%s",
-                "password": "%s"
-                }
-                """.formatted(email, password);
-        given()
-                .header("Content-Type", "application/json")
-                .body(body)
-                .when()
-                .post(Endpoints.LOGIN_URL)
-                .then()
+        LoginRequest loginRequest = new LoginRequest("cqqgslqadspnhazzkz@vtmpj.com","test12345");
+           AuthApi.login(loginRequest)
+                   .then()
                 .statusCode(403)
                 .body("response[0].messages[0]", equalTo("The provided credentials do not match our records."));
     }
 
     @Test
     public void loginWithPasswordOnlySpacesTest() {
-        String email = "cqqgslqadspnhazzkz@vtmpj.com";
-        String password = "        ";
-        String body = """
-                {
-                "email": "%s",
-                "password": "%s"
-                }
-                """.formatted(email, password);
-        given()
-                .header("Content-Type", "application/json")
-                .body(body)
-                .when()
-                .post(Endpoints.LOGIN_URL)
+        LoginRequest loginRequest = new LoginRequest("cqqgslqadspnhazzkz@vtmpj.com","           ");
+        AuthApi.login(loginRequest)
                 .then()
                 .statusCode(422)
                 .body("response[0].messages[0]", equalTo("Поле пароль обязательно для заполнения."));
@@ -292,20 +149,9 @@ public class AuthFormApiTest {
 
     @Test
     public void loginWithEmailOnlySpacesTest() {
-        String email = "                               ";
-        String password = "test1234";
-        String body = """
-                {
-                "email": "%s",
-                "password": "%s"
-                }
-                """.formatted(email, password);
-        given()
-        .header("Content-Type", "application/json")
-                .body(body)
-                .when()
-                .post(Endpoints.LOGIN_URL)
-                .then()
+       LoginRequest loginRequest = new LoginRequest("                             ","test1234");
+       AuthApi.login(loginRequest)
+               .then()
                 .statusCode(422)
                 .body("response[0].messages[0]",equalTo("Поле e-mail адрес обязательно для заполнения."));
     }
@@ -315,18 +161,8 @@ public class AuthFormApiTest {
         Faker faker = new Faker();
         String email = faker.internet().emailAddress();
         String password = faker.internet().password(8,8);
-        System.out.println(email +" " + password);
-        String body = """
-                {
-                "email": "%s",
-                "password": "%s"
-                }
-                """.formatted(email, password);
-        given()
-        .header("Content-Type", "application/json")
-                .body(body)
-                .when()
-                .post(Endpoints.LOGIN_URL)
+        LoginRequest loginRequest = new LoginRequest(email,password);
+        AuthApi.login(loginRequest)
                 .then()
                 .statusCode(403)
                 .body("response[0].messages[0]", equalTo("The provided credentials do not match our records."));
