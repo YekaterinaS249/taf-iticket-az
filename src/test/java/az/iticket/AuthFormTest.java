@@ -15,8 +15,8 @@ public class AuthFormTest extends BaseTest {
     @DisplayName(" Chek Log in with valid data")
     @Test
     public void loginWithValidCredentialsTest() {
-        authPage.setInputEmail("twbstuoqtylygmnqau@gonrr.net");
-        authPage.setInputPassword("test4321");
+        authPage.setInputEmail("silantyevakatya1@gmail.com");
+        authPage.setInputPassword("aska1234");
         authPage.clickSubmitButton();
         Assertions.assertEquals("Вы вошли в систему", authPage.getLoginSuccessMessage());
     }
@@ -24,8 +24,8 @@ public class AuthFormTest extends BaseTest {
     @DisplayName("Chek submit login form with Enter button")
     @Test
     public void submitLoginFormWithEnter() {
-        authPage.setInputEmail("cqqgslqadspnhazzkz@vtmpj.com");
-        authPage.setInputPassword("test1234");
+        authPage.setInputEmail("silantyevakatya1@gmail.com");
+        authPage.setInputPassword("aska1234");
         authPage.submitLoginFormWithEnter();
         Assertions.assertEquals("Вы вошли в систему", authPage.getLoginSuccessMessage());
     }
@@ -34,7 +34,7 @@ public class AuthFormTest extends BaseTest {
     @Test
     public void loginWithEmptyEmailTest() {
         authPage.setInputEmail("");
-        authPage.setInputPassword("test1234");
+        authPage.setInputPassword("aska1234");
         authPage.clickSubmitButton();
         Assertions.assertEquals(LoginMessage.ERROR_EMPTY_EMAIL, authPage.getErrorMessageEmptyInputEmail());
     }
@@ -55,6 +55,15 @@ public class AuthFormTest extends BaseTest {
         authPage.setInputPassword("test1234");
         authPage.clickSubmitButton();
         Assertions.assertEquals(LoginMessage.INVALID_EMAIL_FORMAT, authPage.getErrorInvalidEmail());
+    }
+
+    @DisplayName("Chek login with wrong e-mail")
+    @Test
+    public void loginWithWrongEmailTest() {
+        authPage.setInputEmail("thsmklqhnxyuqzfngl@jbsze.com");
+        authPage.setInputPassword("aska1234");
+        authPage.clickSubmitButton();
+        Assertions.assertEquals(LoginMessage.INVALID_CREDENTIALS, authPage.getErrorInvalidEmail());
     }
 
     @DisplayName("Chek login with e-mail only spaces")
@@ -80,7 +89,7 @@ public class AuthFormTest extends BaseTest {
     @DisplayName("Chek login with wrong password")
     @Test
     public void loginWithWrongPasswordTest() {
-        authPage.setInputEmail("cqqgslqadspnhazzkz@vtmpj.com");
+        authPage.setInputEmail("silantyevakatya1@gmail.com");
         authPage.setInputPassword("12345678");
         authPage.clickSubmitButton();
         Assertions.assertEquals(LoginMessage.INVALID_CREDENTIALS, authPage.getErrorMessageInvalidCredentials());
@@ -154,7 +163,7 @@ public class AuthFormTest extends BaseTest {
     @DisplayName("Chek clear input password")
     @Test
     public void clearPasswordInputTest() {
-        authPage.setInputPassword("cqqgslqadspnhazzkz@vtmpj.com");
+        authPage.setInputPassword("aska1234");
         authPage.clearPassword();
         Assertions.assertEquals("", authPage.getPasswordValue());
     }

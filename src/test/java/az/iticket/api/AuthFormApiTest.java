@@ -100,11 +100,13 @@ public class AuthFormApiTest {
 
     @Test
     public void loginWithLongEmailTest() {
-        LoginRequest loginRequest = new LoginRequest("silantyevayekaterinaaaaaaaaaaaaa@gmail.com","maryam17");
+        String email = "a".repeat(64) + "@" + "b".repeat(187) + ".com";
+        System.out.println(email);
+        LoginRequest loginRequest = new LoginRequest(email,"maryam17");
                 AuthApi.login(loginRequest)
                         .then()
-                .statusCode(403)
-                .body("response[0].messages[0]", equalTo("The provided credentials do not match our records."));
+                .statusCode(422)
+                .body("response[0].messages[1]", equalTo("Количество символов в поле e-mail адрес не может превышать 255."));
 
     }
 
