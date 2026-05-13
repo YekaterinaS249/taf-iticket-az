@@ -149,7 +149,7 @@ public class AuthFormApiTest {
 
     @Test
     public void loginWithEmailOnlySpacesTest() {
-       LoginRequest loginRequest = new LoginRequest("                             ","test1234");
+       LoginRequest loginRequest = new LoginRequest("                    ","test1234");
        AuthApi.login(loginRequest)
                .then()
                 .statusCode(422)
@@ -172,17 +172,9 @@ public class AuthFormApiTest {
     @Test
     public void errorWithoutEmailInputTest(){
         Faker faker = new Faker();
-        String password = faker.internet().password(8,8);
-        String body = """
-                {
-                "password": "%s"
-                }
-                """.formatted(password);
-        given()
-        .header("Content-Type", "application/json")
-                .body(body)
-                .when()
-                .post(Endpoints.LOGIN_URL)
+        LoginRequest loginRequest = new LoginRequest();
+        loginRequest.setPassword(faker.internet().password(8,8));
+        AuthApi.login(loginRequest)
                 .then()
                 .statusCode(422);
     }
@@ -190,17 +182,9 @@ public class AuthFormApiTest {
     @Test
     public void errorWithoutPasswordInputTest(){
         Faker faker = new Faker();
-        String email = faker.internet().emailAddress();
-        String body = """
-                {
-                "email": "%s",
-                }
-                """;
-        given()
-        .header("Content-Type", "application/json")
-                .body(body)
-                .when()
-                .post(Endpoints.LOGIN_URL)
+        LoginRequest loginRequest = new LoginRequest();
+        loginRequest.setEmail(faker.internet().emailAddress());
+        AuthApi.login(loginRequest)
                 .then()
                 .statusCode(422);
     }

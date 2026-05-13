@@ -1,5 +1,7 @@
 package az.iticket.api.request;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class LoginRequest {
     private String email;
     private String password;
