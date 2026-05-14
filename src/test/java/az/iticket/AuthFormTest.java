@@ -86,6 +86,17 @@ public class AuthFormTest extends BaseTest {
 
     }
 
+    @DisplayName("Chek login with long email")
+    @Test
+    public void loginWithLongEmailTest() {
+        String email = "a".repeat(64) + "@" + "b".repeat(187) + ".com";
+        authPage.setInputEmail(email);
+        authPage.setInputPassword("test1234");
+        authPage.clickSubmitButton();
+        Assertions.assertEquals("Количество символов в поле e-mail адрес не может превышать 255." ,authPage.getErrorMessageLongEmail());
+
+    }
+
     @DisplayName("Chek login with wrong password")
     @Test
     public void loginWithWrongPasswordTest() {
@@ -184,8 +195,10 @@ public class AuthFormTest extends BaseTest {
     @DisplayName("Chek clickable close button in Login form")
     @Test
     public void closeButtonInLoginFormTest() {
+        authPage.waitForPageReady();
         homePage.clickAuthButton();
         authPage.clickCloseButton();
+
     }
 }
 

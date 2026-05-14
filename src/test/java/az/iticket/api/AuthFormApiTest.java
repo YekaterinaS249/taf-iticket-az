@@ -12,7 +12,7 @@ public class AuthFormApiTest {
 
     @Test
     public void testLoginWithValidCredentials() {
-        LoginRequest loginRequest = new LoginRequest("twbstuoqtylygmnqau@gonrr.net","test4321");
+        LoginRequest loginRequest = new LoginRequest("silantyevakatya1@gmail.com","aska1234");
         AuthApi.login(loginRequest)
                 .then()
                 .statusCode(200)

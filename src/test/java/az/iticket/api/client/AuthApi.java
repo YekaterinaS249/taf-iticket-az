@@ -13,6 +13,6 @@ public class AuthApi {
                 .contentType(ContentType.JSON)
                 .body(request)
                 .when()
-                .post(Endpoints.LOGIN_URL);
+                .post(Endpoints.LOGIN);
     }
 }
