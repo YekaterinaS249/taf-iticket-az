@@ -11,7 +11,7 @@ public class RecoverPasswordPage extends BasePage {
     private final String RESET_FOOTER_TITLE = "//div[contains(@class,'modal-footer') and contains(.,'Помните пароль')]";
     private final String RESET_BUTTON = "//div[contains(@class,'modal-footer')]//a[normalize-space()='Войти']";
     private final String CLOSE_BUTTON = "(//button[@class='close'])[2]";
-    private final String EMPTY_INPUT_EMAIL = "//*[@aria-live='polite' and contains(.,'обязательно')]";
+    private final String EMPTY_INPUT_EMAIL_MESSAGE = "//*[@aria-live='polite' and contains(.,'обязательно')]";
     private final String INVALID_EMAIL_MESSAGE = "//div[@aria-live='polite' and contains(text(),'e-mail')]";
     private final String SUCCESS_MESSAGE = "//div[contains(text(),'Ссылка на сброс пароля была отправлена')]";
 
@@ -44,7 +44,7 @@ public class RecoverPasswordPage extends BasePage {
     }
 
     public String getErrorMessageEmptyEmail() {
-        return driver.findElement(By.xpath(EMPTY_INPUT_EMAIL)).getText();
+        return driver.findElement(By.xpath(EMPTY_INPUT_EMAIL_MESSAGE)).getText();
     }
     public String getErrorMessageInvalidEmail() {
         return driver.findElement(By.xpath(INVALID_EMAIL_MESSAGE)).getText();
