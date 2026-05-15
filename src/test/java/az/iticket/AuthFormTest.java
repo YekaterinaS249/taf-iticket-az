@@ -195,7 +195,6 @@ public class AuthFormTest extends BaseTest {
     @DisplayName("Chek clickable close button in Login form")
     @Test
     public void closeButtonInLoginFormTest() {
-        authPage.waitForPageReady();
         homePage.clickAuthButton();
         authPage.clickCloseButton();
 
