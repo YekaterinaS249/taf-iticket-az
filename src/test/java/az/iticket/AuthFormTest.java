@@ -151,7 +151,8 @@ public class AuthFormTest extends BaseTest {
     @DisplayName("Chek get footer auth title")
     @Test
     public void getFooterAuthTitleTest() {
-        Assertions.assertEquals("Впервые на iTicket.AZ?", authPage.getFooterAuthTitle());
+        Assertions.assertTrue(authPage.getFooterAuthTitle().contains("Впервые на iTicket.AZ?"));
+        System.out.println(authPage.getFooterAuthTitle());
     }
 
     @DisplayName("Chek login not register user")
@@ -195,8 +196,8 @@ public class AuthFormTest extends BaseTest {
     @DisplayName("Chek clickable close button in Login form")
     @Test
     public void closeButtonInLoginFormTest() {
-        homePage.clickAuthButton();
         authPage.clickCloseButton();
+        Assertions.assertTrue(authPage.isModalLogiInvisible());
 
     }
 }

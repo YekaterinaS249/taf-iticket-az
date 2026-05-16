@@ -2,6 +2,11 @@ package az.iticket;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class RecoverPasswordPage extends BasePage {
 
@@ -32,7 +37,7 @@ public class RecoverPasswordPage extends BasePage {
     }
 
     public String getFooterText() {
-        return driver.findElement(By.xpath(RESET_FOOTER_TITLE)).getText();
+        return driver.findElement(By.xpath(RESET_FOOTER_TITLE)).getText().trim();
     }
 
     public void clickEnterButton() {
@@ -44,14 +49,20 @@ public class RecoverPasswordPage extends BasePage {
     }
 
     public String getErrorMessageEmptyEmail() {
-        return driver.findElement(By.xpath(EMPTY_INPUT_EMAIL_MESSAGE)).getText();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement errorEmptyEmail = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(EMPTY_INPUT_EMAIL_MESSAGE)));
+        return errorEmptyEmail.getText();
     }
     public String getErrorMessageInvalidEmail() {
-        return driver.findElement(By.xpath(INVALID_EMAIL_MESSAGE)).getText();
+       WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+       WebElement errorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INVALID_EMAIL_MESSAGE)));
+       return errorMessage.getText();
     }
 
-    public String getSuccessMessage(){
-        return driver.findElement(By.xpath(SUCCESS_MESSAGE)).getText();
+    public String getSuccessMessage() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement successMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(SUCCESS_MESSAGE)));
+        return successMessage.getText();
     }
 }
 

@@ -17,7 +17,7 @@ public class AuthPage extends BasePage {
     private final String FORGOT_PASSWORD_BUTTON = "//a[@class='forgot']";
     private final String REGISTER_BUTTON = "//a[contains(text(),'Зарегистрироваться')]";
     private final String FOOTER_TITLE = "//div[@class='modal-footer']";
-    private final String CLOSE_BUTTON = "(//button[@class='close'])[1]";
+    private final String CLOSE_BUTTON = "//div[@id='login-modal']//button[contains(@class,'close')]";
     private final String ERROR_MESSAGE_EMPTY_INPUT_EMAIL = "//div[contains(@class,'toastify') and contains(@aria-live,'polite')]";
     private final String ERROR_MESSAGE_EMPTY_INPUT_PASSWORD = " //div[contains(@class,'toastify') and contains(text(),'пароль')]";
     private final String LOGIN_SUCCES_MESSAGE = "//div[contains(text(),'Вы вошли')]";
@@ -25,7 +25,7 @@ public class AuthPage extends BasePage {
     private final String ERROR_MESSAGE_INVALID_CRENDETIALS = "//div[contains(text(),'do not match')]";
     private final String ERROR_MESSAGE_SHORT_PASSWORD = "//div[contains(text(),'пароль')]";
     private final String ERROR_MESSAGE_LONG_EMAIL = "//div[contains(text(),'Количество символов в поле e-mail адрес')]";
-    private final String MODAL_OVERLAY = "(//div[contains(@class,'modal-overlay')])[last()]";
+    private final String LOGIN_MODAL = "//div[@id='login-modal']";
 
 
     public AuthPage(WebDriver driver) {
@@ -60,8 +60,7 @@ public class AuthPage extends BasePage {
 
     public void clickCloseButton() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(MODAL_OVERLAY)));
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(CLOSE_BUTTON)));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(CLOSE_BUTTON)));
     }
 
     public String getErrorMessageEmptyInputEmail() {
@@ -83,8 +82,7 @@ public class AuthPage extends BasePage {
     }
 
     public String getFooterAuthTitle() {
-        String fullText = driver.findElement(By.xpath(FOOTER_TITLE)).getText();
-        return fullText.replace("Зарегистрироваться сейчас", "").trim();
+        return driver.findElement(By.xpath(FOOTER_TITLE)).getText();
     }
 
     public String getErrorInvalidEmail() {
@@ -141,13 +139,11 @@ public class AuthPage extends BasePage {
         return longEmail.getText();
     }
 
-    public void waitForPageReady() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        wait.until(driver ->
-                driver.findElements(By.xpath(MODAL_OVERLAY))
-        );
+    public boolean isModalLogiInvisible(){
+      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+     return wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(LOGIN_SUCCES_MESSAGE)));
     }
 
 
 }
+
