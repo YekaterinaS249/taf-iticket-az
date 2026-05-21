@@ -10,8 +10,8 @@ public class HomePage extends BasePage {
     private final String AUTH_BUTTON = "//button[starts-with(@class,'profile')]";
     private final String COPY_RIGHTS = "//h1[contains(text(),'ITICKET')]";
 
-    public HomePage(WebDriver driver) {
-        super(driver);
+    public HomePage() {
+        super();
     }
 
     public void openHomePage() {

@@ -1,4 +1,4 @@
-package az.iticket.constant;
+package az.iticket.constans;
 
 public class LoginMessage {
     public static final String ERROR_EMPTY_EMAIL = "Поле e-mail адрес обязательно для заполнения.";

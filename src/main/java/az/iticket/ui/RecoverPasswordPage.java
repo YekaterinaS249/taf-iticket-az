@@ -22,8 +22,8 @@ public class RecoverPasswordPage extends BasePage {
     private final String SUCCESS_MESSAGE = "//div[contains(text(),'Ссылка на сброс пароля была отправлена')]";
 
 
-    public RecoverPasswordPage(WebDriver driver) {
-        super(driver);
+    public RecoverPasswordPage() {
+        super();
     }
     public String getTitle() {
         return driver.findElement(By.xpath(RESET_PASSWORD_TITLE)).getText();

@@ -12,9 +12,7 @@ public abstract  class BaseTest {
 
     @BeforeEach
     public void setup() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        homePage = new HomePage(driver);
+        homePage = new HomePage();
         homePage.openHomePage();
     }
     @AfterEach

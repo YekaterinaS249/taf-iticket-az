@@ -29,8 +29,8 @@ public class AuthPage extends BasePage {
     private final String LOGIN_MODAL = "//div[@id='login-modal']";
 
 
-    public AuthPage(WebDriver driver) {
-        super(driver);
+    public AuthPage() {
+        super();
     }
 
     public String getAuthTitle() {
