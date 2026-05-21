@@ -1,4 +1,4 @@
-package az.iticket.modelapi;
+package az.iticket.api.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -31,7 +31,6 @@ public class LoginRequest {
     public void setPassword(String password) {
         this.password = password;
     }
-
 }
 
 

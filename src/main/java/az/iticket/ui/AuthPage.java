@@ -1,4 +1,4 @@
-package az.iticket;
+package az.iticket.ui;
 
 import az.iticket.basepage.BasePage;
 import org.openqa.selenium.By;
