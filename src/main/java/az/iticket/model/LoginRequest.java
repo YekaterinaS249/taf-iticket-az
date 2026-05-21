@@ -1,4 +1,4 @@
-package az.iticket.api.request;
+package az.iticket.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)

@@ -1,7 +1,7 @@
 package az.iticket.api;
 
 import az.iticket.api.client.AuthApi;
-import az.iticket.api.request.LoginRequest;
+import az.iticket.model.LoginRequest;
 import net.datafaker.Faker;
 import org.junit.jupiter.api.Test;
 

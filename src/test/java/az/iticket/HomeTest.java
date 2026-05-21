@@ -3,7 +3,6 @@ package az.iticket;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 public class HomeTest extends BaseTest {
     @DisplayName("Get Copy Rights text")

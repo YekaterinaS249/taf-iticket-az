@@ -60,7 +60,7 @@ public class AuthPage extends BasePage {
 
     public void clickCloseButton() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(CLOSE_BUTTON)));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(CLOSE_BUTTON))).click();
     }
 
     public String getErrorMessageEmptyInputEmail() {
@@ -141,9 +141,8 @@ public class AuthPage extends BasePage {
 
     public boolean isModalLogiInvisible(){
       WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-     return wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(LOGIN_SUCCES_MESSAGE)));
+     return wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(LOGIN_MODAL)));
     }
-
 
 }
 
