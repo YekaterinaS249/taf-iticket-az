@@ -1,7 +1,6 @@
-package az.iticket;
+package az.iticket.ui;
 
-import az.iticket.ui.AuthPage;
-import az.iticket.ui.RecoverPasswordPage;
+import az.iticket.basetest.BaseTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

@@ -1,4 +1,4 @@
-package az.iticket;
+package az.iticket.basetest;
 
 import az.iticket.ui.HomePage;
 import org.junit.jupiter.api.AfterEach;
