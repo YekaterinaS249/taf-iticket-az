@@ -38,7 +38,6 @@ public class AuthPage extends BasePage {
     }
 
     public void setInputEmail(String text) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement inputEmail = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(INPUT_EMAIL)));
         inputEmail.sendKeys(text);
     }
@@ -60,24 +59,20 @@ public class AuthPage extends BasePage {
     }
 
     public void clickCloseButton() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(CLOSE_BUTTON))).click();
     }
 
     public String getErrorMessageEmptyInputEmail() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement errorEmail = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ERROR_MESSAGE_EMPTY_INPUT_EMAIL)));
         return errorEmail.getText();
     }
 
     public String getErrorMessageEmptyInputPassword() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement error = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ERROR_MESSAGE_EMPTY_INPUT_PASSWORD)));
         return error.getText();
     }
 
     public String getLoginSuccessMessage() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement message = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(LOGIN_SUCCES_MESSAGE)));
         return message.getText();
     }
@@ -87,19 +82,16 @@ public class AuthPage extends BasePage {
     }
 
     public String getErrorInvalidEmail() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement invalidEmail = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INVALID_EMAIL_ERROR_MESSAGE)));
         return invalidEmail.getText();
     }
 
     public String getErrorMessageInvalidCredentials() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement wrongPassword = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(ERROR_MESSAGE_INVALID_CRENDETIALS)));
         return wrongPassword.getText();
     }
 
     public String getErrorMessageShortPassword() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement shortPassword = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(ERROR_MESSAGE_SHORT_PASSWORD)));
         return shortPassword.getText();
     }

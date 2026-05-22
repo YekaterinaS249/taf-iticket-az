@@ -50,18 +50,15 @@ public class RecoverPasswordPage extends BasePage {
     }
 
     public String getErrorMessageEmptyEmail() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement errorEmptyEmail = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(EMPTY_INPUT_EMAIL_MESSAGE)));
         return errorEmptyEmail.getText();
     }
     public String getErrorMessageInvalidEmail() {
-       WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
        WebElement errorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INVALID_EMAIL_MESSAGE)));
        return errorMessage.getText();
     }
 
     public String getSuccessMessage() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement successMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(SUCCESS_MESSAGE)));
         return successMessage.getText();
     }
