@@ -7,7 +7,7 @@ public abstract class BasePage {
     protected WebDriver driver;
     protected final String BASE_URL = "https://iticket.az/ru";
 
-    public BasePage(WebDriver driver) {
+    public BasePage() {
         this.driver = DriverManager.getDriver();
     }
 }

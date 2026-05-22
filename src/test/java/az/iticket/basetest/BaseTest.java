@@ -1,5 +1,6 @@
 package az.iticket.basetest;
 
+import az.iticket.core.DriverManager;
 import az.iticket.ui.HomePage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -7,7 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public abstract  class BaseTest {
-    protected WebDriver driver;
     protected HomePage homePage;
 
     @BeforeEach
@@ -16,10 +16,8 @@ public abstract  class BaseTest {
         homePage.openHomePage();
     }
     @AfterEach
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
+        public void tearDown() {
+            DriverManager.quitDriver();
         }
     }
-}
 

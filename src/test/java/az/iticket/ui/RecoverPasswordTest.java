@@ -13,8 +13,8 @@ public class RecoverPasswordTest  extends BaseTest {
     @BeforeEach
     public void initRecoverPasswordPage() {
         homePage.clickAuthButton();
-        authPage = new AuthPage(driver);
-        recoverPasswordPage = new RecoverPasswordPage(driver);
+        authPage = new AuthPage();
+        recoverPasswordPage = new RecoverPasswordPage();
     }
 
     @DisplayName("Chek get title")

@@ -9,7 +9,6 @@ public class DriverManager {
         if (driver == null) {
             driver = new ChromeDriver();
             driver.manage().window().maximize();
-            return  driver;
         }
         return  driver;
     }
@@ -17,6 +16,7 @@ public class DriverManager {
         if (driver != null) {
             driver.quit();
         }
+        driver = null;
     }
 }
 

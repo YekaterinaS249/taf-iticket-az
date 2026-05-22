@@ -10,7 +10,7 @@ public class AuthFormTest extends BaseTest {
     @BeforeEach
     public void initAuthPage() {
         homePage.clickAuthButton();
-        authPage = new AuthPage(driver);
+        authPage = new AuthPage();
     }
 
     @DisplayName(" Chek Log in with valid data")
