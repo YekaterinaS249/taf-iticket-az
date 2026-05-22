@@ -19,7 +19,7 @@ public class AuthFormTest extends BaseTest {
         authPage.setInputEmail("silantyevakatya1@gmail.com");
         authPage.setInputPassword("aska1234");
         authPage.clickSubmitButton();
-        Assertions.assertEquals("Вы вошли в систему", authPage.getLoginSuccessMessage());
+        Assertions.assertEquals(LoginMessage.LOGIN_SUCCESS_MESSAGE, authPage.getLoginSuccessMessage());
     }
 
     @DisplayName("Chek submit login form with Enter button")
@@ -28,7 +28,7 @@ public class AuthFormTest extends BaseTest {
         authPage.setInputEmail("silantyevakatya1@gmail.com");
         authPage.setInputPassword("aska1234");
         authPage.submitLoginFormWithEnter();
-        Assertions.assertEquals("Вы вошли в систему", authPage.getLoginSuccessMessage());
+        Assertions.assertEquals(LoginMessage.LOGIN_SUCCESS_MESSAGE, authPage.getLoginSuccessMessage());
     }
 
     @DisplayName("Chek submit empty e-mail")

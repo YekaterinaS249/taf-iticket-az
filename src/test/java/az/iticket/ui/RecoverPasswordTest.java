@@ -1,6 +1,7 @@
 package az.iticket.ui;
 
 import az.iticket.basetest.BaseTest;
+import az.iticket.constans.RecoverPassMessage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -37,7 +38,7 @@ public class RecoverPasswordTest  extends BaseTest {
         authPage.clickForgotPasswordButton();
         recoverPasswordPage.setInputEmail("silantyevayekaterina@gmail.com");
         recoverPasswordPage.clickResetPasswordButton();
-        Assertions.assertEquals("Ссылка на сброс пароля была отправлена!", recoverPasswordPage.getSuccessMessage());
+        Assertions.assertEquals(RecoverPassMessage.RESET_LINK_SENT_MESSAGE, recoverPasswordPage.getSuccessMessage());
     }
 
     @DisplayName("Chek validation empty e-mail")
@@ -46,7 +47,7 @@ public class RecoverPasswordTest  extends BaseTest {
         authPage.clickForgotPasswordButton();
         recoverPasswordPage.setInputEmail("");
         recoverPasswordPage.clickResetPasswordButton();
-        Assertions.assertEquals("Поле e-mail адрес обязательно для заполнения.", recoverPasswordPage.getErrorMessageEmptyEmail());
+        Assertions.assertEquals(RecoverPassMessage.EMPTY_EMAIL_MESSAGE, recoverPasswordPage.getErrorMessageEmptyEmail());
     }
 
     @DisplayName("Chek validation e-mail without @")
@@ -55,7 +56,7 @@ public class RecoverPasswordTest  extends BaseTest {
         authPage.clickForgotPasswordButton();
         recoverPasswordPage.setInputEmail("testtest.com");
         recoverPasswordPage.clickResetPasswordButton();
-        Assertions.assertEquals("Поле e-mail адрес должно быть действительным электронным адресом.", recoverPasswordPage.getErrorMessageInvalidEmail());
+        Assertions.assertEquals(RecoverPassMessage.INVALID_EMAIL_CREDENTIALS, recoverPasswordPage.getErrorMessageInvalidEmail());
     }
 
     @DisplayName("Chek validation e-mail with double @")
@@ -64,7 +65,7 @@ public class RecoverPasswordTest  extends BaseTest {
         authPage.clickForgotPasswordButton();
         recoverPasswordPage.setInputEmail("test@@test.com");
         recoverPasswordPage.clickResetPasswordButton();
-        Assertions.assertEquals("Поле e-mail адрес должно быть действительным электронным адресом.", recoverPasswordPage.getErrorMessageInvalidEmail());
+        Assertions.assertEquals(RecoverPassMessage.INVALID_EMAIL_CREDENTIALS, recoverPasswordPage.getErrorMessageInvalidEmail());
     }
 
     @DisplayName("Chek validation e-mail without domen")
@@ -74,7 +75,7 @@ public class RecoverPasswordTest  extends BaseTest {
         recoverPasswordPage.setInputEmail("test@");
         recoverPasswordPage.clickResetPasswordButton();
         recoverPasswordPage.clickResetPasswordButton();
-        Assertions.assertEquals("Поле e-mail адрес должно быть действительным электронным адресом.", recoverPasswordPage.getErrorMessageInvalidEmail());
+        Assertions.assertEquals(RecoverPassMessage.INVALID_EMAIL_CREDENTIALS, recoverPasswordPage.getErrorMessageInvalidEmail());
     }
 
     @DisplayName("Chek validation e-mail with TAB character")
@@ -83,7 +84,7 @@ public class RecoverPasswordTest  extends BaseTest {
         authPage.clickForgotPasswordButton();
         recoverPasswordPage.setInputEmail("test\\t@test.com");
         recoverPasswordPage.clickResetPasswordButton();
-        Assertions.assertEquals("Поле e-mail адрес должно быть действительным электронным адресом.", recoverPasswordPage.getErrorMessageInvalidEmail());
+        Assertions.assertEquals(RecoverPassMessage.INVALID_EMAIL_CREDENTIALS, recoverPasswordPage.getErrorMessageInvalidEmail());
     }
 
     @DisplayName("Chek validation e-mail with new line character")
@@ -92,7 +93,7 @@ public class RecoverPasswordTest  extends BaseTest {
         authPage.clickForgotPasswordButton();
         recoverPasswordPage.setInputEmail("test\\n@test.com");
         recoverPasswordPage.clickResetPasswordButton();
-        Assertions.assertEquals("Поле e-mail адрес должно быть действительным электронным адресом.", recoverPasswordPage.getErrorMessageInvalidEmail());
+        Assertions.assertEquals(RecoverPassMessage.INVALID_EMAIL_CREDENTIALS, recoverPasswordPage.getErrorMessageInvalidEmail());
     }
 
     @DisplayName("Chek validation e-mail with starting space")
@@ -101,7 +102,7 @@ public class RecoverPasswordTest  extends BaseTest {
         authPage.clickForgotPasswordButton();
         recoverPasswordPage.setInputEmail(" test@gmail.com");
         recoverPasswordPage.clickResetPasswordButton();
-        Assertions.assertEquals("Ссылка на сброс пароля была отправлена!",recoverPasswordPage.getSuccessMessage());
+        Assertions.assertEquals(RecoverPassMessage.RESET_LINK_SENT_MESSAGE,recoverPasswordPage.getSuccessMessage());
 
     }
 
@@ -111,7 +112,7 @@ public class RecoverPasswordTest  extends BaseTest {
         authPage.clickForgotPasswordButton();
         recoverPasswordPage.setInputEmail("test @test.com");
         recoverPasswordPage.clickResetPasswordButton();
-        Assertions.assertEquals("Поле e-mail адрес должно быть действительным электронным адресом.",recoverPasswordPage.getErrorMessageInvalidEmail());
+        Assertions.assertEquals(RecoverPassMessage.RESET_LINK_SENT_MESSAGE,recoverPasswordPage.getErrorMessageInvalidEmail());
     }
 
     @DisplayName("Chek validation e-mail with ending space")
@@ -120,7 +121,7 @@ public class RecoverPasswordTest  extends BaseTest {
         authPage.clickForgotPasswordButton();
         recoverPasswordPage.setInputEmail("test@test.com ");
         recoverPasswordPage.clickResetPasswordButton();
-        Assertions.assertEquals("Ссылка на сброс пароля была отправлена!",recoverPasswordPage.getSuccessMessage());
+        Assertions.assertEquals(RecoverPassMessage.RESET_LINK_SENT_MESSAGE,recoverPasswordPage.getSuccessMessage());
     }
 
     @DisplayName("Chek validation e-mail with only spaces")
@@ -129,7 +130,7 @@ public class RecoverPasswordTest  extends BaseTest {
         authPage.clickForgotPasswordButton();
         recoverPasswordPage.setInputEmail("        ");
         recoverPasswordPage.clickResetPasswordButton();
-        Assertions.assertEquals("Поле e-mail адрес обязательно для заполнения.",recoverPasswordPage.getErrorMessageEmptyEmail());
+        Assertions.assertEquals(RecoverPassMessage.EMPTY_EMAIL_MESSAGE,recoverPasswordPage.getErrorMessageEmptyEmail());
     }
 
     @DisplayName("Chek reset password for not register user")
@@ -138,6 +139,6 @@ public class RecoverPasswordTest  extends BaseTest {
         authPage.clickForgotPasswordButton();
         recoverPasswordPage.setInputEmail("ecrxsrutjwlvbxfovx@vtmpj.com");
         recoverPasswordPage.clickResetPasswordButton();
-        Assertions.assertEquals("Ссылка на сброс пароля была отправлена!", recoverPasswordPage.getSuccessMessage());
+        Assertions.assertEquals(RecoverPassMessage.RESET_LINK_SENT_MESSAGE, recoverPasswordPage.getSuccessMessage());
     }
 }
