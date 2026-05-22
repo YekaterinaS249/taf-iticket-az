@@ -1,14 +1,15 @@
 package az.iticket.ui;
 
 import az.iticket.basepage.BasePage;
+import groovy.util.logging.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 
+@Log4j2
 public class AuthPage extends BasePage {
     private final String AUTH_TITLE = "//h4[text()='Войти']";
     private final String INPUT_EMAIL = "//*[@id='login-email']";
