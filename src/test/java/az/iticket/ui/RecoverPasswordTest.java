@@ -16,6 +16,7 @@ public class RecoverPasswordTest  extends BaseTest {
         homePage.clickAuthButton();
         authPage = new AuthPage();
         recoverPasswordPage = new RecoverPasswordPage();
+        authPage.clickForgotPasswordButton();
     }
 
     @DisplayName("Chek get title")
@@ -28,14 +29,12 @@ public class RecoverPasswordTest  extends BaseTest {
     @DisplayName("Chek get footer title")
     @Test
     public void footerTitleTest() {
-        authPage.clickForgotPasswordButton();
         Assertions.assertTrue(recoverPasswordPage.getFooterText().contains("Помните пароль?"));
     }
 
     @DisplayName("Chek validation with valid e-mail")
     @Test
     public void validEmailTest() {
-        authPage.clickForgotPasswordButton();
         recoverPasswordPage.setInputEmail("silantyevayekaterina@gmail.com");
         recoverPasswordPage.clickResetPasswordButton();
         Assertions.assertEquals(RecoverPassMessage.RESET_LINK_SENT_MESSAGE, recoverPasswordPage.getSuccessMessage());
@@ -44,7 +43,6 @@ public class RecoverPasswordTest  extends BaseTest {
     @DisplayName("Chek validation empty e-mail")
     @Test
     public void emptyEmailTest() {
-        authPage.clickForgotPasswordButton();
         recoverPasswordPage.setInputEmail("");
         recoverPasswordPage.clickResetPasswordButton();
         Assertions.assertEquals(RecoverPassMessage.EMPTY_EMAIL_MESSAGE, recoverPasswordPage.getErrorMessageEmptyEmail());
@@ -53,7 +51,6 @@ public class RecoverPasswordTest  extends BaseTest {
     @DisplayName("Chek validation e-mail without @")
     @Test
     public void invalidEmailTest() {
-        authPage.clickForgotPasswordButton();
         recoverPasswordPage.setInputEmail("testtest.com");
         recoverPasswordPage.clickResetPasswordButton();
         Assertions.assertEquals(RecoverPassMessage.INVALID_EMAIL_CREDENTIALS, recoverPasswordPage.getErrorMessageInvalidEmail());
@@ -62,7 +59,6 @@ public class RecoverPasswordTest  extends BaseTest {
     @DisplayName("Chek validation e-mail with double @")
     @Test
     public void invalidEmailTestDouble() {
-        authPage.clickForgotPasswordButton();
         recoverPasswordPage.setInputEmail("test@@test.com");
         recoverPasswordPage.clickResetPasswordButton();
         Assertions.assertEquals(RecoverPassMessage.INVALID_EMAIL_CREDENTIALS, recoverPasswordPage.getErrorMessageInvalidEmail());
@@ -71,7 +67,6 @@ public class RecoverPasswordTest  extends BaseTest {
     @DisplayName("Chek validation e-mail without domen")
     @Test
     public void invalidEmailTestDomen() {
-        authPage.clickForgotPasswordButton();
         recoverPasswordPage.setInputEmail("test@");
         recoverPasswordPage.clickResetPasswordButton();
         recoverPasswordPage.clickResetPasswordButton();
@@ -81,7 +76,6 @@ public class RecoverPasswordTest  extends BaseTest {
     @DisplayName("Chek validation e-mail with TAB character")
     @Test
     public void invalidEmailTestTabCharacterTest() {
-        authPage.clickForgotPasswordButton();
         recoverPasswordPage.setInputEmail("test\\t@test.com");
         recoverPasswordPage.clickResetPasswordButton();
         Assertions.assertEquals(RecoverPassMessage.INVALID_EMAIL_CREDENTIALS, recoverPasswordPage.getErrorMessageInvalidEmail());
@@ -90,7 +84,6 @@ public class RecoverPasswordTest  extends BaseTest {
     @DisplayName("Chek validation e-mail with new line character")
     @Test
     public void invalidEmailTestNewLineCharacterTest() {
-        authPage.clickForgotPasswordButton();
         recoverPasswordPage.setInputEmail("test\\n@test.com");
         recoverPasswordPage.clickResetPasswordButton();
         Assertions.assertEquals(RecoverPassMessage.INVALID_EMAIL_CREDENTIALS, recoverPasswordPage.getErrorMessageInvalidEmail());
@@ -99,7 +92,6 @@ public class RecoverPasswordTest  extends BaseTest {
     @DisplayName("Chek validation e-mail with starting space")
     @Test
     public void invalidEmailTestStartingSpaceTest() {
-        authPage.clickForgotPasswordButton();
         recoverPasswordPage.setInputEmail(" test@gmail.com");
         recoverPasswordPage.clickResetPasswordButton();
         Assertions.assertEquals(RecoverPassMessage.RESET_LINK_SENT_MESSAGE,recoverPasswordPage.getSuccessMessage());
@@ -109,7 +101,6 @@ public class RecoverPasswordTest  extends BaseTest {
     @DisplayName("Chek validation e-mail with middle space")
     @Test
     public void invalidEmailTestMiddleSpaceTest() {
-        authPage.clickForgotPasswordButton();
         recoverPasswordPage.setInputEmail("test @test.com");
         recoverPasswordPage.clickResetPasswordButton();
         Assertions.assertEquals(RecoverPassMessage.RESET_LINK_SENT_MESSAGE,recoverPasswordPage.getErrorMessageInvalidEmail());
@@ -118,7 +109,6 @@ public class RecoverPasswordTest  extends BaseTest {
     @DisplayName("Chek validation e-mail with ending space")
     @Test
     public void invalidEmailTestEndingSpaceTest() {
-        authPage.clickForgotPasswordButton();
         recoverPasswordPage.setInputEmail("test@test.com ");
         recoverPasswordPage.clickResetPasswordButton();
         Assertions.assertEquals(RecoverPassMessage.RESET_LINK_SENT_MESSAGE,recoverPasswordPage.getSuccessMessage());
@@ -127,7 +117,6 @@ public class RecoverPasswordTest  extends BaseTest {
     @DisplayName("Chek validation e-mail with only spaces")
     @Test
     public void invalidEmailTestOnlySpacesTest() {
-        authPage.clickForgotPasswordButton();
         recoverPasswordPage.setInputEmail("        ");
         recoverPasswordPage.clickResetPasswordButton();
         Assertions.assertEquals(RecoverPassMessage.EMPTY_EMAIL_MESSAGE,recoverPasswordPage.getErrorMessageEmptyEmail());
@@ -136,9 +125,22 @@ public class RecoverPasswordTest  extends BaseTest {
     @DisplayName("Chek reset password for not register user")
     @Test
     public void resetPasswordNotRegisterUser() {
-        authPage.clickForgotPasswordButton();
         recoverPasswordPage.setInputEmail("ecrxsrutjwlvbxfovx@vtmpj.com");
         recoverPasswordPage.clickResetPasswordButton();
         Assertions.assertEquals(RecoverPassMessage.RESET_LINK_SENT_MESSAGE, recoverPasswordPage.getSuccessMessage());
+    }
+
+    @DisplayName("Chek visible modal login window after click Enter button")
+    @Test
+    public void loginModalLoginWindowAfterClickEnterButton() {
+        recoverPasswordPage.clickEnterButton();
+        Assertions.assertTrue(recoverPasswordPage.visibleLoginWindowAfterClickEnterButton());
+    }
+
+    @DisplayName("Chek invisible reset password modal window")
+    @Test
+    public void invisibleResetPasswordModalWindow() {
+        recoverPasswordPage.clickCloseButton();
+        Assertions.assertTrue(recoverPasswordPage.isRecoverPasswordModalWindowInvisible());
     }
 }

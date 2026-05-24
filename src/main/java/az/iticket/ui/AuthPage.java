@@ -6,8 +6,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import java.time.Duration;
 
 @Log4j2
 public class AuthPage extends BasePage {
@@ -127,13 +125,11 @@ public class AuthPage extends BasePage {
     }
 
     public String getErrorMessageLongEmail() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement longEmail = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ERROR_MESSAGE_LONG_EMAIL)));
         return longEmail.getText();
     }
 
     public boolean isModalLogiInvisible(){
-      WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
      return wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(LOGIN_MODAL)));
     }
 

@@ -194,6 +194,7 @@ public class AuthFormTest extends BaseTest {
         authPage.getEmailPlaceholder();
         Assertions.assertEquals("E-mail", authPage.getEmailPlaceholder());
     }
+    
     @DisplayName("Chek clickable close button in Login form")
     @Test
     public void closeButtonInLoginFormTest() {
@@ -202,4 +203,5 @@ public class AuthFormTest extends BaseTest {
 
     }
 }
+
 
