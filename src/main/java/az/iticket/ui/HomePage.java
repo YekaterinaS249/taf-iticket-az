@@ -2,7 +2,6 @@ package az.iticket.ui;
 
 import az.iticket.basepage.BasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 public class HomePage extends BasePage {
     private final String SEARCH_BUTTON = "//button[contains(@class,'search')]";
