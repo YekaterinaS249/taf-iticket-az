@@ -4,8 +4,6 @@ import az.iticket.api.client.AuthApi;
 import az.iticket.api.model.LoginRequest;
 import net.datafaker.Faker;
 import org.junit.jupiter.api.Test;
-
-import static io.restassured.RestAssured.given;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class AuthFormApiTest {

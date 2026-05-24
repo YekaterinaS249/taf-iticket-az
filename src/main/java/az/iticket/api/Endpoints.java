@@ -8,6 +8,6 @@ public class Endpoints {
                 BASE_URL + "/v5/user/auth/token";
 
         public static final String RECOVER_PASSWORD =
-                BASE_URL + "v5/user/auth/forgot-password";
+                BASE_URL + "/v5/user/auth/forgot-password";
     }
 

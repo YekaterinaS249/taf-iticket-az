@@ -8,7 +8,7 @@ import static io.restassured.RestAssured.given;
 
 
 public class RecoverPassApi {
-    public static Response recoveryPass(RecoverPassRequest passRequest) {
+    public static Response recoverPass(RecoverPassRequest passRequest) {
         return given()
                 .contentType(ContentType.JSON)
                 .body(passRequest)
