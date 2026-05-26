@@ -2,6 +2,7 @@ package az.iticket.ui;
 
 import az.iticket.basetest.BaseTest;
 import az.iticket.constans.LoginMessage;
+import az.iticket.ui.pages.AuthPage;
 import org.junit.jupiter.api.*;
 
 public class AuthFormTest extends BaseTest {

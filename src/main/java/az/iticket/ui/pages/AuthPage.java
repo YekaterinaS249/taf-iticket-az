@@ -1,4 +1,4 @@
-package az.iticket.ui;
+package az.iticket.ui.pages;
 
 import az.iticket.basepage.BasePage;
 import groovy.util.logging.Log4j2;
