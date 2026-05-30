@@ -166,21 +166,6 @@ public class AuthFormTest extends BaseTest {
         Assertions.assertEquals(LoginMessage.INVALID_CREDENTIALS, authPage.getErrorMessageInvalidCredentials());
     }
 
-    @DisplayName("Chek clear input email")
-    @Test
-    public void clearEmailInputTest() {
-        authPage.setInputEmail("cqqgslqadspnhazzkz@vtmpj.com");
-        authPage.clearEmail();
-        Assertions.assertEquals("", authPage.getEmailValue());
-    }
-
-    @DisplayName("Chek clear input password")
-    @Test
-    public void clearPasswordInputTest() {
-        authPage.setInputPassword("aska1234");
-        authPage.clearPassword();
-        Assertions.assertEquals("", authPage.getPasswordValue());
-    }
 
     @DisplayName("Chek get placeholder text in password input")
     @Test

@@ -18,6 +18,8 @@ public class RecoverPasswordPage extends BasePage {
     private final String SUCCESS_MESSAGE = "//div[contains(text(),'Ссылка на сброс пароля была отправлена')]";
     private final String MODAL_RESET_WINDOW = "//div[@id='reset-password-modal']";
     private final String LOGIN_MODAL = "//div[@id='login-modal']";
+    private final String LONG_EMAIL_ERROR_MESSAGE = "//div[contains(text(),'Количество символов в поле e-mail адрес не может превышать 255')]";
+
 
 
     public RecoverPasswordPage() {
@@ -25,7 +27,8 @@ public class RecoverPasswordPage extends BasePage {
     }
 
     public String getTitle() {
-        return driver.findElement(By.xpath(RESET_PASSWORD_TITLE)).getText();
+        WebElement title = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(RESET_PASSWORD_TITLE)));
+        return title.getText();
     }
 
     public void setInputEmail(String text) {
@@ -71,6 +74,11 @@ public class RecoverPasswordPage extends BasePage {
 
     public boolean isRecoverPasswordModalWindowInvisible() {
         return wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(MODAL_RESET_WINDOW)));
+    }
+
+    public String getLongEmailErrorMessage() {
+        WebElement longEmail = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INVALID_EMAIL_MESSAGE)));
+        return longEmail.getText();
     }
 }
 

@@ -103,18 +103,6 @@ public class AuthPage extends BasePage {
 
     }
 
-    public void clearPassword() {
-        driver.findElement(By.xpath(INPUT_PASSWORD)).clear();
-    }
-
-    public String getEmailValue() {
-        return driver.findElement(By.xpath(INPUT_EMAIL)).getAttribute("value");
-    }
-
-    public String getPasswordValue() {
-        return driver.findElement(By.xpath(INPUT_PASSWORD)).getAttribute("value");
-    }
-
     public String getPasswordPlaceholder() {
         return driver.findElement(By.xpath(INPUT_PASSWORD)).getAttribute("placeholder");
     }

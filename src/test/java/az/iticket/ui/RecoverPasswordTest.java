@@ -24,7 +24,6 @@ public class RecoverPasswordTest  extends BaseTest {
     @DisplayName("Chek get title")
     @Test
     public void getTitleTest() {
-        authPage.clickForgotPasswordButton();
         Assertions.assertEquals("Сброс пароля", recoverPasswordPage.getTitle());
     }
 
@@ -40,6 +39,15 @@ public class RecoverPasswordTest  extends BaseTest {
         recoverPasswordPage.setInputEmail("silantyevayekaterina@gmail.com");
         recoverPasswordPage.clickResetPasswordButton();
         Assertions.assertEquals(RecoverPassMessage.RESET_LINK_SENT_MESSAGE, recoverPasswordPage.getSuccessMessage());
+    }
+
+    @DisplayName("Chek validation sent long email")
+    @Test
+    public void longEmailTest() {
+        String email = "a".repeat(64) + "@" + "b".repeat(187) + ".com";
+        recoverPasswordPage.setInputEmail(email);
+        recoverPasswordPage.clickResetPasswordButton();
+        Assertions.assertEquals(RecoverPassMessage.LONG_EMAIL_ERROR_MESSAGE,recoverPasswordPage.getLongEmailErrorMessage());
     }
 
     @DisplayName("Chek validation empty e-mail")
@@ -68,7 +76,7 @@ public class RecoverPasswordTest  extends BaseTest {
 
     @DisplayName("Chek validation e-mail without domen")
     @Test
-    public void invalidEmailTestDomen() {
+    public void invalidEmailWithoutDomen() {
         recoverPasswordPage.setInputEmail("test@");
         recoverPasswordPage.clickResetPasswordButton();
         recoverPasswordPage.clickResetPasswordButton();
