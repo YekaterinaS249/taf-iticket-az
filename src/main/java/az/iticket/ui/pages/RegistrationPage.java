@@ -2,7 +2,7 @@ package az.iticket.ui.pages;
 
 import az.iticket.basepage.BasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+
 
 public class RegistrationPage extends BasePage {
     private final String FIRST_NAME_INPUT = "//input[@name='first_name']";
@@ -28,4 +28,41 @@ public class RegistrationPage extends BasePage {
     public String getFooterTitle() {
         return driver.findElement(By.xpath(REGISTRATION_FOOTER_TITTLE)).getText();
     }
+
+    public void setFirstNameInput(String firstName) {
+        driver.findElement(By.xpath(FIRST_NAME_INPUT)).sendKeys(firstName);
+    }
+
+    public void setLastNameInput(String lastName) {
+        driver.findElement(By.xpath(LAST_NAME_INPUT)).sendKeys(lastName);
+    }
+
+    public void setPhoneNumberInput(String phoneNumber) {
+        driver.findElement(By.xpath(PHONE_NUMBER_INPUT)).sendKeys(phoneNumber);
+    }
+
+    public void setEmailInput(String email) {
+        driver.findElement(By.xpath(EMAIL_INPUT)).sendKeys(email);
+    }
+
+    public void setPasswordInput(String password) {
+        driver.findElement(By.xpath(PASSWORD_INPUT)).sendKeys(password);
+    }
+
+    public void setConfirmPasswordInput(String confirmPassword) {
+        driver.findElement(By.xpath(CONFIRM_PASSWORD_INPUT)).sendKeys(confirmPassword);
+    }
+
+    public void clickRegistrationButton() {
+        driver.findElement(By.xpath(REGISTRATION_BUTTON)).click();
+    }
+
+    public void clickLoginButton() {
+        driver.findElement(By.xpath(LOGIN_LINK)).click();
+    }
+
+    public void clickCloseButton() {
+        driver.findElement(By.xpath(CLOSE_BUTTON)).click();
+    }
+
 }

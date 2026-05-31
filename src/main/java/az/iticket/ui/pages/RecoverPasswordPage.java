@@ -31,8 +31,8 @@ public class RecoverPasswordPage extends BasePage {
         return title.getText();
     }
 
-    public void setInputEmail(String text) {
-        driver.findElement(By.xpath(INPUT_EMAIL)).sendKeys(text);
+    public void setInputEmail(String email) {
+        driver.findElement(By.xpath(INPUT_EMAIL)).sendKeys(email);
     }
 
     public void clickResetPasswordButton() {
@@ -63,7 +63,7 @@ public class RecoverPasswordPage extends BasePage {
     }
 
     public String getSuccessMessage() {
-        WebElement successMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(SUCCESS_MESSAGE)));
+        WebElement successMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(LONG_EMAIL_ERROR_MESSAGE)));
         return successMessage.getText();
     }
 

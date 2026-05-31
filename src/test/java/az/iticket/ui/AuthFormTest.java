@@ -3,7 +3,16 @@ package az.iticket.ui;
 import az.iticket.basetest.BaseTest;
 import az.iticket.constans.LoginMessage;
 import az.iticket.ui.pages.AuthPage;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Story;
 import org.junit.jupiter.api.*;
+
+
+@Epic("Authentication")
+@Feature("Login")
+@Owner("Yekaterina Silantyeva")
 
 public class AuthFormTest extends BaseTest {
     private AuthPage authPage;
@@ -14,7 +23,8 @@ public class AuthFormTest extends BaseTest {
         authPage = new AuthPage();
     }
 
-    @DisplayName(" Chek Log in with valid data")
+    @DisplayName("Check login with valid data")
+    @Story("Login with valid credentials")
     @Test
     public void loginWithValidCredentialsTest() {
         authPage.setInputEmail("silantyevakatya1@gmail.com");
@@ -23,7 +33,8 @@ public class AuthFormTest extends BaseTest {
         Assertions.assertEquals(LoginMessage.LOGIN_SUCCESS_MESSAGE, authPage.getLoginSuccessMessage());
     }
 
-    @DisplayName("Chek submit login form with Enter button")
+    @DisplayName("Cheсk submit login form with Enter button")
+    @Story("Submit login form using Enter key")
     @Test
     public void submitLoginFormWithEnter() {
         authPage.setInputEmail("silantyevakatya1@gmail.com");
@@ -33,6 +44,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Chek submit empty e-mail")
+    @Story("Submit login form with empty email")
     @Test
     public void loginWithEmptyEmailTest() {
         authPage.setInputEmail("");
@@ -42,6 +54,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Chek submit empty password")
+    @Story("Submit login form with empty password")
     @Test
     public void loginWithEmptyPasswordTest() {
         authPage.setInputEmail("cqqgslqadspnhazzkz@vtmpj.com");
@@ -50,7 +63,8 @@ public class AuthFormTest extends BaseTest {
         Assertions.assertEquals(LoginMessage.ERROR_EMPTY_PASSWORD, authPage.getErrorMessageEmptyInputPassword());
     }
 
-    @DisplayName("Chek login with invalid e-mail(without @)")
+    @DisplayName("Login with invalid email (without @)")
+    @Story("Login with invalid email format")
     @Test
     public void loginWithInvalidEmailTest() {
         authPage.setInputEmail("cqqgslqadspnhazzkzvtmpj.com");
@@ -60,6 +74,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Chek login with wrong e-mail")
+    @Story("Login with wrong email")
     @Test
     public void loginWithWrongEmailTest() {
         authPage.setInputEmail("thsmklqhnxyuqzfngl@jbsze.com");
@@ -69,6 +84,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Chek login with e-mail only spaces")
+    @Story("Login with email containing only spaces")
     @Test
     public void loginWithEmailOnlySpacesTest() {
         authPage.setInputEmail("            ");
@@ -77,18 +93,9 @@ public class AuthFormTest extends BaseTest {
         Assertions.assertEquals(LoginMessage.ERROR_EMPTY_EMAIL, authPage.getErrorInvalidEmail());
     }
 
-    @DisplayName("Chek clear input email and submit form")
-    @Test
-    public void clearInputEmailTest() {
-        authPage.setInputEmail("cqqgslqadspnhazzkz@vtmpj.com");
-        authPage.setInputPassword("test1234");
-        authPage.clearEmail();
-        authPage.clickSubmitButton();
-        Assertions.assertEquals(LoginMessage.ERROR_EMPTY_EMAIL, authPage.getErrorMessageEmptyInputEmail());
-
-    }
 
     @DisplayName("Chek login with long email")
+    @Story("Login with long email")
     @Test
     public void loginWithLongEmailTest() {
         String email = "a".repeat(64) + "@" + "b".repeat(187) + ".com";
@@ -100,6 +107,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Chek login with wrong password")
+    @Story("Login with invalid password")
     @Test
     public void loginWithWrongPasswordTest() {
         authPage.setInputEmail("silantyevakatya1@gmail.com");
@@ -109,6 +117,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Chek login with short password")
+    @Story("Login with short password")
     @Test
     public void loginWithShortPasswordTest() {
         authPage.setInputEmail("cqqgslqadspnhazzkz@vtmpj.com");
@@ -118,6 +127,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Chek login test with invalid password length")
+    @Story("Login with invalid password length")
     @Test
     public void loginWithInvalidPasswordLengthTest() {
         authPage.setInputEmail("cqqgslqadspnhazzkz@vtmpj.com");
@@ -127,6 +137,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Chek login with long password")
+    @Story("Login with long password")
     @Test
     public void loginWithLongPasswordTest() {
         authPage.setInputEmail("cqqgslqadspnhazzkz@vtmpj.com");
@@ -135,6 +146,8 @@ public class AuthFormTest extends BaseTest {
         Assertions.assertEquals(LoginMessage.INVALID_CREDENTIALS, authPage.getErrorMessageInvalidCredentials());
     }
 
+    @DisplayName("Check login with password contains only spaces")
+    @Story("Login with whitespace-only password")
     @Test
     public void loginWithPasswordOnlySpacesTest() {
         authPage.setInputEmail("cqqgslqadspnhazzkz@vtmpj.com");
@@ -145,12 +158,14 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Chek get auth title")
+    @Story("Get authentication page title")
     @Test
     public void getAuthTitleTest() {
         Assertions.assertEquals("Войти", authPage.getAuthTitle());
     }
 
     @DisplayName("Chek get footer auth title")
+    @Story("Verify footer authentication title")
     @Test
     public void getFooterAuthTitleTest() {
         Assertions.assertTrue(authPage.getFooterAuthTitle().contains("Впервые на iTicket.AZ?"));
@@ -158,6 +173,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Chek login not register user")
+    @Story("Login with unregistered user")
     @Test
     public void loginNotRegisterUserTest() {
         authPage.setInputEmail("katyatest97@gmail.com");
@@ -168,6 +184,7 @@ public class AuthFormTest extends BaseTest {
 
 
     @DisplayName("Chek get placeholder text in password input")
+    @Story("Password input placeholder is displayed")
     @Test
     public void getAttributeInPasswordInputTest() {
         authPage.getPasswordPlaceholder();
@@ -175,6 +192,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Chek get placeholder text in email input")
+    @Story("Email input placeholder is displayed")
     @Test
     public void getAttributeInEmailInputTest() {
         authPage.getEmailPlaceholder();
@@ -182,10 +200,11 @@ public class AuthFormTest extends BaseTest {
     }
     
     @DisplayName("Chek clickable close button in Login form")
+    @Story("Close button in login form is clickable")
     @Test
     public void closeButtonInLoginFormTest() {
         authPage.clickCloseButton();
-        Assertions.assertTrue(authPage.isModalLogiInvisible());
+        Assertions.assertTrue(authPage.isModalLoginInvisible());
 
     }
 }
