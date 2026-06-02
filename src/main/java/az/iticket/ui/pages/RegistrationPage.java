@@ -32,32 +32,23 @@ public class RegistrationPage extends BasePage {
         return driver.findElement(By.xpath(REGISTRATION_FOOTER_TITTLE)).getText();
     }
 
-    public void setFirstNameInput(String firstName) {
-        driver.findElement(By.xpath(FIRST_NAME_INPUT)).sendKeys(firstName);
+    public void fillRegistrationForm(String firstName, String lastName, String phoneNumber, String email,
+                                     String password, String confirmPassword) {
+        type(FIRST_NAME_INPUT,firstName);
+        type(LAST_NAME_INPUT,lastName);
+        type(PHONE_NUMBER_INPUT,phoneNumber);
+        type(EMAIL_INPUT,email);
+        type(PASSWORD_INPUT,password);
+        type(CONFIRM_PASSWORD_INPUT,confirmPassword);
+        click(REGISTRATION_BUTTON);
     }
 
-    public void setLastNameInput(String lastName) {
-        driver.findElement(By.xpath(LAST_NAME_INPUT)).sendKeys(lastName);
+    public void type(String xpath, String text) {
+        driver.findElement(By.xpath(xpath)).sendKeys(text);
     }
 
-    public void setPhoneNumberInput(String phoneNumber) {
-        driver.findElement(By.xpath(PHONE_NUMBER_INPUT)).sendKeys(phoneNumber);
-    }
-
-    public void setEmailInput(String email) {
-        driver.findElement(By.xpath(EMAIL_INPUT)).sendKeys(email);
-    }
-
-    public void setPasswordInput(String password) {
-        driver.findElement(By.xpath(PASSWORD_INPUT)).sendKeys(password);
-    }
-
-    public void setConfirmPasswordInput(String confirmPassword) {
-        driver.findElement(By.xpath(CONFIRM_PASSWORD_INPUT)).sendKeys(confirmPassword);
-    }
-
-    public void clickRegistrationButton() {
-        driver.findElement(By.xpath(REGISTRATION_BUTTON)).click();
+    public void click(String xpath) {
+        driver.findElement(By.xpath(xpath)).click();
     }
 
     public void clickLoginButton() {

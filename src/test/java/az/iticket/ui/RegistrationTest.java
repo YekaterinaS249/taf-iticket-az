@@ -22,18 +22,9 @@ public class RegistrationTest  extends BaseTest {
     @DisplayName("Registration user with valid data")
     @Test
     public void registrationUserWithValidData() {
-        registrationPage.setFirstNameInput("Yekaterina");
-        registrationPage.setLastNameInput("Kalin");
-        registrationPage.setEmailInput("y22888836@gmail.com");
-        registrationPage.setPhoneNumberInput("507839039");
-        registrationPage.setPasswordInput("test1234");
-        registrationPage.setConfirmPasswordInput("test1234");
-        registrationPage.clickRegistrationButton();
+        registrationPage.fillRegistrationForm("Yekaterina", "Kalin","507839039",
+                "y22888836@gmail.com","test1234","test1234");
         Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.",registrationPage.getConfrimEmailMessage());
     }
-
-
-
-
 
 }
