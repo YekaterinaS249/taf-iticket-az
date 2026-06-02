@@ -1,4 +1,4 @@
-package az.iticket.api;
+package az.iticket.api.endpoints;
 
 public class Endpoints {
         public static final String BASE_URL =

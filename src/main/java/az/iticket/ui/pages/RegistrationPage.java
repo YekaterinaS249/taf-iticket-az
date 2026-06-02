@@ -2,6 +2,8 @@ package az.iticket.ui.pages;
 
 import az.iticket.basepage.BasePage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
 public class RegistrationPage extends BasePage {
@@ -16,6 +18,7 @@ public class RegistrationPage extends BasePage {
     private final String REGISTRATION_FOOTER_TITTLE = "//div[contains(text(),'Уже зарегистрирован')]";
     private final String LOGIN_LINK = "//a[normalize-space()='Войдите здесь']";
     private final String CLOSE_BUTTON = "//h4[text()='Регистрация']/ancestor::div[contains(@class,'modal-dialog')]//button[contains(@class,'close')]";
+    private final String CONFRIM_EMAIL = "//div[contains(text(),'подтвердите e-mail')]";
 
     public RegistrationPage() {
         super();
@@ -63,6 +66,11 @@ public class RegistrationPage extends BasePage {
 
     public void clickCloseButton() {
         driver.findElement(By.xpath(CLOSE_BUTTON)).click();
+    }
+
+    public String getConfrimEmailMessage() {
+        WebElement email = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(CONFRIM_EMAIL)));
+        return email.getText();
     }
 
 }

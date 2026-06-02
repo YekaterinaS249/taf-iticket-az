@@ -1,6 +1,6 @@
 package az.iticket.api.client;
 
-import az.iticket.api.Endpoints;
+import az.iticket.api.endpoints.Endpoints;
 import az.iticket.api.model.LoginRequest;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
