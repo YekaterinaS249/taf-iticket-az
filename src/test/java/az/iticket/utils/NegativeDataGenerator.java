@@ -5,14 +5,6 @@ import net.datafaker.Faker;
 public class NegativeDataGenerator {
     private static final Faker faker = new Faker();
 
-    public static String getLongFirstName() {
-        return faker.lorem().characters(20);
-    }
-
-    public static String getLongLastName() {
-        return faker.lorem().characters(30);
-    }
-
     public static String getLonNumberPhone() {
         return faker.lorem().characters(10);
     }
@@ -27,6 +19,10 @@ public class NegativeDataGenerator {
 
     public static String getEmailWithoutUserName(){
         return "@" + faker.internet().domainWord() + ".com";
+    }
+
+    public static String getFirstNameTooLong(int length) {
+        return "A".repeat(256);
     }
 
 }

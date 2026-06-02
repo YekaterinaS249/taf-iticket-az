@@ -17,7 +17,19 @@ public class PositiveDataGenerator {
     }
 
     public static String getEmail() {
-        return faker.internet().emailAddress();
+        return faker.internet().username() + "@gmail.com";
+    }
+
+    public static String getFirstNameRu(){
+        return fakerRu.name().firstName();
+    }
+
+    public static String getFirstNameByLength(int length) {
+        return "A".repeat(length);
+    }
+
+    public static String getLastNameRu(){
+        return fakerRu.name().lastName();
     }
 
     public static String getEmailWithPlus() {
@@ -33,14 +45,19 @@ public class PositiveDataGenerator {
     }
 
     public static String getPhoneNumberAz() {
-        return faker.number().digits(9);
+       String [] prefixes = {"50","55","77","70"};
+       String prefix = prefixes[faker.random().nextInt(prefixes.length)];
+       String rest = faker.number().digits(7);
+       return prefix + rest;
+
     }
 
     public static String getPassword() {
         return "Test" + faker.number().digits(4);
     }
 
-    public static String getConfirmPassword() {
-        return "Test" + faker.number().digits(4);
+    public static String getConfirmPassword(String password) {
+        return password;
     }
 }
+
