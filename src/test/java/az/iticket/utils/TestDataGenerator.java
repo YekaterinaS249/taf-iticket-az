@@ -4,7 +4,7 @@ import net.datafaker.Faker;
 
 import java.util.Locale;
 
-public class PositiveDataGenerator {
+public class TestDataGenerator {
     private static final Faker faker = new Faker();
     private static final Faker fakerRu = new Faker(new Locale("ru"));
 
@@ -20,7 +20,7 @@ public class PositiveDataGenerator {
         return faker.internet().username() + "@gmail.com";
     }
 
-    public static String getFirstNameRu(){
+    public static String getFirstNameRu() {
         return fakerRu.name().firstName();
     }
 
@@ -28,16 +28,16 @@ public class PositiveDataGenerator {
         return "A".repeat(length);
     }
 
-    public static String getLastNameRu(){
+    public static String getLastNameRu() {
         return fakerRu.name().lastName();
     }
 
     public static String getEmailWithPlus() {
-        return "user+test" + faker.number().digits(3)+ "@test.com";
+        return "user+test" + faker.number().digits(3) + "@test.com";
     }
 
-    public static String getEmailWithDot(){
-        return "qa.test" + faker.number().digits(2) +"@test.com";
+    public static String getEmailWithDot() {
+        return "qa.test" + faker.number().digits(2) + "@test.com";
     }
 
     public static String getEmailWithSubDomain() {
@@ -45,10 +45,10 @@ public class PositiveDataGenerator {
     }
 
     public static String getPhoneNumberAz() {
-       String [] prefixes = {"50","55","77","70"};
-       String prefix = prefixes[faker.random().nextInt(prefixes.length)];
-       String rest = faker.number().digits(7);
-       return prefix + rest;
+        String[] prefixes = {"50", "55", "77", "70"};
+        String prefix = prefixes[faker.random().nextInt(prefixes.length)];
+        String rest = faker.number().digits(7);
+        return prefix + rest;
 
     }
 
@@ -58,6 +58,26 @@ public class PositiveDataGenerator {
 
     public static String getConfirmPassword(String password) {
         return password;
+    }
+
+    public static String getLonNumberPhone() {
+        return faker.lorem().characters(10);
+    }
+
+    public static String getEmailWithoutAt() {
+        return faker.internet().emailAddress().replace("@", "");
+    }
+
+    public static String getEmailWithoutDomen() {
+        return faker.name().username() + "@";
+    }
+
+    public static String getEmailWithoutUserName() {
+        return "@" + faker.internet().domainWord() + ".com";
+    }
+
+    public static String getFirstNameTooLong(int length) {
+        return "A".repeat(256);
     }
 }
 
