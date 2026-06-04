@@ -13,7 +13,7 @@ public abstract  class BaseTest {
 
     @BeforeEach
     public void setup(TestInfo testInfo) {
-        log.info("Test stared: {}.{}",
+        log.info("Test stared: {}. {}",
                 testInfo.getTestClass().orElseThrow().getSimpleName(),
                 testInfo.getTestMethod().orElseThrow().getName());
 
@@ -22,7 +22,7 @@ public abstract  class BaseTest {
     }
     @AfterEach
         public void tearDown(TestInfo testInfo) {
-        log.info("Test finished: {}.{}",
+        log.info("Test finished: {}. {}",
             testInfo.getTestClass().orElseThrow().getSimpleName(),
                 testInfo.getTestMethod().orElseThrow().getName());
             DriverManager.quitDriver();
