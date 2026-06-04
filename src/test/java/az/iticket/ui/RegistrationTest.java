@@ -3,8 +3,7 @@ package az.iticket.ui;
 import az.iticket.basetest.BaseTest;
 import az.iticket.ui.pages.AuthPage;
 import az.iticket.ui.pages.RegistrationPage;
-import az.iticket.utils.NegativeDataGenerator;
-import az.iticket.utils.PositiveDataGenerator;
+import az.iticket.utils.TestDataGenerator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -21,7 +20,7 @@ public class RegistrationTest extends BaseTest {
         authPage = new AuthPage();
         authPage.clickRegisterButton();
         registrationPage = new RegistrationPage();
-        password = PositiveDataGenerator.getPassword();
+        password = TestDataGenerator.getPassword();
 
     }
 
@@ -43,9 +42,9 @@ public class RegistrationTest extends BaseTest {
     public void submitRegistrationFormWithEmptyFirstName() {
         registrationPage.fillRegistrationForm(
                 "",
-                PositiveDataGenerator.getLastName(),
-                PositiveDataGenerator.getPhoneNumberAz(),
-                PositiveDataGenerator.getEmail(),
+                TestDataGenerator.getLastName(),
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
                 password,
                 password);
         Assertions.assertEquals("Поле имя обязательно для заполнения.", registrationPage.getEmptyEmailErrorMessage());
@@ -55,10 +54,10 @@ public class RegistrationTest extends BaseTest {
     @Test
     public void submitRegistrationFormWithCirilicFirstName() {
         registrationPage.fillRegistrationForm(
-                PositiveDataGenerator.getFirstNameRu(),
-                PositiveDataGenerator.getLastName(),
-                PositiveDataGenerator.getPhoneNumberAz(),
-                PositiveDataGenerator.getEmail(),
+                TestDataGenerator.getFirstNameRu(),
+                TestDataGenerator.getLastName(),
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
                 password,
                 password);
         Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
@@ -69,9 +68,9 @@ public class RegistrationTest extends BaseTest {
     public void submitRegistrationFormWithHyphenatedFirstName() {
         registrationPage.fillRegistrationForm(
                 "Anna-Maria",
-                PositiveDataGenerator.getLastName(),
-                PositiveDataGenerator.getPhoneNumberAz(),
-                PositiveDataGenerator.getEmail(),
+                TestDataGenerator.getLastName(),
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
                 password,
                 password);
         Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
@@ -81,9 +80,9 @@ public class RegistrationTest extends BaseTest {
     @Test
     public void submitRegistrationFormWithOneCharacterFirstName() {
         registrationPage.fillRegistrationForm("K",
-                PositiveDataGenerator.getLastName(),
-                PositiveDataGenerator.getPhoneNumberAz(),
-                PositiveDataGenerator.getEmail(),
+                TestDataGenerator.getLastName(),
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
                 password,
                 password);
         Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
@@ -92,11 +91,11 @@ public class RegistrationTest extends BaseTest {
     @DisplayName("Accept first name with 254 characters")
     @Test
     public void submitRegistrationFormWith254Characters() {
-        String firstName = PositiveDataGenerator.getFirstNameByLength(254);
+        String firstName = TestDataGenerator.getFirstNameByLength(254);
         registrationPage.fillRegistrationForm(firstName,
-                PositiveDataGenerator.getLastName(),
-                PositiveDataGenerator.getPhoneNumberAz(),
-                PositiveDataGenerator.getEmail(),
+                TestDataGenerator.getLastName(),
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
                 password,
                 password);
         Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
@@ -106,11 +105,11 @@ public class RegistrationTest extends BaseTest {
     @DisplayName("Accept first name with 255 characters")
     @Test
     public void submitRegistrationFormWith255Characters() {
-        String firstName = PositiveDataGenerator.getFirstNameByLength(255);
+        String firstName = TestDataGenerator.getFirstNameByLength(255);
         registrationPage.fillRegistrationForm(firstName,
-                PositiveDataGenerator.getLastName(),
-                PositiveDataGenerator.getPhoneNumberAz(),
-                PositiveDataGenerator.getEmail(),
+                TestDataGenerator.getLastName(),
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
                 password,
                 password);
         Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
@@ -119,11 +118,11 @@ public class RegistrationTest extends BaseTest {
     @DisplayName("Accept first name with 256 characters")
     @Test
     public void submitRegistrationFormWith256Characters() {
-        String firstName = NegativeDataGenerator.getFirstNameTooLong(256);
+        String firstName = TestDataGenerator.getFirstNameTooLong(256);
         registrationPage.fillRegistrationForm(firstName,
-                PositiveDataGenerator.getLastName(),
-                PositiveDataGenerator.getPhoneNumberAz(),
-                PositiveDataGenerator.getEmail(),
+                TestDataGenerator.getLastName(),
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
                 password,
                 password);
         Assertions.assertEquals("Количество символов в поле имя не может превышать 255.", registrationPage.getLongCredentialsErrorMessage());
@@ -134,9 +133,9 @@ public class RegistrationTest extends BaseTest {
     @Test
     public void submitRegistrationFormWithSymbols() {
         registrationPage.fillRegistrationForm("!@#$%^&*()",
-                PositiveDataGenerator.getLastName(),
-                PositiveDataGenerator.getPhoneNumberAz(),
-                PositiveDataGenerator.getEmail(),
+                TestDataGenerator.getLastName(),
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
                 password,
                 password);
         Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
@@ -148,9 +147,9 @@ public class RegistrationTest extends BaseTest {
     @Test
     public void submitRegistrationFormWithDigits() {
         registrationPage.fillRegistrationForm("12345678910",
-                PositiveDataGenerator.getLastName(),
-                PositiveDataGenerator.getPhoneNumberAz(),
-                PositiveDataGenerator.getEmail(),
+                TestDataGenerator.getLastName(),
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
                 password,
                 password);
         Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
@@ -160,9 +159,9 @@ public class RegistrationTest extends BaseTest {
     @Test
     public void submitRegistrationFormWithLeadingSpace() {
         registrationPage.fillRegistrationForm(" Yekaterina",
-                PositiveDataGenerator.getLastName(),
-                PositiveDataGenerator.getPhoneNumberAz(),
-                PositiveDataGenerator.getEmail(),
+                TestDataGenerator.getLastName(),
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
                 password,
                 password);
         Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
@@ -173,9 +172,9 @@ public class RegistrationTest extends BaseTest {
     @Test
     public void submitRegistrationFormWithSpaceInFirstName() {
         registrationPage.fillRegistrationForm("Anas tasiya",
-                PositiveDataGenerator.getLastName(),
-                PositiveDataGenerator.getPhoneNumberAz(),
-                PositiveDataGenerator.getEmail(),
+                TestDataGenerator.getLastName(),
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
                 password,
                 password);
         Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
@@ -185,9 +184,9 @@ public class RegistrationTest extends BaseTest {
     @Test
     public void submitRegistrationFormWithFirstNameEndingSpaces() {
         registrationPage.fillRegistrationForm("Yekaterina ",
-                PositiveDataGenerator.getLastName(),
-                PositiveDataGenerator.getPhoneNumberAz(),
-                PositiveDataGenerator.getEmail(),
+                TestDataGenerator.getLastName(),
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
                 password,
                 password);
         Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
@@ -197,23 +196,50 @@ public class RegistrationTest extends BaseTest {
     @Test
     public void submitRegistrationFormWithOnlySpaces() {
         registrationPage.fillRegistrationForm("         ",
-                PositiveDataGenerator.getLastName(),
-                PositiveDataGenerator.getPhoneNumberAz(),
-                PositiveDataGenerator.getEmail(),
+                TestDataGenerator.getLastName(),
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
                 password,
                 password);
         Assertions.assertEquals("Поле имя обязательно для заполнения.", registrationPage.getEmptyEmailErrorMessage());
     }
 
+    //Поле First name принимает значени табуляции и сохраняет ее как часть значения без нормализации.
+    @DisplayName("Accept first name TAB characters")
+    @Test
+    public void submitRegistrationFormWithTabCharacters() {
+        registrationPage.fillRegistrationForm("Jo\\thn",
+                TestDataGenerator.getLastName(),
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
+                password,
+                password);
+        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+    }
+
+    //Поле First name принимает значение новой строки и сохраняет ее как часть значения без нормализации.
+    @DisplayName("Accept first name new line characters")
+    @Test
+    public void submitRegistrationFormWithNewLineCharacters() {
+        registrationPage.fillRegistrationForm("Micha\\nel",
+                TestDataGenerator.getLastName(),
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
+                password,
+                password);
+        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+    }
+
     @DisplayName("Submit registration form with empty last name")
     @Test
     public void submitRegistrationFormWithEmptyLastName() {
-        registrationPage.fillRegistrationForm(PositiveDataGenerator.getFirstName(),
+        registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
                 "",
-                PositiveDataGenerator.getPhoneNumberAz(),
-                PositiveDataGenerator.getEmail(),
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Поле фамилия обязательно для заполнения.",registrationPage.getEmptyLastNameErrorMessage());
+        Assertions.assertEquals("Поле фамилия обязательно для заполнения.", registrationPage.getEmptyLastNameErrorMessage());
     }
+
 }
