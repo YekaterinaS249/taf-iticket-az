@@ -266,7 +266,7 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
     }
 
-    @DisplayName("Submit regisration form with one-character last name")
+    @DisplayName("Submit registration form with one-character last name")
     @Test
     public void submitRegistrationFormWithOneCharacterLastName() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
