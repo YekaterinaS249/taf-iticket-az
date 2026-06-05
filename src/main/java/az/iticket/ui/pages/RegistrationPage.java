@@ -21,8 +21,9 @@ public class RegistrationPage extends BasePage {
     private final String CLOSE_BUTTON = "//h4[text()='Регистрация']/ancestor::div[contains(@class,'modal-dialog')]//button[contains(@class,'close')]";
     private final String CONFRIM_EMAIL = "//div[contains(text(),'подтвердите e-mail')]";
     private final String EMPTY_FIRST_NAME_ERROR_MESSAGE = "//div[contains(text(),'Поле имя обязательно для заполнения')]";
-    private final String LONG_CREDENTIALS_ERROR_MESSAGE = "//div[contains(text(),'Количество символов в поле имя не может превышать 255')]";
+    private final String LONG_FIRST_NAME_ERROR_MESSAGE = "//div[contains(text(),'Количество символов в поле имя не может превышать 255')]";
     private final String EMPTY_LAST_NAME_ERROR_MESSAGE = "//div[contains(text(),'Поле фамилия обязательно для заполнения')]";
+    private final String LONG_LAST_NAME_ERROR_MESSAGE = "//div[contains(text(),'Количество символов в поле фамилия не может превышать 255')]";
 
     public RegistrationPage() {
         super();
@@ -75,13 +76,18 @@ public class RegistrationPage extends BasePage {
         return emptyInput.getText();
     }
 
-    public String getLongCredentialsErrorMessage() {
-        WebElement longCredentials = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(LONG_CREDENTIALS_ERROR_MESSAGE)));
+    public String getLongFirstNameErrorMessage() {
+        WebElement longCredentials = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(LONG_FIRST_NAME_ERROR_MESSAGE)));
         return longCredentials.getText();
     }
 
     public String getEmptyLastNameErrorMessage() {
         return driver.findElement(By.xpath(EMPTY_LAST_NAME_ERROR_MESSAGE)).getText();
+    }
+
+    public String getLongLastNameErrorMessage() {
+       WebElement lastName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(LONG_LAST_NAME_ERROR_MESSAGE)));
+       return lastName.getText();
     }
 
 }

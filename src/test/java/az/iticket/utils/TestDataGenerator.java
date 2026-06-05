@@ -79,5 +79,13 @@ public class TestDataGenerator {
     public static String getFirstNameTooLong(int length) {
         return "A".repeat(256);
     }
+
+    public static String getLastNameTooLong(int length) {
+        return "B".repeat(256);
+    }
+
+    public static String getLastNameByLength(int length) {
+        return "C".repeat(length);
+    }
 }
 

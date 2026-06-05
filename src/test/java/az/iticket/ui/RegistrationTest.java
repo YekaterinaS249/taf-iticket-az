@@ -125,10 +125,10 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Количество символов в поле имя не может превышать 255.", registrationPage.getLongCredentialsErrorMessage());
+        Assertions.assertEquals("Количество символов в поле имя не может превышать 255.", registrationPage.getLongFirstNameErrorMessage());
     }
 
-    //Система принимает спецсиволы в поле FirstName,регистрация проходит пользователь входит в систему,валидация отсутсвует.
+    //Система принимает спецсиволы в поле FirstName,регистрация проходит пользователь входит в систему.
     @DisplayName("Accept first name with only symbols")
     @Test
     public void submitRegistrationFormWithSymbols() {
@@ -142,7 +142,7 @@ public class RegistrationTest extends BaseTest {
 
     }
 
-    //Система принимает только числа в поле FirstName,регистрация проходит пользователь входит в систему,валидация отсутвует.
+    //Система принимает только числа в поле FirstName,регистрация проходит пользователь входит в систему.
     @DisplayName("Accept first name with only digits")
     @Test
     public void submitRegistrationFormWithDigits() {
@@ -241,5 +241,181 @@ public class RegistrationTest extends BaseTest {
                 password);
         Assertions.assertEquals("Поле фамилия обязательно для заполнения.", registrationPage.getEmptyLastNameErrorMessage());
     }
+
+    @DisplayName("Submit registration form with cirilic last name")
+    @Test
+    public void submitRegistrationFormWithCirilicLastName() {
+        registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
+                TestDataGenerator.getLastNameRu(),
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
+                password,
+                password);
+        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.",registrationPage.getConfrimEmailMessage());
+    }
+
+    @DisplayName("Submit registration form with hyphenated last name")
+    @Test
+    public void submitRegistrationFormWithHyphenatedLastName() {
+        registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
+                "Martin-Clark",
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
+                password,
+                password);
+        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+    }
+
+    @DisplayName("Submit regisration form with one-character last name")
+    @Test
+    public void submitRegistrationFormWithOneCharacterLastName() {
+        registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
+                "L",
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
+                password,
+                password);
+        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+    }
+
+    @DisplayName("Accept last name with 254 characters")
+    @Test
+    public void submitRegistrationFormWithAllCharactersLastName() {
+        String lastName = TestDataGenerator.getLastNameByLength(254);
+        registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
+                lastName,
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
+                password,
+                password);
+        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+    }
+
+    @DisplayName("Accept last name with 255 characters")
+    @Test
+    public void submitRegistrationFormWithAllCharactersLastNameWith255() {
+        String lastName = TestDataGenerator.getLastNameByLength(255);
+        registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
+                lastName,
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
+                password,
+                password);
+        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+    }
+
+    @DisplayName("Accept last name with 255 characters")
+    @Test
+    public void submitRegistrationFormWithAllCharactersLastNameWith256() {
+        String lastName = TestDataGenerator.getLastNameTooLong(256);
+        registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
+                lastName,
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
+                password,
+                password);
+        Assertions.assertEquals("Количество символов в поле фамилия не может превышать 255.",registrationPage.getLongLastNameErrorMessage());
+    }
+
+    @DisplayName("Accept last name with only symbols")
+    @Test
+    public void submitRegistrationFormWithOnlySymbolsLastName() {
+        registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
+                "!!!@@@@###$$$$%%%",
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
+                password,
+                password);
+        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+
+    }
+
+    @DisplayName("Accept last name with only digits")
+    @Test
+    public void submitRegistrationFormWithOnlyDigitsLastName() {
+        registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
+                "1122334455667788",
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
+                password,
+                password);
+        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+    }
+
+    @DisplayName("Accept last name with leading space")
+    @Test
+    public void submitRegistrationFormWithLeadingSpaceLastName() {
+        registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
+                " Akberov",
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
+                password,
+                password);
+        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+    }
+
+    @DisplayName("Submit registration form with space in last name")
+    @Test
+    public void submitRegistrationFormWithSpacesInLastName() {
+        registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
+                "Iva nov",
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
+                password,
+                password);
+        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+    }
+
+    @DisplayName("Submit registration form with last name ending spaces ")
+    @Test
+    public void submitRegistrationFormWithSpacesInFirstName() {
+        registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
+                "Aliyev ",
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
+                password,
+                password);
+        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+    }
+
+    @DisplayName("Submit registration form with last name only spaces")
+    @Test
+    public void submitRegistrationFormWithOnlySpacesInFirstName() {
+        registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
+                "          ",
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
+                password,
+                password);
+        Assertions.assertEquals("Поле фамилия обязательно для заполнения.", registrationPage.getEmptyLastNameErrorMessage());
+    }
+
+    @DisplayName("Accept last name TAB characters")
+    @Test
+    public void submitRegistrationFormWithAllCharactersTabLastName() {
+        registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
+                "Silanty\\teva",
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
+                password,
+                password);
+        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+    }
+
+    @DisplayName("Accept last name new line characters")
+    @Test
+    public void submitRegistrationFormWithAllCharactersNewLineLastName() {
+        registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
+                "Isa\\nyeva",
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
+                password,
+                password);
+        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+    }
+
+
+
+
 
 }
