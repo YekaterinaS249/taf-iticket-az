@@ -414,8 +414,4 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
     }
 
-
-
-
-
 }
