@@ -1,6 +1,8 @@
 package az.iticket.ui;
 
 import az.iticket.basetest.BaseTest;
+import az.iticket.constans.RecoverPassMessage;
+import az.iticket.constans.RegistrationMessage;
 import az.iticket.ui.pages.AuthPage;
 import az.iticket.ui.pages.RegistrationPage;
 import az.iticket.utils.TestDataGenerator;
@@ -34,7 +36,7 @@ public class RegistrationTest extends BaseTest {
                 "y22888836@gmail.com",
                 "test1234",
                 "test1234");
-        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+        Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
     @DisplayName("Submit registration form with empty first name input")
@@ -47,7 +49,7 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Поле имя обязательно для заполнения.", registrationPage.getEmptyEmailErrorMessage());
+        Assertions.assertEquals(RegistrationMessage.EMPTY_FIRST_NAME_INPUT_MESSAGE, registrationPage.getEmptyEmailErrorMessage());
     }
 
     @DisplayName("Sumbit registration form with cirilic first name")
@@ -60,7 +62,7 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+        Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
     @DisplayName("Submit registration form with hyphenated first name")
@@ -73,7 +75,7 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+        Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
     @DisplayName("Submit regisration form with one-character first name")
@@ -85,7 +87,7 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+        Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
     @DisplayName("Accept first name with 254 characters")
@@ -98,7 +100,7 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+        Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
 
     }
 
@@ -112,7 +114,7 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+        Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
     @DisplayName("Accept first name with 256 characters")
@@ -125,7 +127,7 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Количество символов в поле имя не может превышать 255.", registrationPage.getLongFirstNameErrorMessage());
+        Assertions.assertEquals(RegistrationMessage.LONG_FIRST_NAME_MESSAGE, registrationPage.getLongFirstNameErrorMessage());
     }
 
     //Система принимает спецсиволы в поле FirstName,регистрация проходит пользователь входит в систему.
@@ -138,7 +140,7 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+        Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
 
     }
 
@@ -152,7 +154,7 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+        Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
     @DisplayName("Accept first name with leading space")
@@ -164,7 +166,7 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+        Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
     //Система сохраняет имя пользователя с пробелом по середине,возможно система поддерживает двойные имена.
@@ -177,7 +179,7 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+        Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
     @DisplayName("Submit registation form with first name ending spaces")
@@ -189,7 +191,7 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+        Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
     @DisplayName("Submit registration form with first name only spaces ")
@@ -201,7 +203,7 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Поле имя обязательно для заполнения.", registrationPage.getEmptyEmailErrorMessage());
+        Assertions.assertEquals(RegistrationMessage.EMPTY_FIRST_NAME_INPUT_MESSAGE, registrationPage.getEmptyEmailErrorMessage());
     }
 
     //Поле First name принимает значени табуляции и сохраняет ее как часть значения без нормализации.
@@ -214,7 +216,7 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+        Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
     //Поле First name принимает значение новой строки и сохраняет ее как часть значения без нормализации.
@@ -227,7 +229,7 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+        Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
     @DisplayName("Submit registration form with empty last name")
@@ -239,7 +241,7 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Поле фамилия обязательно для заполнения.", registrationPage.getEmptyLastNameErrorMessage());
+        Assertions.assertEquals(RegistrationMessage.EMPTY_LAST_NAME_INPUT_MESSAGE, registrationPage.getEmptyLastNameErrorMessage());
     }
 
     @DisplayName("Submit registration form with cirilic last name")
@@ -251,7 +253,7 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.",registrationPage.getConfrimEmailMessage());
+        Assertions.assertEquals(RegistrationMessage.EMPTY_LAST_NAME_INPUT_MESSAGE,registrationPage.getConfrimEmailMessage());
     }
 
     @DisplayName("Submit registration form with hyphenated last name")
@@ -263,7 +265,7 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+        Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
     @DisplayName("Submit registration form with one-character last name")
@@ -275,7 +277,7 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+        Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
     @DisplayName("Accept last name with 254 characters")
@@ -288,7 +290,7 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+        Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
     @DisplayName("Accept last name with 255 characters")
@@ -301,7 +303,7 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+        Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
     @DisplayName("Accept last name with 255 characters")
@@ -314,7 +316,7 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Количество символов в поле фамилия не может превышать 255.",registrationPage.getLongLastNameErrorMessage());
+        Assertions.assertEquals(RegistrationMessage.LONG_LAST_NAME_MESSAGE,registrationPage.getLongLastNameErrorMessage());
     }
 
     @DisplayName("Accept last name with only symbols")
@@ -326,7 +328,7 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+        Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
 
     }
 
@@ -339,7 +341,7 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+        Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
     @DisplayName("Accept last name with leading space")
@@ -351,7 +353,7 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+        Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE
     }
 
     @DisplayName("Submit registration form with space in last name")
@@ -363,7 +365,7 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+        Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
     @DisplayName("Submit registration form with last name ending spaces ")
@@ -375,7 +377,7 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+        Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
     @DisplayName("Submit registration form with last name only spaces")
@@ -387,7 +389,7 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Поле фамилия обязательно для заполнения.", registrationPage.getEmptyLastNameErrorMessage());
+        Assertions.assertEquals(RegistrationMessage.EMPTY_LAST_NAME_INPUT_MESSAGE, registrationPage.getEmptyLastNameErrorMessage());
     }
 
     @DisplayName("Accept last name TAB characters")
@@ -399,7 +401,7 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+        Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
     @DisplayName("Accept last name new line characters")
@@ -411,7 +413,18 @@ public class RegistrationTest extends BaseTest {
                 TestDataGenerator.getEmail(),
                 password,
                 password);
-        Assertions.assertEquals("Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.", registrationPage.getConfrimEmailMessage());
+        Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
+    }
+
+    @DisplayName("Submit registration form with empty phone input")
+    @Test
+    public void submitRegistrationFormWithEmptyPhoneInput() {
+        registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
+                TestDataGenerator.getLastName(),
+                "",
+                TestDataGenerator.getEmail(),
+                password,
+                password);
     }
 
 }

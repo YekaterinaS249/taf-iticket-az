@@ -60,7 +60,7 @@ public class TestDataGenerator {
         return password;
     }
 
-    public static String getLonNumberPhone() {
+    public static String getLongNumberPhone() {
         return faker.lorem().characters(10);
     }
 
