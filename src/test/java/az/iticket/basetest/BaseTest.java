@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInfo;
 
 @Slf4j
-public abstract  class BaseTest {
+public abstract class BaseTest {
     protected HomePage homePage;
 
     @BeforeEach
@@ -20,12 +20,13 @@ public abstract  class BaseTest {
         homePage = new HomePage();
         homePage.openHomePage();
     }
+
     @AfterEach
-        public void tearDown(TestInfo testInfo) {
+    public void tearDown(TestInfo testInfo) {
         log.info("Test finished: {}. {}",
-            testInfo.getTestClass().orElseThrow().getSimpleName(),
+                testInfo.getTestClass().orElseThrow().getSimpleName(),
                 testInfo.getTestMethod().orElseThrow().getName());
-            DriverManager.quitDriver();
-        }
+        DriverManager.quitDriver();
     }
+}
 
