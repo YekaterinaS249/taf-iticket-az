@@ -24,6 +24,14 @@ public class RegistrationPage extends BasePage {
     private final String LONG_FIRST_NAME_ERROR_MESSAGE = "//div[contains(text(),'Количество символов в поле имя не может превышать 255')]";
     private final String EMPTY_LAST_NAME_ERROR_MESSAGE = "//div[contains(text(),'Поле фамилия обязательно для заполнения')]";
     private final String LONG_LAST_NAME_ERROR_MESSAGE = "//div[contains(text(),'Количество символов в поле фамилия не может превышать 255')]";
+    private final String EMPTY_PHONE_NUMBER_ERROR_MESSAGE = "//div[contains(text(),'Поле моб. номер обязательно')]";
+    private final String LONG_PHONE_NUMBER_ERROR_MESSAGE = "//div[contains(.,'Количество символов в поле моб. номер')]";
+    private final String EMPTY_EMAIL_INPUT_ERROR_MESSAGE = "//div[text()='Поле e-mail адрес обязательно для заполнения.']";
+    private final String EMAIL_ALREADY_EXITS_ERROR_MESSAGE = "//div[text()='Такое значение поля e-mail адрес уже существует.']";
+    private final String INVALID_EMAIL_CDERENTIALS_ERROR_MESSAGE = "//div[text()='Поле e-mail адрес должно быть действительным электронным адресом.']";
+    private final String EMPTY_PASSWORD_ERROR_MESSAGE = "//div[@aria-live='polite' and text()='Поле пароль обязательно для заполнения.']";
+    private final String SHORT_PASSWORD_ERROR_MESSAGE ="//div[@aria-live='polite' and text()='Количество символов в поле пароль должно быть не меньше 8.']";
+    private final String LONG_PASSWORD_ERROR_MESSAGE = "//div[@aria-live='polite' and text()='Количество символов в поле пароль не может превышать 255.']";
 
     public RegistrationPage() {
         super();
@@ -82,12 +90,53 @@ public class RegistrationPage extends BasePage {
     }
 
     public String getEmptyLastNameErrorMessage() {
-        return driver.findElement(By.xpath(EMPTY_LAST_NAME_ERROR_MESSAGE)).getText();
+        WebElement emptyEmail = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(EMPTY_LAST_NAME_ERROR_MESSAGE)));
+        return emptyEmail.getText();
     }
 
     public String getLongLastNameErrorMessage() {
-       WebElement lastName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(LONG_LAST_NAME_ERROR_MESSAGE)));
-       return lastName.getText();
+        WebElement lastName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(LONG_LAST_NAME_ERROR_MESSAGE)));
+        return lastName.getText();
+    }
+
+    public String getEmptyPhoneNumberErrorMessage() {
+        WebElement phoneNumber = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(EMPTY_PHONE_NUMBER_ERROR_MESSAGE)));
+        return phoneNumber.getText();
+    }
+
+    public String getErrorMessageLongPhoneNumber() {
+        WebElement longNumber = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(LONG_PHONE_NUMBER_ERROR_MESSAGE)));
+        return longNumber.getText();
+    }
+
+    public String getErrorMessageEmptyEmail() {
+        WebElement emptyEmail = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(EMPTY_EMAIL_INPUT_ERROR_MESSAGE)));
+        return emptyEmail.getText();
+    }
+
+    public String getErrorMessageEmailAlreadyExists() {
+        WebElement emailExitsMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(EMAIL_ALREADY_EXITS_ERROR_MESSAGE)));
+        return emailExitsMessage.getText();
+    }
+
+    public String getInvalidEmailCredentialsErrorMessage() {
+        WebElement errorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INVALID_EMAIL_CDERENTIALS_ERROR_MESSAGE)));
+        return errorMessage.getText();
+    }
+
+    public String getEmptyPasswordErrorMessage() {
+        WebElement emptyPassword = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(EMPTY_PASSWORD_ERROR_MESSAGE)));
+        return emptyPassword.getText();
+    }
+
+    public String getShortPasswordErrorMessage() {
+      WebElement shortPassword = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(SHORT_PASSWORD_ERROR_MESSAGE)));
+      return shortPassword.getText();
+    }
+
+    public String getErrorMessageLongPassword() {
+        WebElement errorLongPassword = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(LONG_PASSWORD_ERROR_MESSAGE)));
+        return errorLongPassword.getText();
     }
 
 }
