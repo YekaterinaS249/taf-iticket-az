@@ -4,6 +4,7 @@ import net.datafaker.Faker;
 
 import java.util.Locale;
 
+
 public class TestDataGenerator {
     private static final Faker faker = new Faker();
     private static final Faker fakerRu = new Faker(new Locale("ru"));
@@ -56,12 +57,15 @@ public class TestDataGenerator {
         return "Test" + faker.number().digits(4);
     }
 
-    public static String getConfirmPassword(String password) {
-        return password;
+    public static String getInvalidLengthNumber() {
+        String[] prefixes = {"50", "55", "77", "70"};
+        String prefix = prefixes[faker.random().nextInt(prefixes.length)];
+        String rest = faker.number().digits(8);
+        return prefix + rest;
     }
 
-    public static String getLongNumberPhone() {
-        return faker.lorem().characters(10);
+    public static String getLongPhoneNumber(int length) {
+        return faker.regexify("[0-9]{" + length + "}");
     }
 
     public static String getEmailWithoutAt() {
@@ -86,6 +90,57 @@ public class TestDataGenerator {
 
     public static String getLastNameByLength(int length) {
         return "C".repeat(length);
+    }
+
+    public static String getUserWithEmailContainingPlus(){
+        return faker.name().username() + "+test@gmail.com";
+    }
+
+    public static String getEmailContainsLeadingSpace(){
+        return " " + faker.name().username() + faker.number().digits(3) + "@gmail.com";
+    }
+
+    public static String getEmailContainsSpaceinMiddle(){
+        return faker.internet().emailAddress().replace("@", " @");
+    }
+
+    public static String getEmailContainsEndingSpace(){
+        return faker.internet().emailAddress() + " ";
+    }
+
+    public static String getEmailWithTabCharacters(){
+        return faker.internet().emailAddress().replace("@", "\\t@");
+    }
+
+    public static String getEmailWithNewLineCharacters(){
+        return faker.internet().emailAddress().replace("@","\\n");
+    }
+
+    public static String getPasswordByLength(int length) {
+        return faker.regexify("[A-Za-z0-9]{" + length + "}");
+    }
+
+    public static String getSpecialSymbolsPassword(int length) {
+        return faker.regexify("[!@#$%^&*()_+=\\-{}\\[\\]:;\"'<>?,./]{" + length + "}");
+
+    }
+
+    public static String getOnlyDigitsPassword(int length) {
+        return faker.regexify("[0-9]{" + length + "}");
+    }
+
+    public static String getPasswordWithLeadingPassword() {
+        return " " +faker.internet().password(8,8);
+    }
+
+    public static String getPasswordWithMiddlePassword() {
+        String password = faker.internet().password(8, 8);
+        int middle = password.length() / 2;
+        return password.substring(0, middle) + " " + password.substring(middle);
+    }
+
+    public static String getPasswordWithEndingPassword() {
+        return faker.internet().password(8, 8) + " ";
     }
 }
 
