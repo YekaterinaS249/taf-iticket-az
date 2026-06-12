@@ -880,5 +880,84 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
+    //Система позволяет зарегистрироваться при несовпадении значений Password и Confirm Password.
+    @DisplayName("Verify validation password and confirm password mismatch")
+    @Test
+    public void verifyPasswordAndConfirmPasswordMismatchTest() {
+        registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
+                TestDataGenerator.getLastName(),
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
+                password,
+                "user1234");
+        Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
+
+    }
+
+    @DisplayName("Verify registration page title")
+    @Test
+    public void verifyRegistrationPageTitleTest() {
+        registrationPage.getTitle();
+        Assertions.assertEquals("Регистрация",registrationPage.getTitle());
+    }
+
+    @DisplayName("Verify registration footer title")
+    @Test
+    public void verifyRegistrationFooterTitleTest() {
+        registrationPage.getFooterTitle();
+        Assertions.assertEquals("Уже зарегистрирован?",registrationPage.getFooterTitle());
+    }
+
+    @DisplayName("Verify navigation to login page from registration page after click login link")
+    @Test
+    public void verifyNavigationToLoginPageFromRegistrationPageTest() {
+        registrationPage.clickLoginButton();
+        Assertions.assertTrue(registrationPage.isModalLoginDisplayed());
+    }
+
+    @DisplayName("Get placeholder text in first name input")
+    @Test
+    public void getPlaceholderFirstNameInputTest() {
+        Assertions.assertEquals("Имя", registrationPage.getPlaceholderFirstNameInputText());
+    }
+
+    @DisplayName("Get placeholder text in last name input")
+    @Test
+    public void getPlaceholderLastNameInputTest() {
+        Assertions.assertEquals("Фамилия", registrationPage.getPlaceholderLastNameInputText());
+    }
+
+    @DisplayName("Get placeholder text in phone number input")
+    @Test
+    public void getPlaceholderPhoneNumberInputTest() {
+        Assertions.assertEquals("Мобильный", registrationPage.getPlaceholderPhoneNumberInputText());
+    }
+
+    @DisplayName("Get placeholder text in email input")
+    @Test
+    public void getPlaceholderEmailInputTest() {
+        Assertions.assertEquals("E-mail", registrationPage.getPlaceholderEmailInputText());
+    }
+
+    @DisplayName("Get placeholder text in password input")
+    @Test
+    public void getPlaceholderPasswordInputTest() {
+        Assertions.assertEquals("Пароль", registrationPage.getPlaceholderPasswordInputText());
+    }
+
+    @DisplayName("Get placeholder text in confir password input")
+    @Test
+    public void getPlaceholderConfirmPasswordInputTest() {
+        Assertions.assertEquals("Подтвердить пароль", registrationPage.getPlaceholderConfirmPasswordInputText());
+    }
+
+    @DisplayName("Drop down selector is displayed")
+    @Test
+    public void dropDownSelectorDisplayedTest() {
+        Assertions.assertTrue(registrationPage.isDropDownSelectorDisplayed());
+    }
+
+
+
 }
 
