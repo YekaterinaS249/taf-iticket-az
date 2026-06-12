@@ -32,6 +32,8 @@ public class RegistrationPage extends BasePage {
     private final String EMPTY_PASSWORD_ERROR_MESSAGE = "//div[@aria-live='polite' and text()='Поле пароль обязательно для заполнения.']";
     private final String SHORT_PASSWORD_ERROR_MESSAGE ="//div[@aria-live='polite' and text()='Количество символов в поле пароль должно быть не меньше 8.']";
     private final String LONG_PASSWORD_ERROR_MESSAGE = "//div[@aria-live='polite' and text()='Количество символов в поле пароль не может превышать 255.']";
+    private final String LOGIN_MODAL = "//div[@id='login-modal']";
+    private final String PHONE_DROPDOWN  = "//span[contains(@class,'vti__selection')]";
 
     public RegistrationPage() {
         super();
@@ -42,7 +44,8 @@ public class RegistrationPage extends BasePage {
     }
 
     public String getFooterTitle() {
-        return driver.findElement(By.xpath(REGISTRATION_FOOTER_TITTLE)).getText();
+        String text = driver.findElement(By.xpath(REGISTRATION_FOOTER_TITTLE)).getText();
+        return text.substring(0,text.indexOf("?") + 1);
     }
 
     public void fillRegistrationForm(String firstName, String lastName, String phoneNumber, String email, String password, String confirmPassword) {
@@ -137,6 +140,38 @@ public class RegistrationPage extends BasePage {
     public String getErrorMessageLongPassword() {
         WebElement errorLongPassword = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(LONG_PASSWORD_ERROR_MESSAGE)));
         return errorLongPassword.getText();
+    }
+
+    public boolean isModalLoginDisplayed() {
+       return driver.findElement(By.xpath(LOGIN_MODAL)).isDisplayed();
+    }
+
+    public String getPlaceholderFirstNameInputText(){
+        return driver.findElement(By.xpath(FIRST_NAME_INPUT)).getAttribute("placeholder");
+    }
+
+    public String getPlaceholderLastNameInputText(){
+        return driver.findElement(By.xpath(LAST_NAME_INPUT)).getAttribute("placeholder");
+    }
+
+    public String getPlaceholderPhoneNumberInputText(){
+        return driver.findElement(By.xpath(PHONE_NUMBER_INPUT)).getAttribute("placeholder");
+    }
+
+    public String getPlaceholderEmailInputText(){
+        return driver.findElement(By.xpath(EMAIL_INPUT)).getAttribute("placeholder");
+    }
+
+    public String getPlaceholderPasswordInputText(){
+        return driver.findElement(By.xpath(PASSWORD_INPUT)).getAttribute("placeholder");
+    }
+
+    public String getPlaceholderConfirmPasswordInputText(){
+        return driver.findElement(By.xpath(CONFIRM_PASSWORD_INPUT)).getAttribute("placeholder");
+    }
+
+    public boolean isDropDownSelectorDisplayed() {
+        return  driver.findElement(By.xpath(PHONE_DROPDOWN)).isDisplayed();
     }
 
 }

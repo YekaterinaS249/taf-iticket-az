@@ -58,7 +58,7 @@ public class TestDataGenerator {
     }
 
     public static String getInvalidLengthNumber() {
-        String[] prefixes = {"50", "55", "77", "70"};
+        String [] prefixes = {"50", "55", "77", "70"};
         String prefix = prefixes[faker.random().nextInt(prefixes.length)];
         String rest = faker.number().digits(8);
         return prefix + rest;
@@ -92,28 +92,28 @@ public class TestDataGenerator {
         return "C".repeat(length);
     }
 
-    public static String getUserWithEmailContainingPlus(){
+    public static String getUserWithEmailContainingPlus() {
         return faker.name().username() + "+test@gmail.com";
     }
 
-    public static String getEmailContainsLeadingSpace(){
+    public static String getEmailContainsLeadingSpace() {
         return " " + faker.name().username() + faker.number().digits(3) + "@gmail.com";
     }
 
-    public static String getEmailContainsSpaceinMiddle(){
+    public static String getEmailContainsSpaceinMiddle() {
         return faker.internet().emailAddress().replace("@", " @");
     }
 
-    public static String getEmailContainsEndingSpace(){
+    public static String getEmailContainsEndingSpace() {
         return faker.internet().emailAddress() + " ";
     }
 
-    public static String getEmailWithTabCharacters(){
+    public static String getEmailWithTabCharacters() {
         return faker.internet().emailAddress().replace("@", "\\t@");
     }
 
-    public static String getEmailWithNewLineCharacters(){
-        return faker.internet().emailAddress().replace("@","\\n");
+    public static String getEmailWithNewLineCharacters() {
+        return faker.internet().emailAddress().replace("@", "\\n");
     }
 
     public static String getPasswordByLength(int length) {
@@ -130,7 +130,7 @@ public class TestDataGenerator {
     }
 
     public static String getPasswordWithLeadingPassword() {
-        return " " +faker.internet().password(8,8);
+        return " " + faker.internet().password(8, 8);
     }
 
     public static String getPasswordWithMiddlePassword() {
