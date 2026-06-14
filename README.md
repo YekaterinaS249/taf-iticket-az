@@ -148,7 +148,7 @@ allure serve target/allure-results
 - хранение истории запусков
 
 ---
-
+ 
 ## Автор
 
 Yekaterina Silantyeva
