@@ -105,7 +105,7 @@ src
 Клонировать репозиторий:
 
 ```bash
-git clone <repository-url>
+git clone <https://github.com/YekaterinaS249/taf-iticket-az>
 ```
 
 Перейти в директорию проекта:
