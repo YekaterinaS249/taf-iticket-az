@@ -109,11 +109,15 @@ src
 └── README.md                   # Документация проекта
 ---
 ```
-## Установка проекта
+Клонировать репозиторий:
 
-git clone https://github.com/YekaterinaS249/taf-iticket-az
+git clone <repository-url>
+
+Перейти в директорию проекта:
 
 cd taf-iticket-az
+
+Установить зависимости:
 
 mvn clean install
 
