@@ -109,18 +109,20 @@ src
 └── README.md                   # Документация проекта
 ---
 ```
-Клонировать репозиторий:
+Клонирование репозитория:
+```bash
+git clone https://github.com/YekaterinaS249/taf-iticket-az
+```
 
-git clone <repository-url>
-
-Перейти в директорию проекта:
-
+Переход в директорию проекта:
+```bash
 cd taf-iticket-az
+```
 
-Установить зависимости:
-
+Установка зависимостей:
+```bash
 mvn clean install
-
+```
 ---
 
 ## Запуск тестов
