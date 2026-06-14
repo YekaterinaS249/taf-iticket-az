@@ -124,7 +124,7 @@ cd taf-iticket-az
 mvn clean install
 ```
 ---
-
+ 
 ## Запуск тестов
 
 mvn test
