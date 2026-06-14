@@ -1,7 +1,7 @@
 package az.iticket.ui;
 
 import az.iticket.basetest.BaseTest;
-import az.iticket.constans.RecoverPassMessage;
+import az.iticket.message.RecoverPassMessage;
 import az.iticket.ui.pages.AuthPage;
 import az.iticket.ui.pages.RecoverPasswordPage;
 import org.junit.jupiter.api.Assertions;
