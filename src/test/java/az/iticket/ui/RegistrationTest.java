@@ -1,7 +1,7 @@
 package az.iticket.ui;
 
 import az.iticket.basetest.BaseTest;
-import az.iticket.constans.RegistrationMessage;
+import az.iticket.message.RegistrationMessage;
 import az.iticket.ui.pages.AuthPage;
 import az.iticket.ui.pages.RegistrationPage;
 import az.iticket.utils.TestDataGenerator;

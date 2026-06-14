@@ -1,7 +1,7 @@
 package az.iticket.ui;
 
 import az.iticket.basetest.BaseTest;
-import az.iticket.constans.LoginMessage;
+import az.iticket.message.LoginMessage;
 import az.iticket.ui.pages.AuthPage;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
