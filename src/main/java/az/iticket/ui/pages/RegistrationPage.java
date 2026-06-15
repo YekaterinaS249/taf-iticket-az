@@ -1,39 +1,42 @@
 package az.iticket.ui.pages;
 
 import az.iticket.basepage.BasePage;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 @Slf4j
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class RegistrationPage extends BasePage {
-    private final String FIRST_NAME_INPUT = "//input[@name='first_name']";
-    private final String LAST_NAME_INPUT = "//input[@name='last_name']";
-    private final String PHONE_NUMBER_INPUT = "//input[@placeholder='Мобильный']";
-    private final String EMAIL_INPUT = "//div[@class='form-group mt-4']//input[@name='email']";
-    private final String PASSWORD_INPUT = "(//input[@type='password' and @name='password'])[2]";
-    private final String CONFIRM_PASSWORD_INPUT = "//input[@name='confirm_password']";
-    private final String REGISTRATION_BUTTON = "//button[@type='button' and contains(text(),'Регистрация')]";
-    private final String REGISTRATION_TITLE = "//h4[text()='Регистрация']";
-    private final String REGISTRATION_FOOTER_TITTLE = "//div[contains(text(),'Уже зарегистрирован')]";
-    private final String LOGIN_LINK = "//a[normalize-space()='Войдите здесь']";
-    private final String CLOSE_BUTTON = "//h4[text()='Регистрация']/ancestor::div[contains(@class,'modal-dialog')]//button[contains(@class,'close')]";
-    private final String CONFRIM_EMAIL = "//div[contains(text(),'подтвердите e-mail')]";
-    private final String EMPTY_FIRST_NAME_ERROR_MESSAGE = "//div[contains(text(),'Поле имя обязательно для заполнения')]";
-    private final String LONG_FIRST_NAME_ERROR_MESSAGE = "//div[contains(text(),'Количество символов в поле имя не может превышать 255')]";
-    private final String EMPTY_LAST_NAME_ERROR_MESSAGE = "//div[contains(text(),'Поле фамилия обязательно для заполнения')]";
-    private final String LONG_LAST_NAME_ERROR_MESSAGE = "//div[contains(text(),'Количество символов в поле фамилия не может превышать 255')]";
-    private final String EMPTY_PHONE_NUMBER_ERROR_MESSAGE = "//div[contains(text(),'Поле моб. номер обязательно')]";
-    private final String LONG_PHONE_NUMBER_ERROR_MESSAGE = "//div[contains(.,'Количество символов в поле моб. номер')]";
-    private final String EMPTY_EMAIL_INPUT_ERROR_MESSAGE = "//div[text()='Поле e-mail адрес обязательно для заполнения.']";
-    private final String EMAIL_ALREADY_EXITS_ERROR_MESSAGE = "//div[text()='Такое значение поля e-mail адрес уже существует.']";
-    private final String INVALID_EMAIL_CDERENTIALS_ERROR_MESSAGE = "//div[text()='Поле e-mail адрес должно быть действительным электронным адресом.']";
-    private final String EMPTY_PASSWORD_ERROR_MESSAGE = "//div[@aria-live='polite' and text()='Поле пароль обязательно для заполнения.']";
-    private final String SHORT_PASSWORD_ERROR_MESSAGE ="//div[@aria-live='polite' and text()='Количество символов в поле пароль должно быть не меньше 8.']";
-    private final String LONG_PASSWORD_ERROR_MESSAGE = "//div[@aria-live='polite' and text()='Количество символов в поле пароль не может превышать 255.']";
-    private final String LOGIN_MODAL = "//div[@id='login-modal']";
-    private final String PHONE_DROPDOWN  = "//span[contains(@class,'vti__selection')]";
+    final String FIRST_NAME_INPUT = "//input[@name='first_name']";
+    final String LAST_NAME_INPUT = "//input[@name='last_name']";
+    final String PHONE_NUMBER_INPUT = "//input[@placeholder='Мобильный']";
+    final String EMAIL_INPUT = "//div[@class='form-group mt-4']//input[@name='email']";
+    final String PASSWORD_INPUT = "(//input[@type='password' and @name='password'])[2]";
+    final String CONFIRM_PASSWORD_INPUT = "//input[@name='confirm_password']";
+    final String REGISTRATION_BUTTON = "//button[@type='button' and contains(text(),'Регистрация')]";
+    final String REGISTRATION_TITLE = "//h4[text()='Регистрация']";
+    final String REGISTRATION_FOOTER_TITTLE = "//div[contains(text(),'Уже зарегистрирован')]";
+    final String LOGIN_LINK = "//a[normalize-space()='Войдите здесь']";
+    final String CLOSE_BUTTON = "//h4[text()='Регистрация']/ancestor::div[contains(@class,'modal-dialog')]//button[contains(@class,'close')]";
+    final String CONFRIM_EMAIL = "//div[contains(text(),'подтвердите e-mail')]";
+    final String EMPTY_FIRST_NAME_ERROR_MESSAGE = "//div[contains(text(),'Поле имя обязательно для заполнения')]";
+    final String LONG_FIRST_NAME_ERROR_MESSAGE = "//div[contains(text(),'Количество символов в поле имя не может превышать 255')]";
+    final String EMPTY_LAST_NAME_ERROR_MESSAGE = "//div[contains(text(),'Поле фамилия обязательно для заполнения')]";
+    final String LONG_LAST_NAME_ERROR_MESSAGE = "//div[contains(text(),'Количество символов в поле фамилия не может превышать 255')]";
+    final String EMPTY_PHONE_NUMBER_ERROR_MESSAGE = "//div[contains(text(),'Поле моб. номер обязательно')]";
+    final String LONG_PHONE_NUMBER_ERROR_MESSAGE = "//div[contains(.,'Количество символов в поле моб. номер')]";
+    final String EMPTY_EMAIL_INPUT_ERROR_MESSAGE = "//div[text()='Поле e-mail адрес обязательно для заполнения.']";
+    final String EMAIL_ALREADY_EXITS_ERROR_MESSAGE = "//div[text()='Такое значение поля e-mail адрес уже существует.']";
+    final String INVALID_EMAIL_CDERENTIALS_ERROR_MESSAGE = "//div[text()='Поле e-mail адрес должно быть действительным электронным адресом.']";
+    final String EMPTY_PASSWORD_ERROR_MESSAGE = "//div[@aria-live='polite' and text()='Поле пароль обязательно для заполнения.']";
+    final String SHORT_PASSWORD_ERROR_MESSAGE = "//div[@aria-live='polite' and text()='Количество символов в поле пароль должно быть не меньше 8.']";
+    final String LONG_PASSWORD_ERROR_MESSAGE = "//div[@aria-live='polite' and text()='Количество символов в поле пароль не может превышать 255.']";
+    final String LOGIN_MODAL = "//div[@id='login-modal']";
+    final String PHONE_DROPDOWN = "//span[contains(@class,'vti__selection')]";
 
     public RegistrationPage() {
         super();
@@ -45,7 +48,7 @@ public class RegistrationPage extends BasePage {
 
     public String getFooterTitle() {
         String text = driver.findElement(By.xpath(REGISTRATION_FOOTER_TITTLE)).getText();
-        return text.substring(0,text.indexOf("?") + 1);
+        return text.substring(0, text.indexOf("?") + 1);
     }
 
     public void fillRegistrationForm(String firstName, String lastName, String phoneNumber, String email, String password, String confirmPassword) {
@@ -133,8 +136,8 @@ public class RegistrationPage extends BasePage {
     }
 
     public String getShortPasswordErrorMessage() {
-      WebElement shortPassword = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(SHORT_PASSWORD_ERROR_MESSAGE)));
-      return shortPassword.getText();
+        WebElement shortPassword = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(SHORT_PASSWORD_ERROR_MESSAGE)));
+        return shortPassword.getText();
     }
 
     public String getErrorMessageLongPassword() {
@@ -143,35 +146,35 @@ public class RegistrationPage extends BasePage {
     }
 
     public boolean isModalLoginDisplayed() {
-       return driver.findElement(By.xpath(LOGIN_MODAL)).isDisplayed();
+        return driver.findElement(By.xpath(LOGIN_MODAL)).isDisplayed();
     }
 
-    public String getPlaceholderFirstNameInputText(){
+    public String getPlaceholderFirstNameInputText() {
         return driver.findElement(By.xpath(FIRST_NAME_INPUT)).getAttribute("placeholder");
     }
 
-    public String getPlaceholderLastNameInputText(){
+    public String getPlaceholderLastNameInputText() {
         return driver.findElement(By.xpath(LAST_NAME_INPUT)).getAttribute("placeholder");
     }
 
-    public String getPlaceholderPhoneNumberInputText(){
+    public String getPlaceholderPhoneNumberInputText() {
         return driver.findElement(By.xpath(PHONE_NUMBER_INPUT)).getAttribute("placeholder");
     }
 
-    public String getPlaceholderEmailInputText(){
+    public String getPlaceholderEmailInputText() {
         return driver.findElement(By.xpath(EMAIL_INPUT)).getAttribute("placeholder");
     }
 
-    public String getPlaceholderPasswordInputText(){
+    public String getPlaceholderPasswordInputText() {
         return driver.findElement(By.xpath(PASSWORD_INPUT)).getAttribute("placeholder");
     }
 
-    public String getPlaceholderConfirmPasswordInputText(){
+    public String getPlaceholderConfirmPasswordInputText() {
         return driver.findElement(By.xpath(CONFIRM_PASSWORD_INPUT)).getAttribute("placeholder");
     }
 
     public boolean isDropDownSelectorDisplayed() {
-        return  driver.findElement(By.xpath(PHONE_DROPDOWN)).isDisplayed();
+        return driver.findElement(By.xpath(PHONE_DROPDOWN)).isDisplayed();
     }
 
 }
