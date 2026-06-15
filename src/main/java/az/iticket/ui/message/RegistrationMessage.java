@@ -1,4 +1,4 @@
-package az.iticket.message;
+package az.iticket.ui.message;
 
 public class RegistrationMessage {
     public static final String EMAIL_VERIFICATION_REQUIRED_MESSAGE = "Пожалуйста, подтвердите e-mail, чтобы продолжить пользоваться сайтом.";

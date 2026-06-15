@@ -1,4 +1,4 @@
-package az.iticket.message;
+package az.iticket.ui.message;
 
 public class RecoverPassMessage {
     public static final String RESET_LINK_SENT_MESSAGE = "Ссылка на сброс пароля была отправлена!";
