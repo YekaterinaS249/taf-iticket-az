@@ -5,12 +5,18 @@ import az.iticket.message.RegistrationMessage;
 import az.iticket.ui.pages.AuthPage;
 import az.iticket.ui.pages.RegistrationPage;
 import az.iticket.utils.TestDataGenerator;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+
+@Epic("Authentication")
+@Feature("Registration")
+@Owner("Yekaterina Silantyeva")
 public class RegistrationTest extends BaseTest {
+
     private AuthPage authPage;
     private RegistrationPage registrationPage;
     private String password;
@@ -25,20 +31,21 @@ public class RegistrationTest extends BaseTest {
 
     }
 
-    @DisplayName("Registration user with valid data")
+    @DisplayName("REG-001 - Verify successful user registration with valid data")
+    @Story("Successful user registration")
     @Test
     public void registrationUserWithValidData() {
-        registrationPage.fillRegistrationForm(
-                "Yekaterina",
-                "Kalin",
-                "507839039",
-                "y22888836@gmail.com",
-                "test1234",
-                "test1234");
+        registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
+                TestDataGenerator.getLastName(),
+                TestDataGenerator.getPhoneNumberAz(),
+                TestDataGenerator.getEmail(),
+                password,
+                password);
         Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
-    @DisplayName("Submit registration form with empty first name input")
+    @DisplayName("REG-002 -Verify validation error is displayed for empty first name")
+    @Story("Register with empty first name")
     @Test
     public void submitRegistrationFormWithEmptyFirstNameTest() {
         registrationPage.fillRegistrationForm(
@@ -51,9 +58,10 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMPTY_FIRST_NAME_INPUT_MESSAGE, registrationPage.getEmptyEmailErrorMessage());
     }
 
-    @DisplayName("Sumbit registration form with cirilic first name")
+    @DisplayName("REG-003 -Verify successful registration with Cyrillic first name")
+    @Story("Register with Cyrillic first name")
     @Test
-    public void submitRegistrationFormWithCirilicFirstNameTest() {
+    public void submitRegistrationFormWithCyrillicFirstNameTest() {
         registrationPage.fillRegistrationForm(
                 TestDataGenerator.getFirstNameRu(),
                 TestDataGenerator.getLastName(),
@@ -64,7 +72,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
-    @DisplayName("Submit registration form with hyphenated first name")
+    @DisplayName("REG-004 -Verify successful registration with hyphenated first name")
+    @Story("Register with hyphenated first name")
     @Test
     public void submitRegistrationFormWithHyphenatedFirstNameTest() {
         registrationPage.fillRegistrationForm(
@@ -77,7 +86,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
-    @DisplayName("Submit regisration form with one-character first name")
+    @DisplayName("REG-005 -Verify successful registration with one-character first name")
+    @Story("Registration with one-character first name")
     @Test
     public void submitRegistrationFormWithOneCharacterFirstNameTest() {
         registrationPage.fillRegistrationForm("K",
@@ -89,7 +99,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
-    @DisplayName("Accept first name with 254 characters")
+    @DisplayName("REG-006 -Verify registration accepts a 254-character first name")
+    @Story("Register with 254-character first name")
     @Test
     public void submitRegistrationFormWith254CharactersTest() {
         String firstName = TestDataGenerator.getFirstNameByLength(254);
@@ -103,7 +114,8 @@ public class RegistrationTest extends BaseTest {
 
     }
 
-    @DisplayName("Accept first name with 255 characters")
+    @DisplayName("REG-007 -Verify registration accepts a 255-character first name")
+    @Story("Register with 255-character first name")
     @Test
     public void submitRegistrationFormWith255CharactersTest() {
         String firstName = TestDataGenerator.getFirstNameByLength(255);
@@ -116,7 +128,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
-    @DisplayName("Accept first name with 256 characters")
+    @DisplayName("REG-008 -Verify validation error for a 256-character first name")
+    @Story("Register with 256-character first name")
     @Test
     public void submitRegistrationFormWith256CharactersTest() {
         String firstName = TestDataGenerator.getFirstNameTooLong(256);
@@ -130,7 +143,8 @@ public class RegistrationTest extends BaseTest {
     }
 
     //Система принимает спецсиволы в поле FirstName,регистрация проходит пользователь входит в систему.
-    @DisplayName("Accept first name with only symbols")
+    @DisplayName("REG-009 -Verify registration accepts a first name containing only symbols")
+    @Story("Register with symbols-only first name")
     @Test
     public void submitRegistrationFormWithSymbolsTest() {
         registrationPage.fillRegistrationForm("!@#$%^&*()",
@@ -144,7 +158,8 @@ public class RegistrationTest extends BaseTest {
     }
 
     //Система принимает только числа в поле FirstName,регистрация проходит пользователь входит в систему.
-    @DisplayName("Accept first name with only digits")
+    @DisplayName("REG-010 -Verify registration accepts a first name containing only digits")
+    @Story("Register with digits-only first name")
     @Test
     public void submitRegistrationFormWithDigitsTest() {
         registrationPage.fillRegistrationForm("12345678910",
@@ -156,7 +171,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
-    @DisplayName("Accept first name with leading space")
+    @DisplayName("REG-011 -Verify leading space first name during registration")
+    @Story("Register with leading space in first name")
     @Test
     public void submitRegistrationFormWithLeadingSpaceTest() {
         registrationPage.fillRegistrationForm(" Yekaterina",
@@ -169,7 +185,8 @@ public class RegistrationTest extends BaseTest {
     }
 
     //Система сохраняет имя пользователя с пробелом по середине,возможно система поддерживает двойные имена.
-    @DisplayName("Submit registration form with space in first name")
+    @DisplayName("REG-012 -Verify registration accepts first name with middle space")
+    @Story("Register with middle space in first name")
     @Test
     public void submitRegistrationFormWithSpaceInFirstNameTest() {
         registrationPage.fillRegistrationForm("Anas tasiya",
@@ -181,7 +198,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
-    @DisplayName("Submit registation form with first name ending spaces")
+    @DisplayName("REG-013 -Verify registration with trailing spaces in first name")
+    @Story("Register with first name ending with spaces")
     @Test
     public void submitRegistrationFormWithFirstNameEndingSpacesTest() {
         registrationPage.fillRegistrationForm("Yekaterina ",
@@ -193,7 +211,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
-    @DisplayName("Submit registration form with first name only spaces ")
+    @DisplayName("REG-014 -Verify validation error for first name containing only spaces")
+    @Story("Register with whitespace-only first name")
     @Test
     public void submitRegistrationFormWithOnlySpacesTest() {
         registrationPage.fillRegistrationForm("         ",
@@ -206,7 +225,8 @@ public class RegistrationTest extends BaseTest {
     }
 
     //Поле First name принимает значени табуляции и сохраняет ее как часть значения без нормализации.
-    @DisplayName("Accept first name TAB characters")
+    @DisplayName(" REG-015 -Verify registration with tab characters in first name")
+    @Story("Register with tab characters in first name")
     @Test
     public void submitRegistrationFormWithTabCharactersTest() {
         registrationPage.fillRegistrationForm("Jo\\thn",
@@ -219,7 +239,8 @@ public class RegistrationTest extends BaseTest {
     }
 
     //Поле First name принимает значение новой строки и сохраняет ее как часть значения без нормализации.
-    @DisplayName("Accept first name new line characters")
+    @DisplayName("REG-016 -Verify registration with new line characters in first name")
+    @Story("Register with new line characters")
     @Test
     public void submitRegistrationFormWithNewLineCharactersTest() {
         registrationPage.fillRegistrationForm("Micha\\nel",
@@ -231,7 +252,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
-    @DisplayName("Submit registration form with empty last name")
+    @DisplayName("REG-017 -Verify validation error for empty last name")
+    @Story("Register with empty last name")
     @Test
     public void submitRegistrationFormWithEmptyLastNameTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -243,7 +265,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMPTY_LAST_NAME_INPUT_MESSAGE, registrationPage.getEmptyLastNameErrorMessage());
     }
 
-    @DisplayName("Submit registration form with cirilic last name")
+    @DisplayName("REG-018 -Verify registration accepts Cyrillic last name")
+    @Story("Registration with Cyrillic last name")
     @Test
     public void submitRegistrationFormWithCirilicLastNameTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -255,7 +278,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMPTY_LAST_NAME_INPUT_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
-    @DisplayName("Submit registration form with hyphenated last name")
+    @DisplayName("REG-019 -Verify registration accepts hyphenated last name")
+    @Story("Register with hyphenated last name")
     @Test
     public void submitRegistrationFormWithHyphenatedLastNameTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -267,7 +291,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
-    @DisplayName("Submit registration form with one-character last name")
+    @DisplayName("REG-020 -Verify registration accepts one-character last name")
+    @Story("Register with one-character last name")
     @Test
     public void submitRegistrationFormWithOneCharacterLastNameTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -279,7 +304,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
-    @DisplayName("Accept last name with 254 characters")
+    @DisplayName("REG-021 -Verify registration accepts 254-character last name")
+    @Story("Register with 254-character last name")
     @Test
     public void submitRegistrationFormWithAllCharactersLastNameTest() {
         String lastName = TestDataGenerator.getLastNameByLength(254);
@@ -292,7 +318,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
-    @DisplayName("Accept last name with 255 characters")
+    @DisplayName("REG-022 -Verify registration accepts 255-characters last name")
+    @Story("Register with 255-characters last name")
     @Test
     public void submitRegistrationFormWithAllCharactersLastNameWith255Test() {
         String lastName = TestDataGenerator.getLastNameByLength(255);
@@ -305,7 +332,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
-    @DisplayName("Accept last name with 256 characters")
+    @DisplayName("REG-023 - Verify validation error for a 256-character last name")
+    @Story("Register with 256-character last name")
     @Test
     public void submitRegistrationFormWithAllCharactersLastNameWith256Test() {
         String lastName = TestDataGenerator.getLastNameTooLong(256);
@@ -318,7 +346,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.LONG_LAST_NAME_MESSAGE, registrationPage.getLongLastNameErrorMessage());
     }
 
-    @DisplayName("Accept last name with only symbols")
+    @DisplayName("REG-024 -Verify registration accepts a last name containing only symbols")
+    @Story("Register with symbols-only last name")
     @Test
     public void submitRegistrationFormWithOnlySymbolsLastNameTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -331,7 +360,8 @@ public class RegistrationTest extends BaseTest {
 
     }
 
-    @DisplayName("Accept last name with only digits")
+    @DisplayName("REG-025 -Verify registration accepts last name containing only digits")
+    @Story("Register with digits-only last name")
     @Test
     public void submitRegistrationFormWithOnlyDigitsLastNameTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -343,7 +373,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
-    @DisplayName("Accept last name with leading space")
+    @DisplayName("REG-026 -Verify successful registration with leading space in last name")
+    @Story("Register with leading space in last name")
     @Test
     public void submitRegistrationFormWithLeadingSpaceLastNameTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -355,7 +386,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
-    @DisplayName("Submit registration form with space in last name")
+    @DisplayName("REG-027 -Verify registration accepts middle space in last name")
+    @Story("Register with middle space in last name")
     @Test
     public void submitRegistrationFormWithSpacesInLastNameTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -367,7 +399,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
-    @DisplayName("Submit registration form with last name ending spaces ")
+    @DisplayName("REG-028 -Verify successful registration with trailing spaces in last name")
+    @Story("Register with ending spaces in last name")
     @Test
     public void submitRegistrationFormWithSpacesInFirstNameTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -379,7 +412,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
-    @DisplayName("Submit registration form with last name only spaces")
+    @DisplayName("REG-029 -Verify validation error for last name containing only spaces")
+    @Story("Register with whitespace-only last name")
     @Test
     public void submitRegistrationFormWithOnlySpacesInFirstNameTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -391,7 +425,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMPTY_LAST_NAME_INPUT_MESSAGE, registrationPage.getEmptyLastNameErrorMessage());
     }
 
-    @DisplayName("Accept last name TAB characters")
+    @DisplayName("REG-030 -Verify registration accepts tab characters in last name")
+    @Story("Register with tab characters in last name")
     @Test
     public void submitRegistrationFormWithAllCharactersTabLastNameTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -403,7 +438,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
-    @DisplayName("Accept last name new line characters")
+    @DisplayName("REG-031 -Verify registration accepts newline characters in last name")
+    @Story("Register with newline characters in last name")
     @Test
     public void submitRegistrationFormWithAllCharactersNewLineLastNameTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -415,7 +451,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
-    @DisplayName("Submit registration form with empty phone input")
+    @DisplayName("REG-032 -Verify validation error for empty phone number")
+    @Story("Register with empty phone number")
     @Test
     public void submitRegistrationFormWithEmptyPhoneInputTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -427,7 +464,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMPTY_PHONE_NUMBER_ERROR_MESSAGE, registrationPage.getEmptyPhoneNumberErrorMessage());
     }
 
-    @DisplayName("Submit registration form with short phone number")
+    @DisplayName("REG-032 -Verify validation error for short phone number")
+    @Story("Register with short phone number")
     @Test
     public void submitRegistrationFormWithShortPhoneNumberTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -442,7 +480,8 @@ public class RegistrationTest extends BaseTest {
     /* Поле номера для Азербайждана принимает 11 цифр
     хотя корректная длина номера 12 цифр валидация отсутвует.
      */
-    @DisplayName("Verify validation for Azerbaijan phone number with 11 digits")
+    @DisplayName("REG-033 -Verify validation for Azerbaijan phone number with 11 digits")
+    @Story("Register with Azerbaijan phone number (11 digits)")
     @Test
     public void verifyValidationForAzerbaijanPhoneNumberWith11DigitsTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -457,7 +496,8 @@ public class RegistrationTest extends BaseTest {
     /* Поле номера для Азербайджана принимает 13 цифр
     хотя максимально допустимая длина допускает 12 цифр включая префикс
      */
-    @DisplayName("Verify validation for Azerbaijan phone number with 13 digits")
+    @DisplayName("REG-034 -Verify validation for Azerbaijan phone number with 13 digits")
+    @Story("Register with Azerbaijan number(12 digits)")
     @Test
     public void submitRegistrationFormWithInvalidLenghtPhoneNumberTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -472,7 +512,8 @@ public class RegistrationTest extends BaseTest {
     /* Система валидирует только максимально превышающею длину строки
     для номера телефона
      */
-    @DisplayName("Veriry validation for Azerbaijan too long phone number")
+    @DisplayName("REG-035 -Verify validation for Azerbaijan too long phone number")
+    @Story("Register with too long Azerbaijan phone number")
     @Test
     public void verifyValidationForAzerbaijanTooLongPhoneNumberTest() {
         String phoneNumber = TestDataGenerator.getLongPhoneNumber(256);
@@ -485,7 +526,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.LONG_PHONE_NUMBER_ERROR_MESSAGE, registrationPage.getErrorMessageLongPhoneNumber());
     }
 
-    @DisplayName("Verify validation for phone input with only spaces")
+    @DisplayName("REG-036 -Verify validation for phone input with only spaces")
+    @Story("Register with whitespace-only phone number")
     @Test
     public void verifyValidationForPhoneInputWithOnlySpacesTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -497,7 +539,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMPTY_PHONE_NUMBER_ERROR_MESSAGE, registrationPage.getEmptyPhoneNumberErrorMessage());
     }
 
-    @DisplayName("Verify validation with empty email input")
+    @DisplayName("REG-037 -Verify validation with empty email input")
+    @Story("Register with empty email")
     @Test
     public void verifyValidationWithEmptyEmailInputTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -509,7 +552,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMPTY_EMAIL_ERROR_MESSAGE, registrationPage.getErrorMessageEmptyEmail());
     }
 
-    @DisplayName("Verify validation registration with register email")
+    @DisplayName("REG-038 -Verify validation registration with already register email")
+    @Story("Register with already registered email")
     @Test
     public void verifyValidationRegistrationWithRegisterEmailTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -521,7 +565,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMAIL_ALREADY_EXITS_ERROR_MESSAGE, registrationPage.getErrorMessageEmailAlreadyExists());
     }
 
-    @DisplayName("Verify email validation with dot in username")
+    @DisplayName("REG-039 -Verify email validation with dot in username")
+    @Story("Register with email containing dot in username")
     @Test
     public void verifyEmailValidationWithDotInUsernameTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -533,7 +578,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
-    @DisplayName("Verify email validation with containing plus")
+    @DisplayName("REG-040 -Verify email validation with containing plus")
+    @Story("Register with email containing plus sign")
     @Test
     public void verifyEmailValidationWithContainsPlusTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -545,7 +591,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
-    @DisplayName("Verify validation email with sub domain")
+    @DisplayName("REG-041 -Verify validation email with sub domain")
+    @Story("Register with email containing subdomain")
     @Test
     public void verifyEmailValidationWithSubDomainTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -557,7 +604,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
-    @DisplayName("Verify validation email without at symbols")
+    @DisplayName("REG-042 -Verify validation email without at symbols")
+    @Story("Email validation without @ symbol")
     @Test
     public void verifyEmailValidationWithoutAtSymbolsTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -569,7 +617,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.INVALID_EMAIL_CREDENTIALS_MESSAGE, registrationPage.getInvalidEmailCredentialsErrorMessage());
     }
 
-    @DisplayName("Verify validation email without domain")
+    @DisplayName("REG-043 -Verify validation email without domain")
+    @Story("Register with email missing domain")
     @Test
     public void verifyEmailValidationWithoutDomainTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -581,7 +630,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.INVALID_EMAIL_CREDENTIALS_MESSAGE, registrationPage.getInvalidEmailCredentialsErrorMessage());
     }
 
-    @DisplayName("Verify validation email without user name")
+    @DisplayName("REG-044 -Verify validation email without user name")
+    @Story("Email validation without username")
     @Test
     public void verifyEmailValidationWithoutUserNameTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -593,7 +643,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.INVALID_EMAIL_CREDENTIALS_MESSAGE, registrationPage.getInvalidEmailCredentialsErrorMessage());
     }
 
-    @DisplayName("Verify validation email with double at symbols")
+    @DisplayName("REG-045 -Verify validation email with double at symbols")
+    @Story("Email validation with multiple @ symbols")
     @Test
     public void verifyEmailValidationWithDoubleAtSymbolsTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -605,7 +656,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.INVALID_EMAIL_CREDENTIALS_MESSAGE, registrationPage.getInvalidEmailCredentialsErrorMessage());
     }
 
-    @DisplayName("Verify validation email contains starting spaces")
+    @DisplayName("REG-046 -Verify validation email contains starting spaces")
+    @Story("Register with email starting with spaces")
     @Test
     public void verifyEmailValidationWithContainsStartingSpacesTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -617,7 +669,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
-    @DisplayName("Verify validation email contains middle spaces")
+    @DisplayName("REG-047 -Verify validation email contains middle spaces")
+    @Story("Register with email containing middle spaces")
     @Test
     public void verifyEmailValidationWithContainsMiddleSpacesTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -629,7 +682,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.INVALID_EMAIL_CREDENTIALS_MESSAGE, registrationPage.getInvalidEmailCredentialsErrorMessage());
     }
 
-    @DisplayName("Verify validation email contains ending spaces")
+    @DisplayName("REG-048 -Verify validation email contains ending spaces")
+    @Story("Register with email ending with spaces")
     @Test
     public void verifyEmailValidationWithEndingSpacesTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -641,7 +695,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
-    @DisplayName("Verify validation email with only spaces")
+    @DisplayName("REG-049 -Verify validation email with only spaces")
+    @Story("Register with whitespace-only email")
     @Test
     public void verifyEmailValidationWithOnlySpacesTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -653,7 +708,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMPTY_EMAIL_ERROR_MESSAGE, registrationPage.getEmptyEmailErrorMessage());
     }
 
-    @DisplayName("Verify validation email with TAB characters")
+    @DisplayName("REG-050 -Verify validation email with tab characters")
+    @Story("Register with tab characters in email")
     @Test
     public void verifyEmailValidationWithTabCharactersTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -666,7 +722,8 @@ public class RegistrationTest extends BaseTest {
 
     }
 
-    @DisplayName("Verify validation email with new line character")
+    @DisplayName("REG-051 -Verify validation email with new line character")
+    @Story("Register with newline character in email")
     @Test
     public void verifyEmailValidationWithNewLineCharactersTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -678,7 +735,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.INVALID_EMAIL_CREDENTIALS_MESSAGE, registrationPage.getInvalidEmailCredentialsErrorMessage());
     }
 
-    @DisplayName("Verify validation empty password input")
+    @DisplayName("REG-052 -Verify validation empty password input")
+    @Story("Register with empty password")
     @Test
     public void verifyEmailValidationEmptyPasswordTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -690,7 +748,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMPTY_PASSWORD_ERROR_MESSAGE, registrationPage.getEmptyPasswordErrorMessage());
     }
 
-    @DisplayName("Verify validation with short password")
+    @DisplayName("REG-053 -Verify validation with short password")
+    @Story("Register with short password")
     @Test
     public void verifyEmailValidationShortPasswordTest() {
         String shortPassword = TestDataGenerator.getPasswordByLength(1);
@@ -703,7 +762,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.SHORT_PASSWORD_ERROR_MESSAGE, registrationPage.getShortPasswordErrorMessage());
     }
 
-    @DisplayName("Verify validation invalid password length 7 symbols")
+    @DisplayName("REG-054 -Verify validation invalid password length 7 symbols")
+    @Story("Password validation for 7-character password")
     @Test
     public void verifyValidationInvalidPasswordLength() {
         String invalidPassword = TestDataGenerator.getPasswordByLength(7);
@@ -717,7 +777,8 @@ public class RegistrationTest extends BaseTest {
 
     }
 
-    @DisplayName("Verify validation password  with min length 8 symbols")
+    @DisplayName("REG-055 -Verify validation password  with min length 8 symbols")
+    @Story("Register with minimum length password (8 characters)")
     @Test
     public void verifyEmailValidationMinLength8SymbolsTest() {
         String minLengthPassword = TestDataGenerator.getPasswordByLength(8);
@@ -730,7 +791,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
-    @DisplayName("Verify validation password 9 symbols")
+    @DisplayName("REG-056 -Verify validation password 9 symbols")
+    @Story("Register with 9-character password")
     @Test
     public void verifyEmailValidationPassword9SymbolsTest() {
         String validPassword = TestDataGenerator.getPasswordByLength(9);
@@ -743,7 +805,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
-    @DisplayName("Verify validation password with 254 characters")
+    @DisplayName("REG-057 -Verify validation password with 254 characters")
+    @Story("Register with 254-character password")
     @Test
     public void verifyEmailValidationPasswordWith254CharactersTest() {
         String validPassword = TestDataGenerator.getPasswordByLength(254);
@@ -757,7 +820,8 @@ public class RegistrationTest extends BaseTest {
 
     }
 
-    @DisplayName("Verify validation password with 255 characters")
+    @DisplayName("REG-058 -Verify validation password with 255 characters")
+    @Story("Register with 255-character password")
     @Test
     public void verifyEmailValidationPasswordWith255CharactersTest() {
         String validPassword = TestDataGenerator.getPasswordByLength(255);
@@ -770,7 +834,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
-    @DisplayName("Verify validation password with 256 characters")
+    @DisplayName("REG-059 -Verify validation error password with 256 characters")
+    @Story("Register with 256-character password")
     @Test
     public void verifyEmailValidationPasswordWith256CharactersTest() {
         String invalidPassword = TestDataGenerator.getPasswordByLength(256);
@@ -785,7 +850,8 @@ public class RegistrationTest extends BaseTest {
     }
 
     // Поле пароль принимает любые символы,валидируется только длина.
-    @DisplayName("Verify validation password with only symbols")
+    @DisplayName("REG-060 -Verify validation password with only symbols")
+    @Story("Register with symbols-only password")
     @Test
     public void verifyEmailValidationPasswordWithOnlySymbolsTest() {
         String symbolsPassword = TestDataGenerator.getSpecialSymbolsPassword(8);
@@ -799,7 +865,8 @@ public class RegistrationTest extends BaseTest {
 
     }
 
-    @DisplayName("Verify validation password with only digits")
+    @DisplayName("REG-061 -Verify validation password with only digits")
+    @Story("Register with digits-only password")
     @Test
     public void verifyEmailValidationPasswordWithOnlyDigitsTest() {
         String digitsPassword = TestDataGenerator.getOnlyDigitsPassword(8);
@@ -814,7 +881,8 @@ public class RegistrationTest extends BaseTest {
     }
 
     // Система не тримит пробелы в пароле.Пароль чувствилен к whitespaces.
-    @DisplayName("Verify validation password with leading spaces")
+    @DisplayName("REG-062 -Verify validation password with leading spaces")
+    @Story("Register with leading spaces in password")
     @Test
     public void verifyEmailValidationPasswordWithLeadingSpacesTest() {
         String leadingSpacesPassword = TestDataGenerator.getPasswordWithLeadingPassword();
@@ -827,7 +895,8 @@ public class RegistrationTest extends BaseTest {
         Assertions.assertEquals(RegistrationMessage.EMAIL_VERIFICATION_REQUIRED_MESSAGE, registrationPage.getConfrimEmailMessage());
     }
 
-    @DisplayName("Verify validation password contains middle spaces")
+    @DisplayName("REG-063 -Verify validation password contains middle spaces")
+    @Story("Register with middle spaces in password")
     @Test
     public void verifyEmailValidationPasswordWithMiddleSpacesTest() {
         String middleSpacesPassword = TestDataGenerator.getPasswordWithMiddlePassword();
@@ -841,7 +910,8 @@ public class RegistrationTest extends BaseTest {
 
     }
 
-    @DisplayName("Verify validation password with ending spaces")
+    @DisplayName("REG-064 -Verify validation password with ending spaces")
+    @Story("Registration with password ending with spaces")
     @Test
     public void verifyEmailValidationPasswordWithEndingSpacesTest() {
         String endingSpacesPassword = TestDataGenerator.getPasswordWithEndingPassword();
@@ -855,7 +925,8 @@ public class RegistrationTest extends BaseTest {
 
     }
 
-    @DisplayName("Verify validation password only spaces ")
+    @DisplayName("REG-065 -Verify validation password only spaces ")
+    @Story("Register with whitespace-only password")
     @Test
     public void verifyEmailValidationPasswordOnlySpacesTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -868,7 +939,8 @@ public class RegistrationTest extends BaseTest {
     }
 
     //Система позволяет завершить регистрацию при пустом поле подтверждения пароля. Валидация обязательности поля отсутствует.
-    @DisplayName("Verify validation empty confirm password")
+    @DisplayName("REG-066 -Verify validation empty confirm password")
+    @Story("Register with empty confirm password")
     @Test
     public void verifyEmptyConfirmPasswordTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -881,7 +953,8 @@ public class RegistrationTest extends BaseTest {
     }
 
     //Система позволяет зарегистрироваться при несовпадении значений Password и Confirm Password.
-    @DisplayName("Verify validation password and confirm password mismatch")
+    @DisplayName("REG-067 -Verify validation password and confirm password mismatch")
+    @Story("Register with password mismatch")
     @Test
     public void verifyPasswordAndConfirmPasswordMismatchTest() {
         registrationPage.fillRegistrationForm(TestDataGenerator.getFirstName(),
@@ -894,69 +967,78 @@ public class RegistrationTest extends BaseTest {
 
     }
 
-    @DisplayName("Verify registration page title")
+    @DisplayName("REG-068 -Verify registration page title")
+    @Story("Registration page title text presence")
     @Test
     public void verifyRegistrationPageTitleTest() {
         registrationPage.getTitle();
-        Assertions.assertEquals("Регистрация",registrationPage.getTitle());
+        Assertions.assertEquals("Регистрация", registrationPage.getTitle());
     }
 
-    @DisplayName("Verify registration footer title")
+    @DisplayName("REG-069 -Verify registration footer title")
+    @Story("Registration page footer text presence")
     @Test
     public void verifyRegistrationFooterTitleTest() {
         registrationPage.getFooterTitle();
-        Assertions.assertEquals("Уже зарегистрирован?",registrationPage.getFooterTitle());
+        Assertions.assertEquals("Уже зарегистрирован?", registrationPage.getFooterTitle());
     }
 
-    @DisplayName("Verify navigation to login page from registration page after click login link")
+    @DisplayName("REG-070 -Verify navigation to login page from registration page after click login link")
+    @Story("Navigation from registration page to login page")
     @Test
     public void verifyNavigationToLoginPageFromRegistrationPageTest() {
         registrationPage.clickLoginButton();
         Assertions.assertTrue(registrationPage.isModalLoginDisplayed());
     }
 
-    @DisplayName("Get placeholder text in first name input")
+    @DisplayName("REG-071 -Get placeholder text in first name input")
+    @Story("Verify placeholder text in first name input")
     @Test
     public void getPlaceholderFirstNameInputTest() {
         Assertions.assertEquals("Имя", registrationPage.getPlaceholderFirstNameInputText());
     }
 
-    @DisplayName("Get placeholder text in last name input")
+    @DisplayName("REG-072 -Get placeholder text in last name input")
+    @Story("Verify placeholder text in last name input")
     @Test
     public void getPlaceholderLastNameInputTest() {
         Assertions.assertEquals("Фамилия", registrationPage.getPlaceholderLastNameInputText());
     }
 
-    @DisplayName("Get placeholder text in phone number input")
+    @DisplayName("REG-073 -Get placeholder text in phone number input")
+    @Story("Verify placeholder text in phone input")
     @Test
     public void getPlaceholderPhoneNumberInputTest() {
         Assertions.assertEquals("Мобильный", registrationPage.getPlaceholderPhoneNumberInputText());
     }
 
-    @DisplayName("Get placeholder text in email input")
+    @DisplayName("REG-074 -Get placeholder text in email input")
+    @Story("Verify placeholder text in email input")
     @Test
     public void getPlaceholderEmailInputTest() {
         Assertions.assertEquals("E-mail", registrationPage.getPlaceholderEmailInputText());
     }
 
-    @DisplayName("Get placeholder text in password input")
+    @DisplayName("REG-075 -Get placeholder text in password input")
+    @Story("Verify placeholder text in password input")
     @Test
     public void getPlaceholderPasswordInputTest() {
         Assertions.assertEquals("Пароль", registrationPage.getPlaceholderPasswordInputText());
     }
 
-    @DisplayName("Get placeholder text in confir password input")
+    @DisplayName("REG-076 -Get placeholder text in confir password input")
+    @Story("Verify placeholder text in confirm password")
     @Test
     public void getPlaceholderConfirmPasswordInputTest() {
         Assertions.assertEquals("Подтвердить пароль", registrationPage.getPlaceholderConfirmPasswordInputText());
     }
 
-    @DisplayName("Drop down selector is displayed")
+    @DisplayName("REG-077 -Verify dropdown selector is displayed")
+    @Story("Dropdown selector visibility")
     @Test
     public void dropDownSelectorDisplayedTest() {
         Assertions.assertTrue(registrationPage.isDropDownSelectorDisplayed());
     }
-
 
 
 }
