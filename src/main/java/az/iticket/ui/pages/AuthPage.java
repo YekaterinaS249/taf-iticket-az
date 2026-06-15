@@ -90,18 +90,16 @@ public class AuthPage extends BasePage {
 
     @Step("Get empty password error message")
     public String getErrorMessageEmptyInputPassword() {
-        WebElement error = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ERROR_MESSAGE_EMPTY_INPUT_PASSWORD)));
-        String errorEmptyPassword = error.getText();
-        log.info("Error message: {}", errorEmptyPassword);
-        return error.getText();
+        String  text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ERROR_MESSAGE_EMPTY_INPUT_PASSWORD))).getText();
+        log.info("Error message: {}", text);
+        return text;
     }
 
     @Step("Get login success message")
     public String getLoginSuccessMessage() {
-        WebElement message = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(LOGIN_SUCCES_MESSAGE)));
-        String loginSuccessMessage = message.getText();
-        log.info("Login success message: {}", loginSuccessMessage);
-        return message.getText();
+        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(LOGIN_SUCCES_MESSAGE))).getText();
+        log.info("Login success message: {}", text);
+        return text;
     }
 
     @Step("Get footer auth title")
@@ -113,23 +111,23 @@ public class AuthPage extends BasePage {
 
     @Step("Get error message for invalid email")
     public String getErrorInvalidEmail() {
-        WebElement invalidEmail = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INVALID_EMAIL_ERROR_MESSAGE)));
-        log.info("Error message: {}", invalidEmail.getText());
-        return invalidEmail.getText();
+        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INVALID_EMAIL_ERROR_MESSAGE))).getText();
+        log.info("Error message: {}", text);
+        return text;
     }
 
     @Step("Get invalid credentials error message")
     public String getErrorMessageInvalidCredentials() {
-        WebElement wrongPassword = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ERROR_MESSAGE_INVALID_CRENDETIALS)));
-        log.info("Error message: {}", wrongPassword.getText());
-        return wrongPassword.getText();
+        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ERROR_MESSAGE_INVALID_CRENDETIALS))).getText();
+        log.info("Error message: {}", text);
+        return text;
     }
 
     @Step("Get error message for short password")
     public String getErrorMessageShortPassword() {
-        WebElement shortPassword = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ERROR_MESSAGE_SHORT_PASSWORD)));
-        log.info("Error message: {}", shortPassword.getText());
-        return shortPassword.getText();
+        String text  = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ERROR_MESSAGE_SHORT_PASSWORD))).getText();
+        log.info("Error message: {}", text);
+        return text;
     }
 
     @Step("Submit login form with ENTER")
@@ -154,9 +152,9 @@ public class AuthPage extends BasePage {
 
     @Step("Get error message for long email")
     public String getErrorMessageLongEmail() {
-        WebElement longEmail = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ERROR_MESSAGE_LONG_EMAIL)));
-        log.info("Error message: {}", longEmail.getText());
-        return longEmail.getText();
+        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ERROR_MESSAGE_LONG_EMAIL))).getText();
+        log.info("Error message: {}", text);
+        return text;
     }
 
     @Step("Verify login modal is not visible")
