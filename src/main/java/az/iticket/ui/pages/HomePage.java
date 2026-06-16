@@ -50,9 +50,16 @@ public class HomePage extends BasePage {
        return isDisplayed;
     }
 
+    @Step("Search input is displayed on the Home page")
+    public boolean searchInputIsDisplayed() {
+        boolean isDisplayed = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(SEARCH_INPUT))).isDisplayed();
+        log.info("Search input is displayed: {} " ,isDisplayed);
+        return isDisplayed;
+    }
+
     @Step("Copy rights text has on home page")
     public boolean isDisplayedCopyRights() {
-        boolean isDisplayedText = driver.findElement(By.xpath(COPY_RIGHTS)).isDisplayed();
+        boolean isDisplayedText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(COPY_RIGHTS))).isDisplayed();
         log.info("Copy rights text:{} ",isDisplayedText);
         return isDisplayedText;
     }
