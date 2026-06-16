@@ -8,26 +8,22 @@ import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Slf4j
 public class AuthPage extends BasePage {
-    final String AUTH_TITLE = "//h4[text()='Войти']";
+    final String AUTH_TITLE = "//div[text()='Войти']";
     final String INPUT_EMAIL = "//*[@id='login-email']";
-    final String INPUT_PASSWORD = "//input[@name='password']";
+    final String INPUT_PASSWORD = "//input[@id='login-password']";
     final String SUBMIT_BUTTON = "//button[@type='submit']";
-    final String FORGOT_PASSWORD_BUTTON = "//a[@class='forgot']";
-    final String REGISTER_BUTTON = "//a[contains(text(),'Зарегистрироваться')]";
-    final String FOOTER_TITLE = "//div[@class='modal-footer']";
-    final String CLOSE_BUTTON = "//div[@id='login-modal']//button[contains(@class,'close')]";
-    final String ERROR_MESSAGE_EMPTY_INPUT_EMAIL = "//div[contains(@class,'toastify') and contains(@aria-live,'polite')]";
-    final String ERROR_MESSAGE_EMPTY_INPUT_PASSWORD = " //div[contains(@class,'toastify') and contains(text(),'пароль')]";
-    final String LOGIN_SUCCES_MESSAGE = "//div[contains(text(),'Вы вошли')]";
-    final String INVALID_EMAIL_ERROR_MESSAGE = "//div[contains(@class,'toastify')]";
-    final String ERROR_MESSAGE_INVALID_CRENDETIALS = "//div[contains(text(),'do not match')]";
-    final String ERROR_MESSAGE_SHORT_PASSWORD = "//div[contains(text(),'пароль')]";
+    final String FORGOT_PASSWORD_BUTTON = "//button[normalize-space()='Забыли пароль?']";
+    final String REGISTER_BUTTON = "//button[contains(.,'Регистрация')]";
+    final String FOOTER_TITLE = "//p//span[normalize-space()='Нет аккаунта?']";
+    final String CLOSE_BUTTON = "//button[@aria-label='Close modal']";
+    final String INVALID_EMAIL_ERROR_MESSAGE = "//div[@id='login-email-hint']";
+    final String ERROR_MESSAGE_EMPTY_INPUT_PASSWORD = "//p[contains(@class,'notification-card__text')]";
+    final String INVALID_PASSWORD_ERROR_MESSAGE = "//div[@id='login-password-hint']";
     final String ERROR_MESSAGE_LONG_EMAIL = "//div[contains(text(),'Количество символов в поле e-mail адрес')]";
     final String LOGIN_MODAL = "//div[@id='login-modal']";
 
@@ -38,7 +34,7 @@ public class AuthPage extends BasePage {
 
     @Step("Get auth title")
     public String getAuthTitle() {
-        String authTitle = driver.findElement(By.xpath(AUTH_TITLE)).getText();
+        String authTitle = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(AUTH_TITLE))).getText();
         log.info("Auth title: {}", authTitle);
         return authTitle;
     }
@@ -82,7 +78,7 @@ public class AuthPage extends BasePage {
 
     @Step("Get empty email error message")
     public String getErrorMessageEmptyInputEmail() {
-        WebElement errorEmail = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ERROR_MESSAGE_EMPTY_INPUT_EMAIL)));
+        WebElement errorEmail = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INVALID_EMAIL_ERROR_MESSAGE)));
         String errorEmptyEmail = errorEmail.getText();
         log.info("Error message: {}", errorEmptyEmail);
         return errorEmail.getText();
@@ -95,12 +91,6 @@ public class AuthPage extends BasePage {
         return text;
     }
 
-    @Step("Get login success message")
-    public String getLoginSuccessMessage() {
-        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(LOGIN_SUCCES_MESSAGE))).getText();
-        log.info("Login success message: {}", text);
-        return text;
-    }
 
     @Step("Get footer auth title")
     public String getFooterAuthTitle() {
@@ -118,17 +108,11 @@ public class AuthPage extends BasePage {
 
     @Step("Get invalid credentials error message")
     public String getErrorMessageInvalidCredentials() {
-        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ERROR_MESSAGE_INVALID_CRENDETIALS))).getText();
+        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INVALID_PASSWORD_ERROR_MESSAGE))).getText();
         log.info("Error message: {}", text);
         return text;
     }
 
-    @Step("Get error message for short password")
-    public String getErrorMessageShortPassword() {
-        String text  = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ERROR_MESSAGE_SHORT_PASSWORD))).getText();
-        log.info("Error message: {}", text);
-        return text;
-    }
 
     @Step("Submit login form with ENTER")
     public void submitLoginFormWithEnter() {
