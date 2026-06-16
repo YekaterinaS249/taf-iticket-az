@@ -12,10 +12,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 @Slf4j
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class HomePage extends BasePage {
-    final String SEARCH_BUTTON = "//button[contains(@class,'search')]";
-    final String CART_BUTTON = "//button[@class='cart ico-btn']";
-    final String AUTH_BUTTON = "//button[starts-with(@class,'profile')]";
-    final String COPY_RIGHTS = "//h1[contains(text(),'ITICKET')]";
+    final String SEARCH_INPUT = "//input[@id='search-input']";
+    final String AUTH_BUTTON = "//button[.//span[text()='Войти']]";
+    final String COPY_RIGHTS = "//span[contains(text(),'© 2016–2026 iTicket.GLOBAL. Все права защищены.')]";
 
     public HomePage() {
         super();
@@ -25,16 +24,10 @@ public class HomePage extends BasePage {
         driver.get(BASE_URL);
     }
 
-    @Step("Click on search button")
-    public void clickSearchButton() {
-        driver.findElement(By.xpath(SEARCH_BUTTON)).click();
-        log.info("Search button clicked");
-    }
-
-    @Step("Click cart button")
-    public void clickCartButton() {
-        driver.findElement(By.xpath(CART_BUTTON)).click();
-        log.info("Cart button clicked");
+    @Step("Click on search input")
+    public void clickSearchInput() {
+        driver.findElement(By.xpath(SEARCH_INPUT)).click();
+        log.info("Search input clicked");
     }
 
     @Step("Click on auth button")
@@ -50,24 +43,10 @@ public class HomePage extends BasePage {
        return text;
     }
 
-    @Step("Search button is displayed on the Home page")
-    public boolean isDisplayedSearchButton() {
-        boolean isDisplayed = driver.findElement(By.xpath(SEARCH_BUTTON)).isDisplayed();
-        log.info("Search button is displayed: {} " ,isDisplayed);
-        return isDisplayed;
-    }
-
     @Step("Auth button is displayed on the Home page")
     public boolean isDisplayedAuthButton() {
        boolean isDisplayed = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(AUTH_BUTTON))).isDisplayed();
        log.info("Auth button is displayed: {} " ,isDisplayed);
-       return isDisplayed;
-    }
-
-    @Step("Cart button is displayed on the Home page")
-    public boolean isDisplayedCartButton() {
-       boolean isDisplayed = driver.findElement(By.xpath(CART_BUTTON)).isDisplayed();
-       log.info("Cart button is displayed: {} " ,isDisplayed);
        return isDisplayed;
     }
 
