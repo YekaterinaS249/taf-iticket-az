@@ -1,12 +1,13 @@
 package az.iticket.ui.pages;
 
 import az.iticket.basepage.BasePage;
+import io.qameta.allure.Step;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
 
 @Slf4j
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -42,15 +43,22 @@ public class RegistrationPage extends BasePage {
         super();
     }
 
+    @Step("Get registration page title")
     public String getTitle() {
-        return driver.findElement(By.xpath(REGISTRATION_TITLE)).getText();
+        String text = driver.findElement(By.xpath(REGISTRATION_TITLE)).getText();
+        log.info("Title: {}", text);
+        return text;
     }
 
+    @Step("Get registration page footer title")
     public String getFooterTitle() {
         String text = driver.findElement(By.xpath(REGISTRATION_FOOTER_TITTLE)).getText();
-        return text.substring(0, text.indexOf("?") + 1);
+        String footerTitle = text.substring(0, text.indexOf("?") + 1);
+        log.info("Footer title: {}", footerTitle);
+        return footerTitle;
     }
 
+    @Step("User fills registration form and submit it")
     public void fillRegistrationForm(String firstName, String lastName, String phoneNumber, String email, String password, String confirmPassword) {
         log.info("Filling registration form with data: firstName = {} ,lastName = {},phoneNumber= {},email= {},password = {},confirmPassword = {}",
                 firstName, lastName, phoneNumber, email, password, confirmPassword);
@@ -72,109 +80,162 @@ public class RegistrationPage extends BasePage {
         driver.findElement(By.xpath(xpath)).click();
     }
 
+    @Step("User click on the login link")
     public void clickLoginButton() {
+        log.info("Clicking on the login button");
         driver.findElement(By.xpath(LOGIN_LINK)).click();
     }
 
+    @Step("User click on the close button")
     public void clickCloseButton() {
+        log.info("Clicking on the close button");
         driver.findElement(By.xpath(CLOSE_BUTTON)).click();
     }
 
-    public String getConfrimEmailMessage() {
-        WebElement email = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(CONFRIM_EMAIL)));
-        return email.getText();
+    @Step("Get confirm message")
+    public String getConfirmEmailMessage() {
+        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(CONFRIM_EMAIL))).getText();
+        log.info("Confirm email message: {}", text);
+        return text;
     }
 
+    @Step("Get empty email error message")
     public String getEmptyEmailErrorMessage() {
-        WebElement emptyInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(EMPTY_FIRST_NAME_ERROR_MESSAGE)));
-        return emptyInput.getText();
+        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(EMPTY_FIRST_NAME_ERROR_MESSAGE))).getText();
+        log.info("Empty email message: {}", text);
+        return text;
     }
 
+    @Step("Get long email error message")
     public String getLongFirstNameErrorMessage() {
-        WebElement longCredentials = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(LONG_FIRST_NAME_ERROR_MESSAGE)));
-        return longCredentials.getText();
+       String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(LONG_FIRST_NAME_ERROR_MESSAGE))).getText();
+       log.info("Long email error message: {}", text);
+        return text;
     }
 
+    @Step("Get empty last name error message")
     public String getEmptyLastNameErrorMessage() {
-        WebElement emptyEmail = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(EMPTY_LAST_NAME_ERROR_MESSAGE)));
-        return emptyEmail.getText();
+        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(EMPTY_LAST_NAME_ERROR_MESSAGE))).getText();
+        log.info("Empty last name error message: {}", text);
+        return text;
     }
 
+    @Step("Get long last name error message")
     public String getLongLastNameErrorMessage() {
-        WebElement lastName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(LONG_LAST_NAME_ERROR_MESSAGE)));
-        return lastName.getText();
+        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(LONG_LAST_NAME_ERROR_MESSAGE))).getText();
+        log.info("Long email error message: {}", text);
+        return text;
     }
 
+    @Step("Get empty phone error message")
     public String getEmptyPhoneNumberErrorMessage() {
-        WebElement phoneNumber = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(EMPTY_PHONE_NUMBER_ERROR_MESSAGE)));
-        return phoneNumber.getText();
+        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(EMPTY_PHONE_NUMBER_ERROR_MESSAGE))).getText();
+        log.info("Empty phone number error message: {}", text);
+        return text;
     }
 
+    @Step("Get long phone number error message")
     public String getErrorMessageLongPhoneNumber() {
-        WebElement longNumber = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(LONG_PHONE_NUMBER_ERROR_MESSAGE)));
-        return longNumber.getText();
+        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(LONG_PHONE_NUMBER_ERROR_MESSAGE))).getText();
+        log.info("Long email error message: {}", text);
+        return text;
     }
 
+    @Step("Get empty email error message")
     public String getErrorMessageEmptyEmail() {
-        WebElement emptyEmail = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(EMPTY_EMAIL_INPUT_ERROR_MESSAGE)));
-        return emptyEmail.getText();
+       String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(EMPTY_EMAIL_INPUT_ERROR_MESSAGE))).getText();
+       log.info("Empty email error message: {}", text);
+        return text;
     }
 
+    @Step("Get user already exits error message")
     public String getErrorMessageEmailAlreadyExists() {
-        WebElement emailExitsMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(EMAIL_ALREADY_EXITS_ERROR_MESSAGE)));
-        return emailExitsMessage.getText();
+        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(EMAIL_ALREADY_EXITS_ERROR_MESSAGE))).getText();
+        log.info("Email already exists error message: {}", text);
+        return text;
     }
 
+    @Step("Get invalid credentials error message")
     public String getInvalidEmailCredentialsErrorMessage() {
-        WebElement errorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INVALID_EMAIL_CDERENTIALS_ERROR_MESSAGE)));
-        return errorMessage.getText();
+        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INVALID_EMAIL_CDERENTIALS_ERROR_MESSAGE))).getText();
+        log.info("Invalid email credentials error message: {}", text);
+        return text;
     }
 
+    @Step("Get empty password error message")
     public String getEmptyPasswordErrorMessage() {
-        WebElement emptyPassword = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(EMPTY_PASSWORD_ERROR_MESSAGE)));
-        return emptyPassword.getText();
+        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(EMPTY_PASSWORD_ERROR_MESSAGE))).getText();
+        log.info("Empty password error message: {}", text);
+        return text;
     }
 
+    @Step("Get short password error message")
     public String getShortPasswordErrorMessage() {
-        WebElement shortPassword = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(SHORT_PASSWORD_ERROR_MESSAGE)));
-        return shortPassword.getText();
+       String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(SHORT_PASSWORD_ERROR_MESSAGE))).getText();
+       log.info("Short password error message: {}", text);
+        return text;
     }
 
+    @Step("Get error long password error message")
     public String getErrorMessageLongPassword() {
-        WebElement errorLongPassword = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(LONG_PASSWORD_ERROR_MESSAGE)));
-        return errorLongPassword.getText();
+        String text= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(LONG_PASSWORD_ERROR_MESSAGE))).getText();
+        log.info("Long email error message: {}", text);
+        return text;
     }
 
+    @Step("Login modal is displayed: {result}")
     public boolean isModalLoginDisplayed() {
+        log.info("Checking  modal login is displayed");
         return driver.findElement(By.xpath(LOGIN_MODAL)).isDisplayed();
     }
 
+    @Step("Get placeholder text in first name")
     public String getPlaceholderFirstNameInputText() {
-        return driver.findElement(By.xpath(FIRST_NAME_INPUT)).getAttribute("placeholder");
+        String placeholder = driver.findElement(By.xpath(FIRST_NAME_INPUT)).getAttribute("placeholder");
+        log.info("First name placeholder: {}", placeholder);
+        return placeholder;
     }
 
+    @Step("Get placeholder text in last name")
     public String getPlaceholderLastNameInputText() {
-        return driver.findElement(By.xpath(LAST_NAME_INPUT)).getAttribute("placeholder");
+        String placeholder = driver.findElement(By.xpath(LAST_NAME_INPUT)).getAttribute("placeholder");
+        log.info("Last name placeholder: {}", placeholder);
+        return placeholder;
     }
 
+    @Step("Get placeholder text in phone number")
     public String getPlaceholderPhoneNumberInputText() {
-        return driver.findElement(By.xpath(PHONE_NUMBER_INPUT)).getAttribute("placeholder");
+        String placeholder = driver.findElement(By.xpath(PHONE_NUMBER_INPUT)).getAttribute("placeholder");
+        log.info("Phone number placeholder: {}", placeholder);
+        return placeholder;
     }
 
+    @Step("Get placeholder text in email")
     public String getPlaceholderEmailInputText() {
-        return driver.findElement(By.xpath(EMAIL_INPUT)).getAttribute("placeholder");
+        String placeholder = driver.findElement(By.xpath(EMAIL_INPUT)).getAttribute("placeholder");
+        log.info("Email placeholder: {}", placeholder);
+        return placeholder;
     }
 
+    @Step("Get placeholder text in password")
     public String getPlaceholderPasswordInputText() {
-        return driver.findElement(By.xpath(PASSWORD_INPUT)).getAttribute("placeholder");
+        String placeholder = driver.findElement(By.xpath(PASSWORD_INPUT)).getAttribute("placeholder");
+        log.info("Password placeholder: {}", placeholder);
+        return placeholder;
     }
 
+    @Step("Get placeholder text in confirm password")
     public String getPlaceholderConfirmPasswordInputText() {
-        return driver.findElement(By.xpath(CONFIRM_PASSWORD_INPUT)).getAttribute("placeholder");
+        String placeholder = driver.findElement(By.xpath(CONFIRM_PASSWORD_INPUT)).getAttribute("placeholder");
+        log.info("Confirm password placeholder: {}", placeholder);
+        return placeholder;
     }
 
+    @Step("Check that phone dropdown is displayed")
     public boolean isDropDownSelectorDisplayed() {
-        return driver.findElement(By.xpath(PHONE_DROPDOWN)).isDisplayed();
+        boolean isVisible = driver.findElement(By.xpath(PHONE_DROPDOWN)).isDisplayed();
+        log.info("Phone dropdown visibility: {}", isVisible);
+        return isVisible;
     }
 
 }
