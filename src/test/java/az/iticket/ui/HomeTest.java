@@ -10,7 +10,7 @@ public class HomeTest extends BaseTest {
     @Test
     public void getCopyRights() {
         homePage.getCopyRights();
-        Assertions.assertEquals("ITICKET® - зарегистрированная торговая марка ООО «ITICKET».",homePage.getCopyRights());
+        Assertions.assertEquals("© 2016–2026 iTicket.GLOBAL. Все права защищены.",homePage.getCopyRights());
     }
 
     @DisplayName("Сhek displayed login button")
@@ -19,21 +19,17 @@ public class HomeTest extends BaseTest {
         Assertions.assertTrue(homePage.isDisplayedAuthButton());
     }
 
-    @DisplayName("Chek displayed cart button")
+    @DisplayName("Search input displayed on thr Home Page")
     @Test
-    public void cartButton() {
-        Assertions.assertTrue(homePage.isDisplayedCartButton());
-    }
-
-    @DisplayName("Chek displayed search button")
-    @Test
-    public void searchButton() {
-        Assertions.assertTrue(homePage.isDisplayedSearchButton());
+    public void searchInputDisplayedOnTheHomePage() {
+        Assertions.assertTrue(homePage.searchInputIsDisplayed());
     }
 
     @DisplayName("Chek displayed copyrights")
     @Test
     public void copyrightsButton() {
         Assertions.assertTrue(homePage.isDisplayedCopyRights());
+
     }
 }
+
