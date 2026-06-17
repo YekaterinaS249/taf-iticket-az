@@ -111,14 +111,14 @@ public class AuthPage extends BasePage {
 
     @Step("Get error message for  min length password")
     public String getErrorPasswordMinLength() {
-        String text = driver.findElement(By.xpath(PASSWORD_MIN_LENGTH_ERROR_MESSAGE)).getText();
+        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(PASSWORD_MIN_LENGTH_ERROR_MESSAGE))).getText();
         log.info("Error message: {}", text);
         return text;
     }
 
     @Step("Get error message for invalid credentials")
     public String getErrorInvalidCredentials() {
-        String text = driver.findElement(By.xpath(INVALID_CREDENTIALS_ERROR_MESSAGE)).getText();
+        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INVALID_CREDENTIALS_ERROR_MESSAGE))).getText();
         log.info("Error message: {}", text);
         return text;
     }
