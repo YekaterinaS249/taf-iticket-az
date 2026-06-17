@@ -23,7 +23,11 @@ public class AuthPage extends BasePage {
     final String CLOSE_BUTTON = "//button[@aria-label='Close modal']";
     final String INVALID_EMAIL_ERROR_MESSAGE = "//div[@id='login-email-hint']";
     final String ERROR_MESSAGE_EMPTY_INPUT_PASSWORD = "//p[contains(@class,'notification-card__text')]";
-    final String INVALID_PASSWORD_ERROR_MESSAGE = "//div[@id='login-password-hint']";
+    final String PASSWORD_MIN_LENGTH_ERROR_MESSAGE = "//p[text()='Количество символов в поле пароль должно быть не меньше 8.']";
+    final String INVALID_CREDENTIALS_ERROR_MESSAGE = "//p[text()='Неверное имя пользователя или пароль.']";
+    final String INVALID_LENGTH_PASSWORD_ERROR_MESSAGE = "//div[@id='login-password-hint']";
+    final String MAX_LENGTH_PASSWORD_ERROR_MESSAGE = "//p[text()='Количество символов в поле пароль не может превышать 255.']";
+    final String USER_NOT_FOUND_MESSAGE = "//p[text()='Пользователь не найден']";
     final String ERROR_MESSAGE_LONG_EMAIL = "//div[contains(text(),'Количество символов в поле e-mail адрес')]";
     final String LOGIN_MODAL = "//div[@id='login-modal']";
 
@@ -106,14 +110,40 @@ public class AuthPage extends BasePage {
         return text;
     }
 
-    @Step("Get invalid credentials error message")
-    public String getErrorMessageInvalidCredentials() {
-        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INVALID_PASSWORD_ERROR_MESSAGE))).getText();
+    @Step("Get error message for  min length password")
+    public String getErrorPasswordMinLength() {
+        String text = driver.findElement(By.xpath(PASSWORD_MIN_LENGTH_ERROR_MESSAGE)).getText();
         log.info("Error message: {}", text);
         return text;
     }
 
+    @Step("Get error message for invalid credentials")
+    public String getErrorInvalidCredentials() {
+        String text = driver.findElement(By.xpath(INVALID_CREDENTIALS_ERROR_MESSAGE)).getText();
+        log.info("Error message: {}", text);
+        return text;
+    }
 
+    @Step("Get error message invalid length password")
+    public String getErrorLengthPassword() {
+        String text = driver.findElement(By.xpath(INVALID_LENGTH_PASSWORD_ERROR_MESSAGE)).getText();
+        log.info("Error message: {}", text);
+        return text;
+    }
+
+    @Step("Get error message max length password")
+    public String getErrorPasswordMaxLength() {
+        String text = driver.findElement(By.xpath(MAX_LENGTH_PASSWORD_ERROR_MESSAGE)).getText();
+        log.info("Error message: {}", text);
+        return text;
+    }
+
+    @Step("Get not register user error message")
+    public String getErrorMessageUserNotFound() {
+        String text = driver.findElement(By.xpath(USER_NOT_FOUND_MESSAGE)).getText();
+        log.info("Error message: {}", text);
+        return text;
+    }
     @Step("Submit login form with ENTER")
     public void submitLoginFormWithEnter() {
         driver.findElement(By.xpath(INPUT_PASSWORD)).sendKeys(Keys.ENTER);
