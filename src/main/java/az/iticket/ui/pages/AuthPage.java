@@ -95,7 +95,6 @@ public class AuthPage extends BasePage {
         return text;
     }
 
-
     @Step("Get footer auth title")
     public String getFooterAuthTitle() {
         String text = driver.findElement(By.xpath(FOOTER_TITLE)).getText();
