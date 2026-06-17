@@ -1,6 +1,6 @@
 package az.iticket.ui.pages;
 
-import az.iticket.basepage.BasePage;
+import az.iticket.ui.pages.basepage.BasePage;
 import io.qameta.allure.Step;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;

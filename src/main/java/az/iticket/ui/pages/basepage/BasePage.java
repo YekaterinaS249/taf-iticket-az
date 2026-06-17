@@ -1,4 +1,4 @@
-package az.iticket.basepage;
+package az.iticket.ui.pages.basepage;
 
 import az.iticket.ui.core.DriverManager;
 import org.openqa.selenium.WebDriver;

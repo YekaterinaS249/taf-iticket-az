@@ -1,6 +1,6 @@
 package az.iticket.ui.pages;
 
-import az.iticket.basepage.BasePage;
+import az.iticket.ui.pages.basepage.BasePage;
 import org.openqa.selenium.By;
 
 public class SearchPage extends BasePage {
