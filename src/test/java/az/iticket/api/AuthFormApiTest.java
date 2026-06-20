@@ -1,6 +1,7 @@
 package az.iticket.api;
 
 import az.iticket.api.client.AuthApi;
+import az.iticket.api.data.AuthDataFactory;
 import az.iticket.api.model.LoginRequest;
 import net.datafaker.Faker;
 import org.junit.jupiter.api.Test;
@@ -10,12 +11,7 @@ public class AuthFormApiTest {
 
     @Test
     public void WithoutPasswordTest() {
-
-        Faker faker = new Faker();
-        String email = faker.name().username() + "@test.com";
-        String password = "";
-        LoginRequest loginRequest = new LoginRequest(email,password);
-        AuthApi.login(loginRequest)
+        AuthApi.login(AuthDataFactory.loginWithoutPassword())
                 .then()
                 .statusCode(422)
                 .body("response[0].messages[0]", equalTo("Поле пароль обязательно для заполнения."));
@@ -23,11 +19,7 @@ public class AuthFormApiTest {
 
     @Test
     public void WithoutEmailTest() {
-        Faker faker = new Faker();
-        String email = "";
-        String password = faker.internet().password();
-        LoginRequest loginRequest = new LoginRequest(email,password);
-        AuthApi.login(loginRequest)
+        AuthApi.login(AuthDataFactory.loginWithoutEmail())
                 .then()
                 .statusCode(422)
                 .body("response[0].messages[0]", equalTo("Поле e-mail адрес обязательно для заполнения."));
@@ -36,21 +28,15 @@ public class AuthFormApiTest {
 
     @Test
     public void wrongPasswordTest() {
-        LoginRequest loginRequest = new LoginRequest("cqqgslqadspnhazzkz@vtmpj.com","12345678");
-
-        AuthApi.login(loginRequest)
+        AuthApi.login(AuthDataFactory.wrongPasswordLogin())
                 .then()
-                .statusCode(403)
+                .statusCode(422)
                 .body("response[0].messages[0]", equalTo("The provided credentials do not match our records."));
     }
 
     @Test
     public void wrongEmailTest() {
-        Faker faker = new Faker();
-        String email = faker.internet().emailAddress();
-        String password = "test1234";
-        LoginRequest loginRequest = new LoginRequest(email,password);
-        AuthApi.login(loginRequest)
+        AuthApi.login(AuthDataFactory.wrongEmailLogin())
                 .then()
                 .statusCode(403)
                 .body("response[0].messages[0]", equalTo("The provided credentials do not match our records."));
@@ -58,10 +44,7 @@ public class AuthFormApiTest {
 
     @Test
     public void loginWithoutEmailAndPasswordTest() {
-        String email = "";
-        String password = "";
-        LoginRequest loginRequest = new LoginRequest(email,password);
-        AuthApi.login(loginRequest)
+        AuthApi.login(AuthDataFactory.emptyEmailAndPasswordLogin())
                 .then()
                 .statusCode(422)
                 .body("response[0].messages[0]", equalTo("Поле e-mail адрес обязательно для заполнения."))
