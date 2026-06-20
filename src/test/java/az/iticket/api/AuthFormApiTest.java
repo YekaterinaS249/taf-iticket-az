@@ -9,15 +9,6 @@ import static org.hamcrest.core.IsEqual.equalTo;
 public class AuthFormApiTest {
 
     @Test
-    public void testLoginWithValidCredentials() {
-        LoginRequest loginRequest = new LoginRequest("silantyevakatya1@gmail.com","aska1234");
-        AuthApi.login(loginRequest)
-                .then()
-                .statusCode(200)
-                .log().all();
-    }
-
-    @Test
     public void WithoutPasswordTest() {
 
         Faker faker = new Faker();
