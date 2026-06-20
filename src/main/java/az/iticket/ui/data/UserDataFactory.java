@@ -1,11 +1,11 @@
-package az.iticket.utils;
+package az.iticket.ui.data;
 
 import net.datafaker.Faker;
 
 import java.util.Locale;
 
 
-public class TestDataGenerator {
+public class UserDataFactory {
     private static final Faker faker = new Faker();
     private static final Faker fakerRu = new Faker(new Locale("ru"));
 
