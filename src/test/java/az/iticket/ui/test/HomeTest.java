@@ -1,6 +1,6 @@
-package az.iticket.ui;
+package az.iticket.ui.test;
 
-import az.iticket.basetest.BaseTest;
+import az.iticket.ui.basetest.BaseTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

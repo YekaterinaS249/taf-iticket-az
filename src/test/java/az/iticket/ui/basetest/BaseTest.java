@@ -1,4 +1,4 @@
-package az.iticket.basetest;
+package az.iticket.ui.basetest;
 
 import az.iticket.ui.core.DriverManager;
 import az.iticket.ui.pages.HomePage;

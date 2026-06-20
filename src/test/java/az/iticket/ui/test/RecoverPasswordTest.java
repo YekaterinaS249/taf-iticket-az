@@ -1,6 +1,6 @@
-package az.iticket.ui;
+package az.iticket.ui.test;
 
-import az.iticket.basetest.BaseTest;
+import az.iticket.ui.basetest.BaseTest;
 import az.iticket.ui.message.RecoverPassMessage;
 import az.iticket.ui.pages.AuthPage;
 import az.iticket.ui.pages.RecoverPasswordPage;
