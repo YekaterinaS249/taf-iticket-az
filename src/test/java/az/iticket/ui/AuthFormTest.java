@@ -174,7 +174,7 @@ public class AuthFormTest extends BaseTest {
         authPage.setInputEmail("user@user.com");
         authPage.setInputPassword("user123");
         authPage.clickSubmitButton();
-        Assertions.assertEquals(LoginMessage.PASSWORD_TOO_SHORT, authPage.getErrorPasswordMinLength());
+        Assertions.assertEquals(LoginMessage.PASSWORD_TOO_SHORT, authPage.getErrorShortPassword());
     }
 
     @DisplayName("Verify password max length validation -UI-LOG-025")
