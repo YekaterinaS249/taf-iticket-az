@@ -49,7 +49,7 @@ public class AuthFormTest extends BaseTest {
     @ParameterizedTest(name = "Email: {0}")
     @CsvSource({
             "UI-LOG-003, '@gmail.com'",
-            "UI-LOG-004,'test@'",
+            "UI-LOG-004,'test'",
             "UI-LOG-005, 'user.user@@gmail.com'",
             "UI-LOG-006,'user@.test.com'",
             "UI-LOG-007, 'юзер@gmail.com'"

@@ -1,4 +1,4 @@
-package az.iticket.api;
+package az.iticket.api.test;
 
 import az.iticket.api.client.RecoverPassApi;
 import az.iticket.api.model.RecoverPassRequest;
@@ -10,7 +10,7 @@ public class RecoverPassApiTest {
     @Test
     public void emptyEmailInputTest(){
        RecoverPassRequest passRequest = new RecoverPassRequest("");
-       RecoverPassApi.recoverPass(passRequest)
+       RecoverPassApi.recoverPassword(passRequest)
                .then()
                .statusCode(422)
                .body("response[0].messages[0]",equalTo("Поле e-mail адрес обязательно для заполнения."));
@@ -20,7 +20,7 @@ public class RecoverPassApiTest {
     @Test
     public void validEmailMessageTest(){
         RecoverPassRequest passRequest = new RecoverPassRequest("katyatest97@gmail.com");
-        RecoverPassApi.recoverPass(passRequest)
+        RecoverPassApi.recoverPassword(passRequest)
                 .then()
                 .statusCode(200)
                 .body("response[0].messages[0]",equalTo("Ссылка на сброс пароля была отправлена!"));
@@ -29,7 +29,7 @@ public class RecoverPassApiTest {
     @Test
     public void invalidEmailMessageTest(){
         RecoverPassRequest passRequest = new RecoverPassRequest("testtest.com");
-        RecoverPassApi.recoverPass(passRequest)
+        RecoverPassApi.recoverPassword(passRequest)
                 .then()
                 .statusCode(422)
                 .body("response[0].messages[0]", equalTo("Поле e-mail адрес должно быть действительным электронным адресом."));
@@ -38,7 +38,7 @@ public class RecoverPassApiTest {
     @Test
     public void invalidEmailMessageWithDoubleAtSymbolTest(){
         RecoverPassRequest passRequest = new RecoverPassRequest("test@@test.com");
-        RecoverPassApi.recoverPass(passRequest)
+        RecoverPassApi.recoverPassword(passRequest)
                 .then()
                 .statusCode(422)
                 .body("response[0].messages[0]",equalTo("Поле e-mail адрес должно быть действительным электронным адресом."));
@@ -47,7 +47,7 @@ public class RecoverPassApiTest {
     @Test
     public void invalidEmailMessageWithoutDomenTest() {
         RecoverPassRequest passRequest = new RecoverPassRequest("test@");
-        RecoverPassApi.recoverPass(passRequest)
+        RecoverPassApi.recoverPassword(passRequest)
                 .then()
                 .statusCode(422)
                 .body("response[0].messages[0]",equalTo("Поле e-mail адрес должно быть действительным электронным адресом."));
@@ -56,7 +56,7 @@ public class RecoverPassApiTest {
     @Test
     public void invalidEmailMessageWithTabCharactersTest() {
         RecoverPassRequest passRequest = new RecoverPassRequest("test\\t@test.com");
-        RecoverPassApi.recoverPass(passRequest)
+        RecoverPassApi.recoverPassword(passRequest)
                 .then()
                 .statusCode(422)
                 .body("response[0].messages[0]",equalTo("Поле e-mail адрес должно быть действительным электронным адресом."));
@@ -66,7 +66,7 @@ public class RecoverPassApiTest {
     @Test
     public void invalidEmailMessageWithNewLineCharactersTest() {
         RecoverPassRequest passRequest = new RecoverPassRequest("test\\n@test.com");
-        RecoverPassApi.recoverPass(passRequest)
+        RecoverPassApi.recoverPassword(passRequest)
                 .then()
                 .statusCode(422)
                 .body("response[0].messages[0]",equalTo("Поле e-mail адрес должно быть действительным электронным адресом."));
@@ -75,7 +75,7 @@ public class RecoverPassApiTest {
     @Test
     public void invalidEmailMessageWithStartingSpaceTest(){
         RecoverPassRequest passRequest = new RecoverPassRequest(" test@gmail.com");
-        RecoverPassApi.recoverPass(passRequest)
+        RecoverPassApi.recoverPassword(passRequest)
                 .then()
                 .statusCode(200)
                 .body("response[0].messages[0]", equalTo("Ссылка на сброс пароля была отправлена!"));
@@ -85,7 +85,7 @@ public class RecoverPassApiTest {
     @Test
     public void invalidEmailMessageWithMiddleSpaceTest(){
         RecoverPassRequest passRequest = new RecoverPassRequest("test @test.com");
-        RecoverPassApi.recoverPass(passRequest)
+        RecoverPassApi.recoverPassword(passRequest)
                 .then()
                 .statusCode(422)
                 .body("response[0].messages[0]",equalTo("Поле e-mail адрес должно быть действительным электронным адресом."));
@@ -94,7 +94,7 @@ public class RecoverPassApiTest {
     @Test
     public void invalidEmailMessageWithEndingSpaceTest(){
         RecoverPassRequest passRequest = new RecoverPassRequest("test@test.com ");
-        RecoverPassApi.recoverPass(passRequest)
+        RecoverPassApi.recoverPassword(passRequest)
                 .then()
                 .statusCode(200)
                 .body("response[0].messages[0]",equalTo("Ссылка на сброс пароля была отправлена!"));
@@ -103,7 +103,7 @@ public class RecoverPassApiTest {
      @Test
     public void invalidEmailMessageWithOnlySpacesTest(){
         RecoverPassRequest passRequest = new RecoverPassRequest("              ");
-        RecoverPassApi.recoverPass(passRequest)
+        RecoverPassApi.recoverPassword(passRequest)
                 .then()
                 .statusCode(422)
                 .body("response[0].messages[0]",equalTo("Поле e-mail адрес обязательно для заполнения."));
@@ -112,7 +112,7 @@ public class RecoverPassApiTest {
      @Test
     public void notRegisterUserTest(){
         RecoverPassRequest passRequest = new RecoverPassRequest("hatlfaxkhovnnrzaqr@onldm.net");
-        RecoverPassApi.recoverPass(passRequest)
+        RecoverPassApi.recoverPassword(passRequest)
                 .then()
                 .statusCode(200)
                 .body("response[0].messages[0]" , equalTo("Ссылка на сброс пароля была отправлена!"));
@@ -122,7 +122,7 @@ public class RecoverPassApiTest {
     public void longEmailMessageTest(){
          String email = "a".repeat(64) + "@" + "b".repeat(187) + ".com";
          RecoverPassRequest passRequest = new RecoverPassRequest(email);
-         RecoverPassApi.recoverPass(passRequest)
+         RecoverPassApi.recoverPassword(passRequest)
                  .then()
                  .statusCode(422)
                  .body("response[0].messages[0]",equalTo("Поле e-mail адрес должно быть действительным электронным адресом."))
