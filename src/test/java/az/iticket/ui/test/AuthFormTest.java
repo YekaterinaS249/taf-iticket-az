@@ -24,6 +24,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Verify login with invalid password -UI-LOG-001")
+    @Severity(SeverityLevel.CRITICAL)
     @Story("Login validation")
     @Test
     public void loginWithWrongPassword() {
@@ -35,6 +36,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Verify login with non-registered user -UI-LOG-002")
+    @Severity(SeverityLevel.CRITICAL)
     @Story("Login validation")
     @Test
     public void verifyLoginWithWrongEmail() {
@@ -44,7 +46,8 @@ public class AuthFormTest extends BaseTest {
         Assertions.assertEquals(LoginMessage.USER_NOT_FOUND_MESSAGE, authPage.getErrorMessageUserNotFound());
     }
 
-    @DisplayName("Verify invalid email formats")
+    @DisplayName("Verify invalid email credentials")
+    @Severity(SeverityLevel.CRITICAL)
     @Story("Email validation")
     @ParameterizedTest(name = "Email: {0}")
     @CsvSource({
@@ -63,6 +66,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Verify email validation with spaces")
+    @Severity(SeverityLevel.CRITICAL)
     @Story("Email validation")
     @ParameterizedTest(name = "Email: {0}")
     @CsvSource({
@@ -79,6 +83,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Verify validation invalid email format")
+    @Severity(SeverityLevel.CRITICAL)
     @Story("Email validation")
     @ParameterizedTest(name = "Email: {0}")
     @CsvSource({
@@ -93,6 +98,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Verify email max length validation")
+    @Severity(SeverityLevel.MINOR)
     @Story("Email validation")
     @ParameterizedTest(name = "UI-LOG-014, UI-LOG-015 {0}")
     @ValueSource(ints = {254, 255})
@@ -105,11 +111,12 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Verify email validation with tab and newline characters")
+    @Severity(SeverityLevel.MINOR)
     @Story("Email validation")
-    @ParameterizedTest(name = "UI-LOG-16, UI-LOG-017 {0}")
+    @ParameterizedTest(name = "Email: {0}")
     @CsvSource({
-            "UI-LOG-013,'user\\t@test.com",
-            "UI-LOG-014,'user\\n@test.com"
+            "UI-LOG-016,'user\\t@test.com",
+            "UI-LOG-017,'user\\n@test.com"
     })
     void emailWithTabAndNewLineTest(String testId, String email) {
         authPage.setInputEmail(email);
@@ -119,6 +126,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Verify email validation with 256 characters -UI-LOG-018")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
     public void emailValidationWith256Characters() {
         String email = "a".repeat(246) + "@gmail.com";
@@ -129,6 +137,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Verify empty email validation -UI-LOG-019")
+    @Severity(SeverityLevel.CRITICAL)
     @Story("Email validation")
     @Test
     public void loginWithEmptyEmailTest() {
@@ -139,6 +148,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Verify password validation by length")
+    @Severity(SeverityLevel.CRITICAL)
     @Story("Password validation")
     @ParameterizedTest(name = "{0} | length = {1}")
     @CsvSource({
@@ -156,6 +166,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Verify password validation error disappears after valid input -UI-LOG-023")
+    @Severity(SeverityLevel.MINOR)
     @Story("Password validation")
     @Test
     public void passwordValidationErrorDisappearsAfterEntering6CharactersTest() {
@@ -168,6 +179,7 @@ public class AuthFormTest extends BaseTest {
 
     //В системе присутвует разночтение бэка и фронта на валидацию пароля.
     @DisplayName("Verify password validation for 7-character password -UI-LOG-024")
+    @Severity(SeverityLevel.CRITICAL)
     @Story("Password validation")
     @Test
     public void passwordValidationFor7CharacterPasswordTest() {
@@ -178,10 +190,11 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Verify password max length validation -UI-LOG-025")
+    @Severity(SeverityLevel.CRITICAL)
     @Story("Password validation")
     @Test
     public void passwordValidationByMaxLengthTest() {
-        String password = ("Aa1").repeat(85) + "A";
+        String password = ("a21").repeat(85) + "A";
         authPage.setInputEmail("user@user.com");
         authPage.setInputPassword(password);
         authPage.clickSubmitButton();
@@ -189,6 +202,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Verify password with only spaces -UI-LOG-026")
+    @Severity(SeverityLevel.CRITICAL)
     @Story("Password validation")
     @Test
     public void passwordValidationWithOnlySpacesTest() {
@@ -206,6 +220,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Verify auth page footer title -UI-LOG-028")
+    @Severity(SeverityLevel.MINOR)
     @Story("UI elements")
     @Test
     public void authPageFooterTitleTest() {
@@ -213,6 +228,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Verify email placeholder text -UI-LOG-029")
+    @Severity(SeverityLevel.MINOR)
     @Story("UI elements")
     @Test
     public void placeholderTextInEmailInputTest() {
@@ -221,6 +237,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Verify password visibility toggle -UI-LOG-030")
+    @Severity(SeverityLevel.MINOR)
     @Story("UI elements")
     @Test
     public void passwordVisibilityToggleTest() {
@@ -230,8 +247,9 @@ public class AuthFormTest extends BaseTest {
         Assertions.assertEquals("text", authPage.getPasswordFieldType());
     }
 
-    @DisplayName("Verify login modal closes correctly -UI-LOG-031")
-    @Story("UI elements")
+    @DisplayName("Verify recover password modal is closed after clicking Close button  -UI-LOG-031")
+    @Severity(SeverityLevel.MINOR)
+    @Story("Modal Window")
     @Test
     public void modalWindowLoginNotDisplayedTest() {
         authPage.clickCloseButton();
