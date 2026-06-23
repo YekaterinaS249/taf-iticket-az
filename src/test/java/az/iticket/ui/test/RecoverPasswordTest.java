@@ -123,7 +123,7 @@ public class RecoverPasswordTest extends BaseTest {
     @Story("Recover Password")
     @Test
     public void successMessageTest() {
-        recoverPasswordPage.setInputEmail("silantyevayekaterina@gmail.com");
+        recoverPasswordPage.setInputEmail("omnqqmvgtlixqnwjtp@jbsze.com");
         recoverPasswordPage.clickResetPasswordButton();
         Assertions.assertEquals(RecoverPassMessage.RESET_LINK_SENT_MESSAGE, recoverPasswordPage.getSuccessMessageSendEmail());
 
