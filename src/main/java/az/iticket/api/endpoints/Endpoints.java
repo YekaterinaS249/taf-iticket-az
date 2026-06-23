@@ -5,9 +5,9 @@ public class Endpoints {
                 "https://api.iticket.az/ru";
 
         public static final String LOGIN =
-                BASE_URL + "/v5/user/auth/token";
+                BASE_URL + "/v6/user/auth/token?client=web";
 
         public static final String RECOVER_PASSWORD =
-                BASE_URL + "/v5/user/auth/forgot-password";
+                BASE_URL + "/v6/user/auth/forgot-password?client=web";
     }
 
