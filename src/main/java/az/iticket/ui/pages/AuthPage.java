@@ -66,8 +66,9 @@ public class AuthPage extends BasePage {
 
     @Step("Click 'Forgot password' button")
     public void clickForgotPasswordButton() {
-        driver.findElement(By.xpath(FORGOT_PASSWORD_BUTTON)).click();
+        WebElement forgotPasswordButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(FORGOT_PASSWORD_BUTTON)));
         log.info("User clicked forgot password button");
+        forgotPasswordButton.click();
     }
 
     @Step("Click registration button")
