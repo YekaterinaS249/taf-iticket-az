@@ -13,35 +13,37 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RecoverPasswordPage extends BasePage {
 
-    final String INPUT_EMAIL = "(//input[@name='email'])[2]";
-    final String RESET_PASSWORD_BUTTON = "//button[contains(text(),'Сброс')]";
-    final String RESET_PASSWORD_TITLE = "//h4[contains(text(),'Сброс пароля')]";
-    final String RESET_FOOTER_TITLE = "//div[contains(@class,'modal-footer') and contains(.,'Помните пароль')]";
-    final String ENTER_BUTTON = "//div[contains(@class,'modal-footer')]//a[normalize-space()='Войти']";
-    final String CLOSE_BUTTON = "//div[@id='reset-password-modal']//button[contains(@class,'close')]";
-    final String EMPTY_INPUT_EMAIL_MESSAGE = "//*[@aria-live='polite' and contains(.,'обязательно')]";
-    final String INVALID_EMAIL_MESSAGE = "//div[@aria-live='polite' and contains(text(),'e-mail')]";
-    final String SUCCESS_MESSAGE = "//div[contains(text(),'Ссылка на сброс пароля была отправлена')]";
-    final String MODAL_RESET_WINDOW = "//div[@id='reset-password-modal']";
+    final String INPUT_EMAIL = "//input[@id='forgot-email']";
+    final String RESET_PASSWORD_BUTTON = "//button[@type='submit']";
+    final String RESET_PASSWORD_TITLE = "//div[contains(@class,'font-semibold') and contains(.,'Забыли пароль')]";
+    final String BACK_TO_ENTER_BUTTON = "//span[contains(normalize-space(.), 'Назад к входу')]";
+    final String CLOSE_MODAL_BUTTON = "//button[@aria-label='Close modal']";
+    final String INVALID_EMAIL_ERROR_MESSAGE = "//div[@id='forgot-email-hint']";
+    final String INVALID_FORMAT_EMAIL_MESSAGE = "//p[contains(.,'должно быть действительным электронным адресом')]";
+    final String EMAIL_REQUIRED_ERROR_MESSAGE = "//div[@id='forgot-email-hint']";
+    final String RESET_PASSWORD_MESSAGE = "//p[text()='Введите email, мы отправим ссылку для сброса пароля']";
+    final String MODAL_RESET_WINDOW = "//div[@id='reset-modal']";
     final String LOGIN_MODAL = "//div[@id='login-modal']";
-    final String LONG_EMAIL_ERROR_MESSAGE = "//div[contains(text(),'Количество символов в поле e-mail адрес не может превышать 255')]";
+    final String SUCCESS_SEND_EMAIL_MESSAGE = "//p[contains(@class,'notification-card__text')]";
+    final String MAX_LENGTH_EMAIL_ERROR_MESSAGE = "//p[normalize-space()='Количество символов в поле e-mail адрес не может превышать 255.']";
 
 
     public RecoverPasswordPage() {
         super();
     }
 
-    @Step("Get recover password  title")
+    @Step("Get recover password title")
     public String getTitle() {
-        String titleText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(RESET_PASSWORD_TITLE))).getText();
-        log.info("title: {}", titleText);
-        return titleText;
+        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(RESET_PASSWORD_TITLE))).getText();
+        log.info("title: {}", text);
+        return text;
     }
 
     @Step("Enter email: {email}")
     public void setInputEmail(String email) {
-        driver.findElement(By.xpath(INPUT_EMAIL)).sendKeys(email);
+       WebElement inputEmail = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INPUT_EMAIL)));
         log.info("User entered email: {}", email);
+        inputEmail.sendKeys(email);
     }
 
     @Step("Click on reset password button")
@@ -50,50 +52,57 @@ public class RecoverPasswordPage extends BasePage {
         log.info("User clicked reset password button");
     }
 
-    @Step("Get footer text for recover password page")
-    public String getFooterText() {
-        String footerText = driver.findElement(By.xpath(RESET_FOOTER_TITLE)).getText().trim();
-        log.info("footer text: {}", footerText);
-        return footerText;
-    }
-
-    @Step("Click Enter button")
-    public void clickEnterButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(ENTER_BUTTON))).click();
+    @Step("Click on te back to enter button")
+    public void clickBackToEnterButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(BACK_TO_ENTER_BUTTON))).click();
         log.info("User clicked enter button");
     }
 
     @Step("Click close button")
     public void clickCloseButton() {
-        WebElement closeButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(CLOSE_BUTTON)));
+        WebElement closeButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(CLOSE_MODAL_BUTTON)));
         log.info("User clicked close button");
         closeButton.click();
     }
 
-    @Step("Get error message for empty email")
-    public String getErrorMessageEmptyEmail() {
-        String errorEmptyEmail = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(EMPTY_INPUT_EMAIL_MESSAGE))).getText();
-        log.info("error empty email: {}", errorEmptyEmail);
-        return errorEmptyEmail;
+    @Step("Get reset password message")
+    public String getResetPasswordMessage() {
+        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(RESET_PASSWORD_MESSAGE))).getText();
+        log.info("get reset password message: {}", text);
+        return text;
+    }
+
+    @Step("Get empty email error")
+    public String getEmailRequiredErrorMessage() {
+        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(EMAIL_REQUIRED_ERROR_MESSAGE))).getText();
+        log.info("Empty email error: {}", text);
+        return text;
     }
 
     @Step("Get error message invalid credentials email")
     public String getErrorMessageInvalidEmail() {
-        String errorMessageInvalidEmail = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INVALID_EMAIL_MESSAGE))).getText();
-        log.info("error invalid email: {}", errorMessageInvalidEmail);
-        return errorMessageInvalidEmail;
+        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INVALID_EMAIL_ERROR_MESSAGE))).getText();
+        log.info("error invalid email: {}", text);
+        return text;
     }
 
-    @Step("Get succes message")
-    public String getSuccessMessage() {
-         String successMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(SUCCESS_MESSAGE))).getText();
-         log.info("success message: {}", successMessage);
-         return successMessage;
+    @Step("Get error message invalid format email")
+    public String getErrorMessageInvalidFormatEmail() {
+        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INVALID_FORMAT_EMAIL_MESSAGE))).getText();
+        log.info("error invalid format email: {}", text);
+        return text;
+    }
+
+    @Step("Get success message send email")
+    public String getSuccessMessageSendEmail() {
+        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(SUCCESS_SEND_EMAIL_MESSAGE))).getText();
+        log.info("success message send email: {}", text);
+        return text;
     }
 
     @Step("Login modal is visible")
     public boolean visibleLoginWindowAfterClickEnterButton() {
-        boolean isDisplayed = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(LOGIN_MODAL))).isDisplayed();
+        boolean isDisplayed = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(LOGIN_MODAL))).isDisplayed();
         log.info("login window: {}", isDisplayed);
         return isDisplayed;
     }
@@ -106,10 +115,17 @@ public class RecoverPasswordPage extends BasePage {
     }
 
     @Step("Get error message for long email")
-    public String getLongEmailErrorMessage() {
-     String longEmailError = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(LONG_EMAIL_ERROR_MESSAGE))).getText();
-        log.info("long email error: {}", longEmailError);
-        return longEmailError;
+    public String getMaxLengthEmailErrorMessage() {
+     String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(MAX_LENGTH_EMAIL_ERROR_MESSAGE))).getText();
+        log.info("long email error: {}", text);
+        return text;
+    }
+
+    @Step("Get email placeholder text")
+    public String getEmailPlaceholderText() {
+        String placeholder = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INPUT_EMAIL))).getAttribute("placeholder");
+        log.info("email placeholder: {}", placeholder);
+        return placeholder;
     }
 }
 
