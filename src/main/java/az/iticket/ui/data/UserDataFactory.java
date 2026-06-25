@@ -33,10 +33,6 @@ public class UserDataFactory {
         return fakerRu.name().lastName();
     }
 
-    public static String getEmailWithPlus() {
-        return "user+test" + faker.number().digits(3) + "@test.com";
-    }
-
     public static String getEmailWithDot() {
         return "qa.test" + faker.number().digits(2) + "@test.com";
     }
@@ -50,7 +46,6 @@ public class UserDataFactory {
         String prefix = prefixes[faker.random().nextInt(prefixes.length)];
         String rest = faker.number().digits(7);
         return prefix + rest;
-
     }
 
     public static String getPassword() {
@@ -58,14 +53,10 @@ public class UserDataFactory {
     }
 
     public static String getInvalidLengthNumber() {
-        String [] prefixes = {"50", "55", "77", "70"};
+        String[] prefixes = {"50", "55", "77", "70"};
         String prefix = prefixes[faker.random().nextInt(prefixes.length)];
         String rest = faker.number().digits(8);
         return prefix + rest;
-    }
-
-    public static String getLongPhoneNumber(int length) {
-        return faker.regexify("[0-9]{" + length + "}");
     }
 
     public static String getEmailWithoutAt() {
@@ -100,7 +91,7 @@ public class UserDataFactory {
         return " " + faker.name().username() + faker.number().digits(3) + "@gmail.com";
     }
 
-    public static String getEmailContainsSpaceinMiddle() {
+    public static String getEmailContainsSpaceInMiddle() {
         return faker.internet().emailAddress().replace("@", " @");
     }
 
@@ -141,6 +132,12 @@ public class UserDataFactory {
 
     public static String getPasswordWithEndingPassword() {
         return faker.internet().password(8, 8) + " ";
+    }
+
+    public static String getMaxLengthEmail(){
+        String localPart = "a".repeat(246);
+        String email = localPart + "@test.com";
+        return email;
     }
 }
 
