@@ -17,7 +17,7 @@ public class AuthPage extends BasePage {
     final String INPUT_PASSWORD = "//input[@id='login-password']";
     final String LOGIN_BUTTON = "//button[@type='submit']";
     final String FORGOT_PASSWORD_BUTTON = "//button[normalize-space()='Забыли пароль?']";
-    final String REGISTRATION_BUTTON = "//button[contains(.,'Регистрация')]";
+    final String REGISTRATION_BUTTON = "//button[.//span[text()='Регистрация']]";
     final String LOGIN_FOOTER_TITLE = "//p//span[normalize-space()='Нет аккаунта?']";
     final String MODAL_CLOSE_BUTTON = "//button[@aria-label='Close modal']";
     final String INVALID_EMAIL_ERROR_MESSAGE = "//div[@id='login-email-hint']";
@@ -73,8 +73,9 @@ public class AuthPage extends BasePage {
 
     @Step("Click registration button")
     public void clickRegisterButton() {
-        driver.findElement(By.xpath(REGISTRATION_BUTTON)).click();
+        WebElement button = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(REGISTRATION_BUTTON)));
         log.info("User clicked registration button");
+        button.click();
     }
 
     @Step("Click modal close button")
