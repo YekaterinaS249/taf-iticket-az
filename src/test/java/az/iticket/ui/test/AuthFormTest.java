@@ -66,7 +66,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Verify email validation with spaces")
-    @Severity(SeverityLevel.CRITICAL)
+    @Severity(SeverityLevel.NORMAL)
     @Story("Email validation")
     @ParameterizedTest(name = "Email: {0}")
     @CsvSource({
@@ -83,7 +83,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Verify validation invalid email format")
-    @Severity(SeverityLevel.CRITICAL)
+    @Severity(SeverityLevel.NORMAL)
     @Story("Email validation")
     @ParameterizedTest(name = "Email: {0}")
     @CsvSource({
@@ -98,7 +98,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Verify email max length validation")
-    @Severity(SeverityLevel.MINOR)
+    @Severity(SeverityLevel.NORMAL)
     @Story("Email validation")
     @ParameterizedTest(name = "UI-LOG-014, UI-LOG-015 {0}")
     @ValueSource(ints = {254, 255})
@@ -111,7 +111,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Verify email validation with tab and newline characters")
-    @Severity(SeverityLevel.MINOR)
+    @Severity(SeverityLevel.NORMAL)
     @Story("Email validation")
     @ParameterizedTest(name = "Email: {0}")
     @CsvSource({
@@ -126,7 +126,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Verify email validation with 256 characters -UI-LOG-018")
-    @Severity(SeverityLevel.CRITICAL)
+    @Severity(SeverityLevel.NORMAL)
     @Test
     public void emailValidationWith256Characters() {
         String email = "a".repeat(246) + "@gmail.com";
@@ -137,7 +137,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Verify empty email validation -UI-LOG-019")
-    @Severity(SeverityLevel.CRITICAL)
+    @Severity(SeverityLevel.NORMAL)
     @Story("Email validation")
     @Test
     public void loginWithEmptyEmailTest() {
@@ -148,7 +148,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Verify password validation by length")
-    @Severity(SeverityLevel.CRITICAL)
+    @Severity(SeverityLevel.NORMAL)
     @Story("Password validation")
     @ParameterizedTest(name = "{0} | length = {1}")
     @CsvSource({
@@ -166,7 +166,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Verify password validation error disappears after valid input -UI-LOG-023")
-    @Severity(SeverityLevel.MINOR)
+    @Severity(SeverityLevel.NORMAL)
     @Story("Password validation")
     @Test
     public void passwordValidationErrorDisappearsAfterEntering6CharactersTest() {
@@ -179,7 +179,7 @@ public class AuthFormTest extends BaseTest {
 
     //В системе присутвует разночтение бэка и фронта на валидацию пароля.
     @DisplayName("Verify password validation for 7-character password -UI-LOG-024")
-    @Severity(SeverityLevel.CRITICAL)
+    @Severity(SeverityLevel.NORMAL)
     @Story("Password validation")
     @Test
     public void passwordValidationFor7CharacterPasswordTest() {
@@ -190,7 +190,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Verify password max length validation -UI-LOG-025")
-    @Severity(SeverityLevel.CRITICAL)
+    @Severity(SeverityLevel.NORMAL)
     @Story("Password validation")
     @Test
     public void passwordValidationByMaxLengthTest() {
@@ -202,7 +202,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Verify password with only spaces -UI-LOG-026")
-    @Severity(SeverityLevel.CRITICAL)
+    @Severity(SeverityLevel.NORMAL)
     @Story("Password validation")
     @Test
     public void passwordValidationWithOnlySpacesTest() {
@@ -213,6 +213,7 @@ public class AuthFormTest extends BaseTest {
     }
 
     @DisplayName("Verify auth page title -UI-LOG-027")
+    @Severity(SeverityLevel.MINOR)
     @Story("UI elements")
     @Test
     public void authPageTitleTest() {
