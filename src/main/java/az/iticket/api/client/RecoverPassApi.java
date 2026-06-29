@@ -13,7 +13,7 @@ import static io.restassured.RestAssured.given;
 public class RecoverPassApi {
     public static Response recoverPassword(RecoverPassRequest passRequest) {
         log.info("RecoverPass Request: {}", passRequest.toString());
-        Response response= given()
+        Response response = given()
                 .filter(new AllureRestAssured())
                 .contentType(ContentType.JSON)
                 .body(passRequest)

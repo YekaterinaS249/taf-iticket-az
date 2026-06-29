@@ -9,5 +9,8 @@ public class Endpoints {
 
         public static final String RECOVER_PASSWORD =
                 BASE_URL + "/v6/user/auth/forgot-password?client=web";
+
+        public static final String REGISTER =
+                BASE_URL + "/v6/user/auth/register?client=web";
     }
 
