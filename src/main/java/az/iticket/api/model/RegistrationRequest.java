@@ -9,6 +9,7 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
+
 public class RegistrationRequest {
     @JsonProperty("first_name")
     String firstName;
