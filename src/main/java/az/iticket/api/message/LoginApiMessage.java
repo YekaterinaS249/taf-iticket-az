@@ -1,12 +1,48 @@
 package az.iticket.api.message;
 
-public class LoginApiMessage {
-    public static final String PASSWORD_REQUIRED_MESSAGE = "Поле пароль обязательно для заполнения.";
-    public static final String EMAIL_REQUIRED_MESSAGE = "Поле e-mail адрес обязательно для заполнения.";
-    public static final String AUTH_INVALID_CREDENTIALS = "Пользователь не найден";
-    public static final String INVALID_EMAIL_FORMAT_MESSAGE = "Поле e-mail адрес должно быть действительным электронным адресом.";
-    public static final String MAX_LENGTH_EMAIL_MESSAGE = "Количество символов в поле e-mail адрес не может превышать 255.";
-    public static final String MIN_LENGTH_PASSWORD_MESSAGE = "Количество символов в поле пароль должно быть не меньше 8.";
-    public static final String MAX_LENGTH_PASSWORD_MESSAGE = "Количество символов в поле пароль не может превышать 255.";
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.Properties;
 
+public enum LoginApiMessage {
+
+    PASSWORD_REQUIRED("password.required"),
+    EMAIL_REQUIRED("email.required"),
+    INVALID_CREDENTIALS("auth.invalid.credentials"),
+    INVALID_EMAIL_FORMAT("email.invalid.format"),
+    MAX_EMAIL_LENGTH("email.max.length"),
+    MIN_PASSWORD_LENGTH("password.min.length"),
+    MAX_PASSWORD_LENGTH("password.max.length");
+
+    private static final Properties PROPERTIES = new Properties();
+
+    static {
+        try (InputStream input = LoginApiMessage.class.getClassLoader()
+                .getResourceAsStream("login.api_ru.properties")) {
+
+            if (input == null) {
+                throw new RuntimeException("Файл login.api_ru.properties не найден в src/test/resources");
+            }
+
+            try (InputStreamReader reader =
+                         new InputStreamReader(input, StandardCharsets.UTF_8)) {
+                PROPERTIES.load(reader);
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private final String key;
+
+    LoginApiMessage(String key) {
+        this.key = key;
+    }
+
+    public String getMessage() {
+        return PROPERTIES.getProperty(key);
+    }
 }
