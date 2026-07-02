@@ -21,7 +21,7 @@ public class AuthFormApiTest {
         AuthApi.login(AuthDataFactory.loginWithoutPassword())
                 .then()
                 .statusCode(422)
-                .body("response[0].messages[0]", equalTo(LoginApiMessage.PASSWORD_REQUIRED_MESSAGE));
+                .body("response[0].messages[0]", equalTo(LoginApiMessage.PASSWORD_REQUIRED.getMessage()));
     }
 
     @DisplayName("Login with empty email -API-LOG-002")
@@ -30,7 +30,7 @@ public class AuthFormApiTest {
         AuthApi.login(AuthDataFactory.loginWithoutEmail())
                 .then()
                 .statusCode(422)
-                .body("response[0].messages[0]", equalTo(LoginApiMessage.EMAIL_REQUIRED_MESSAGE));
+                .body("response[0].messages[0]", equalTo(LoginApiMessage.EMAIL_REQUIRED.getMessage()));
 
     }
 
@@ -40,7 +40,7 @@ public class AuthFormApiTest {
         AuthApi.login(AuthDataFactory.wrongPasswordLogin())
                 .then()
                 .statusCode(422)
-                .body("response[0].messages[0]", equalTo(LoginApiMessage.AUTH_INVALID_CREDENTIALS));
+                .body("response[0].messages[0]", equalTo(LoginApiMessage.INVALID_CREDENTIALS.getMessage()));
     }
 
     @DisplayName("Login with invalid email -API-LOG-004")
@@ -49,7 +49,7 @@ public class AuthFormApiTest {
         AuthApi.login(AuthDataFactory.wrongEmailLogin())
                 .then()
                 .statusCode(403)
-                .body("response[0].messages[0]", equalTo(LoginApiMessage.AUTH_INVALID_CREDENTIALS));
+                .body("response[0].messages[0]", equalTo(LoginApiMessage.INVALID_CREDENTIALS.getMessage()));
     }
 
 
@@ -59,7 +59,7 @@ public class AuthFormApiTest {
                 AuthApi.login(AuthDataFactory.emailWithoutAtSymbols())
                         .then()
                 .statusCode(422)
-                .body("response[0].messages[0]", equalTo(LoginApiMessage.INVALID_EMAIL_FORMAT_MESSAGE));
+                .body("response[0].messages[0]", equalTo(LoginApiMessage.INVALID_EMAIL_FORMAT.getMessage()));
     }
 
     @DisplayName("Login with email without domain part -API-LOG-006")
@@ -68,7 +68,7 @@ public class AuthFormApiTest {
                 AuthApi.login(AuthDataFactory.emailWithoutDomainPart())
                         .then()
                 .statusCode(422)
-                .body("response[0].messages[0]", equalTo(LoginApiMessage.INVALID_EMAIL_FORMAT_MESSAGE));
+                .body("response[0].messages[0]", equalTo(LoginApiMessage.INVALID_EMAIL_FORMAT.getMessage()));
     }
 
     @DisplayName("Login with email without username part -API-LOG-007")
@@ -77,7 +77,7 @@ public class AuthFormApiTest {
         AuthApi.login(AuthDataFactory.emailWithoutUserNamePart())
                 .then()
                 .statusCode(422)
-                .body("response[0].messages[0]", equalTo(LoginApiMessage.INVALID_EMAIL_FORMAT_MESSAGE));
+                .body("response[0].messages[0]", equalTo(LoginApiMessage.INVALID_EMAIL_FORMAT.getMessage()));
     }
 
     @DisplayName("Login with email containing double '@' -API-LOG-008")
@@ -86,7 +86,7 @@ public class AuthFormApiTest {
         AuthApi.login(AuthDataFactory.emailWithDoubleAtSymbols())
                 .then()
                 .statusCode(422)
-                .body("response[0].messages[0]", equalTo(LoginApiMessage.INVALID_EMAIL_FORMAT_MESSAGE));
+                .body("response[0].messages[0]", equalTo(LoginApiMessage.INVALID_EMAIL_FORMAT.getMessage()));
     }
 
     @DisplayName("Login with Cyrillic characters in email -API-LOG-009")
@@ -95,17 +95,16 @@ public class AuthFormApiTest {
         AuthApi.login(AuthDataFactory.emailUserNameCyrilic())
                 .then()
                 .statusCode(422)
-                .body("response[0].messages[0]", equalTo(LoginApiMessage.INVALID_EMAIL_FORMAT_MESSAGE));
+                .body("response[0].messages[0]", equalTo(LoginApiMessage.INVALID_EMAIL_FORMAT.getMessage()));
     }
 
-    //На фронте валидация возращает неверный формат,бэк возращает другое сообщение.
     @DisplayName("Login with leading space in email -API-LOG-010")
     @Test
     public void emailContainsLeadingSpaceTest() {
         AuthApi.login(AuthDataFactory.emailContainsStartingSpace())
                 .then()
                 .statusCode(403)
-                .body("response[0].messages[0]",equalTo(LoginApiMessage.AUTH_INVALID_CREDENTIALS));
+                .body("response[0].messages[0]",equalTo(LoginApiMessage.INVALID_CREDENTIALS.getMessage()));
 
     }
 
@@ -115,18 +114,18 @@ public class AuthFormApiTest {
         AuthApi.login(AuthDataFactory.emailContainsMiddleSpace())
                 .then()
                 .statusCode(422)
-                .body("response[0].messages[0]",equalTo(LoginApiMessage.INVALID_EMAIL_FORMAT_MESSAGE));
+                .body("response[0].messages[0]",equalTo(LoginApiMessage.INVALID_CREDENTIALS.getMessage()));
 
     }
 
-    //На фронте валидация возращает неверный формат,бэк возращает другое сообщение.
+
     @DisplayName("Login with trailing space in email -API-LOG-012")
     @Test
     public void  emailContainsTrailingSpaceTest() {
         AuthApi.login(AuthDataFactory.emailContainsEndingSpace())
                 .then()
                 .statusCode(403)
-                .body("response[0].messages[0]",equalTo(LoginApiMessage.AUTH_INVALID_CREDENTIALS));
+                .body("response[0].messages[0]",equalTo(LoginApiMessage.INVALID_CREDENTIALS.getMessage()));
 
     }
 
@@ -136,7 +135,7 @@ public class AuthFormApiTest {
         AuthApi.login(AuthDataFactory.emailDomainPartStarsWithDot())
                 .then()
                 .statusCode(422)
-                .body("response[0].messages[0]", equalTo(LoginApiMessage.INVALID_EMAIL_FORMAT_MESSAGE));
+                .body("response[0].messages[0]", equalTo(LoginApiMessage.INVALID_EMAIL_FORMAT.getMessage()));
     }
 
     @DisplayName("Login with tab character in email -API-LOG-014")
@@ -145,7 +144,7 @@ public class AuthFormApiTest {
         AuthApi.login(AuthDataFactory.emailWithTabCharacters())
                 .then()
                 .statusCode(422)
-                .body("response[0].messages[0]",equalTo(LoginApiMessage.INVALID_EMAIL_FORMAT_MESSAGE));
+                .body("response[0].messages[0]",equalTo(LoginApiMessage.INVALID_EMAIL_FORMAT.getMessage()));
     }
 
     @DisplayName("Login with newline character in email -API-LOG-015")
@@ -154,7 +153,7 @@ public class AuthFormApiTest {
         AuthApi.login(AuthDataFactory.emailWithNewLineCharacters())
                 .then()
                 .statusCode(422)
-                .body("response[0].messages[0]",equalTo(LoginApiMessage.INVALID_EMAIL_FORMAT_MESSAGE));
+                .body("response[0].messages[0]",equalTo(LoginApiMessage.INVALID_EMAIL_FORMAT.getMessage()));
     }
 
     @DisplayName("Login with Cyrillic password -API-LOG-016")
@@ -163,7 +162,7 @@ public class AuthFormApiTest {
         AuthApi.login(AuthDataFactory.passwordCyrillic())
                 .then()
                 .statusCode(403)
-                .body("response[0].messages[0]",equalTo(LoginApiMessage.AUTH_INVALID_CREDENTIALS));
+                .body("response[0].messages[0]",equalTo(LoginApiMessage.INVALID_CREDENTIALS.getMessage()));
     }
 
     @DisplayName("Login with email exceeding maximum length -API-LOG-017")
@@ -172,7 +171,7 @@ public class AuthFormApiTest {
                 AuthApi.login(AuthDataFactory.emailWithMaxLength())
                         .then()
                 .statusCode(422)
-                .body("response[0].messages[1]", equalTo(LoginApiMessage.MAX_LENGTH_EMAIL_MESSAGE));
+                .body("response[0].messages[1]", equalTo(LoginApiMessage.MAX_EMAIL_LENGTH.getMessage()));
     }
 
     @DisplayName("Login with password shorter than minimum length -API-LOG-018")
@@ -181,7 +180,7 @@ public class AuthFormApiTest {
                 AuthApi.login(AuthDataFactory.passwordTooShort())
                         .then()
                 .statusCode(422)
-                .body("response[0].messages[0]", equalTo(LoginApiMessage.MIN_LENGTH_PASSWORD_MESSAGE));
+                .body("response[0].messages[0]", equalTo(LoginApiMessage.MIN_PASSWORD_LENGTH.getMessage()));
 
     }
 
@@ -191,7 +190,7 @@ public class AuthFormApiTest {
                 AuthApi.login(AuthDataFactory.passwordInvalidLength())
                         .then()
                 .statusCode(422)
-                .body("response[0].messages[0]", equalTo(LoginApiMessage.MIN_LENGTH_PASSWORD_MESSAGE));
+                .body("response[0].messages[0]", equalTo(LoginApiMessage.MIN_PASSWORD_LENGTH.getMessage()));
 
     }
 
@@ -201,7 +200,7 @@ public class AuthFormApiTest {
         AuthApi.login(AuthDataFactory.passwordOnlySpaces())
                 .then()
                 .statusCode(422)
-                .body("response[0].messages[0]", equalTo(LoginApiMessage.PASSWORD_REQUIRED_MESSAGE));
+                .body("response[0].messages[0]", equalTo(LoginApiMessage.PASSWORD_REQUIRED.getMessage()));
 
     }
 
@@ -211,7 +210,7 @@ public class AuthFormApiTest {
        AuthApi.login(AuthDataFactory.emailOnlySpaces())
                .then()
                 .statusCode(422)
-                .body("response[0].messages[0]",equalTo(LoginApiMessage.EMAIL_REQUIRED_MESSAGE));
+                .body("response[0].messages[0]",equalTo(LoginApiMessage.EMAIL_REQUIRED.getMessage()));
     }
 
     @DisplayName("Login with password exceeding maximum length -API-LOG-022")
@@ -220,7 +219,7 @@ public class AuthFormApiTest {
         AuthApi.login(AuthDataFactory.passwordMaxLength())
                 .then()
                 .statusCode(422)
-                .body("response[0].messages[0]", equalTo(LoginApiMessage.MAX_LENGTH_PASSWORD_MESSAGE));
+                .body("response[0].messages[0]", equalTo(LoginApiMessage.MAX_PASSWORD_LENGTH.getMessage()));
     }
 
     @DisplayName("Login with unregistered user -API-LOG-023")
@@ -229,7 +228,7 @@ public class AuthFormApiTest {
         AuthApi.login(AuthDataFactory.notRegisteredUserLogin())
                 .then()
                 .statusCode(403)
-                .body("response[0].messages[0]", equalTo(LoginApiMessage.AUTH_INVALID_CREDENTIALS));
+                .body("response[0].messages[0]", equalTo(LoginApiMessage.INVALID_CREDENTIALS.getMessage()));
 
     }
 
