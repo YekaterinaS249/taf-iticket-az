@@ -273,3 +273,4 @@ public class AuthFormTest extends BaseTest {
 
     }
 }
+
