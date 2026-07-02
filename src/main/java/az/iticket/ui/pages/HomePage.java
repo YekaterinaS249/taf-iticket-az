@@ -5,8 +5,6 @@ import io.qameta.allure.Step;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
 @Slf4j
@@ -24,44 +22,41 @@ public class HomePage extends BasePage {
         driver.get(BASE_URL);
     }
 
-    @Step("Click on search input")
-    public void clickSearchInput() {
-        driver.findElement(By.xpath(SEARCH_INPUT)).click();
-        log.info("Search input clicked");
-    }
-
-    @Step("Click on auth button")
+    @Step("Click authentication button")
     public void clickAuthButton() {
-        driver.findElement(By.xpath(AUTH_BUTTON)).click();
-        log.info("Auth button clicked");
+        waitForClickable(AUTH_BUTTON).click();
+        log.info("Authentication button clicked");
     }
 
-    @Step("Get copyrights text")
-    public String getCopyRights() {
-       String text = driver.findElement(By.xpath(COPY_RIGHTS)).getText();
-       log.info("Copy rights text:{} ",text);
-       return text;
+    @Step("Get copyright text")
+    public String getCopyrightText() {
+        String text = waitForVisibility(COPY_RIGHTS).getText();
+        log.info("Copyright text: {} ", text);
+        return text;
     }
 
-    @Step("Auth button is displayed on the Home page")
-    public boolean isDisplayedAuthButton() {
-       boolean isDisplayed = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(AUTH_BUTTON))).isDisplayed();
-       log.info("Auth button is displayed: {} " ,isDisplayed);
-       return isDisplayed;
-    }
-
-    @Step("Search input is displayed on the Home page")
-    public boolean searchInputIsDisplayed() {
-        boolean isDisplayed = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(SEARCH_INPUT))).isDisplayed();
-        log.info("Search input is displayed: {} " ,isDisplayed);
+    @Step("Verify authentication button is displayed")
+    public boolean isAuthButtonDisplayed() {
+        boolean isDisplayed = waitForVisibility(AUTH_BUTTON).isDisplayed();
+        log.info("Authentication button is displayed: {} ", isDisplayed);
         return isDisplayed;
     }
 
-    @Step("Copy rights text has on home page")
-    public boolean isDisplayedCopyRights() {
-        boolean isDisplayedText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(COPY_RIGHTS))).isDisplayed();
-        log.info("Copy rights text:{} ",isDisplayedText);
-        return isDisplayedText;
+    @Step("Verify search input is displayed")
+    public boolean isSearchInputDisplayed() {
+        boolean isDisplayed = waitForVisibility(SEARCH_INPUT).isDisplayed();
+        log.info("Search input is displayed: {} ", isDisplayed);
+        return isDisplayed;
+    }
+
+    @Step("Verify copyright text is displayed")
+    public boolean isCopyrightDisplayed() {
+        boolean isDisplayed = waitForVisibility(COPY_RIGHTS).isDisplayed();
+        log.info("Copyright text is displayed: {} ", isDisplayed);
+        return isDisplayed;
     }
 }
+
+
+
 
