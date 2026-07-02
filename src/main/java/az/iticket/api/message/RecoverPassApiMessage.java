@@ -18,10 +18,10 @@ public enum RecoverPassApiMessage {
 
     static {
         try (InputStream input = RecoverPassApiMessage.class.getClassLoader()
-                .getResourceAsStream("RecoverPassApiMessage_ru.properties")) {
+                .getResourceAsStream("recover.password.api_ru.properties")) {
 
             if (input == null) {
-                throw new RuntimeException("Файл RecoverPassApiMessage_ru.properties не найден в src/test/resources");
+                throw new RuntimeException("Файл recover.password.api_ru.properties не найден в src/test/resources");
             }
 
             try (InputStreamReader reader =
