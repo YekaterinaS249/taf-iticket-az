@@ -16,7 +16,7 @@ public class RegistrationApiTest {
         RegistrationApi.registration(RegistrationDataFactory.getShortPhoneNumber())
                 .then()
                 .statusCode(200)
-                .body("response.email_verification.message", equalTo(RegistrationApiMessage.EMAIL_CONFIRM_MESSAGE));
+                .body("response.email_verification.message", equalTo(RegistrationApiMessage.EMAIL_CONFIRM_MESSAGE.getMessage()));
 
     }
 
@@ -26,7 +26,7 @@ public class RegistrationApiTest {
         RegistrationApi.registration(RegistrationDataFactory.getMaxLengthPhoneNumber())
                 .then()
                 .statusCode(200)
-                .body("response.email_verification.message", equalTo(RegistrationApiMessage.EMAIL_CONFIRM_MESSAGE));
+                .body("response.email_verification.message", equalTo(RegistrationApiMessage.EMAIL_CONFIRM_MESSAGE.getMessage()));
     }
 
     @DisplayName("Verify phone number only letters -API-REG-003")
@@ -35,7 +35,7 @@ public class RegistrationApiTest {
         RegistrationApi.registration(RegistrationDataFactory.getPhoneNumberFieldRejectsLetters())
                 .then()
                 .statusCode(200)
-                .body("response.email_verification.message", equalTo(RegistrationApiMessage.EMAIL_CONFIRM_MESSAGE));
+                .body("response.email_verification.message", equalTo(RegistrationApiMessage.EMAIL_CONFIRM_MESSAGE.getMessage()));
     }
 
     @DisplayName("Verify phone number only symbols -API-REG-004")
@@ -44,7 +44,7 @@ public class RegistrationApiTest {
         RegistrationApi.registration(RegistrationDataFactory.getPhoneNumberFieldRejectsOnlySymbols())
                 .then()
                 .statusCode(200)
-                .body("response.email_verification.message", equalTo(RegistrationApiMessage.EMAIL_CONFIRM_MESSAGE));
+                .body("response.email_verification.message", equalTo(RegistrationApiMessage.EMAIL_CONFIRM_MESSAGE.getMessage()));
     }
 }
 

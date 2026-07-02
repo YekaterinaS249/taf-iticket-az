@@ -98,7 +98,7 @@ public class RegistrationPage extends BasePage {
     @Step("Get success registration message")
     public String getSuccessMessage() {
         String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(SUCCESS_REGISTER_MESSAGE))).getText();
-        log.info("Succes message: {}", text);
+        log.info("Success message: {}", text);
         return text;
     }
 
@@ -234,6 +234,7 @@ public class RegistrationPage extends BasePage {
         log.info("Phone dropdown visibility: {}", isVisible);
         return isVisible;
     }
+
     @Step("Registration modal is invisible")
     public boolean isModalRegistrationInvisible() {
         boolean invisible = wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(REGISTRATION_MODAL)));
@@ -241,6 +242,7 @@ public class RegistrationPage extends BasePage {
         return invisible;
     }
 }
+
 
 
 
