@@ -1,35 +1,58 @@
 package az.iticket.ui.test;
 
 import az.iticket.ui.basetest.BaseTest;
-import org.junit.jupiter.api.Assertions;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+@Epic("Home Page")
+@Feature("Home Page UI")
+@Owner("Silantyeva Yekaterina")
 public class HomeTest extends BaseTest {
-    @DisplayName("Get Copy Rights text")
+
+    @DisplayName("Verify copyright text -UI-HMP-001")
+    @Story("Verify copyright text")
+    @Severity(SeverityLevel.NORMAL)
     @Test
-    public void getCopyRights() {
-        homePage.getCopyRights();
-        Assertions.assertEquals("© 2016–2026 iTicket.GLOBAL. Все права защищены.",homePage.getCopyRights());
+    public void shouldReturnCopyrightTextTest() {
+        assertEquals("© 2016–2026 iTicket.GLOBAL. Все права защищены.",
+                homePage.getCopyrightText(),
+                "Copyright text should match the expected value.");
     }
 
-    @DisplayName("Сhek displayed login button")
+    @DisplayName("Verify login button is displayed -UI-HMP-002")
+    @Story("Verify login button visibility")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
-    public void loginButton() {
-        Assertions.assertTrue(homePage.isDisplayedAuthButton());
+    public void shouldDisplayLoginButtonTest() {
+        assertTrue(homePage.isAuthButtonDisplayed(),
+                "Login button should be displayed on the Home page.");
     }
 
-    @DisplayName("Search input displayed on thr Home Page")
+    @DisplayName("Verify search input is displayed -UI-HMP-003")
+    @Story("Verify search input is displayed")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
-    public void searchInputDisplayedOnTheHomePage() {
-        Assertions.assertTrue(homePage.searchInputIsDisplayed());
+    public void shouldDisplaySearchInputTest() {
+        assertTrue(homePage.isSearchInputDisplayed(),
+                "Search input should be displayed on the Home page.");
     }
 
-    @DisplayName("Chek displayed copyrights")
+    @DisplayName("Verify copyright text is displayed -UI-HMP-004")
+    @Story("Verify copyright visibility")
+    @Severity(SeverityLevel.NORMAL)
     @Test
-    public void copyrightsButton() {
-        Assertions.assertTrue(homePage.isDisplayedCopyRights());
+    public void shouldDisplayCopyrightTextTest() {
+        assertTrue(homePage.isCopyrightDisplayed(),
+                "Copyright text should be displayed on the Home page.");
 
     }
 }
+
+
+
+
 
