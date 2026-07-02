@@ -9,6 +9,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 @Epic("Authentication")
 @Feature("Login")
@@ -27,11 +30,12 @@ public class AuthFormTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Story("Login validation")
     @Test
-    public void loginWithWrongPassword() {
+    public void loginWithWrongPasswordTest() {
         authPage.setInputEmail("omnqqmvgtlixqnwjtp@jbsze.com");
         authPage.setInputPassword("test1234");
         authPage.clickSubmitButton();
-        Assertions.assertEquals(LoginMessage.INVALID_CREDENTIALS_ERROR_MESSAGE, authPage.getErrorInvalidCredentials());
+        assertEquals(LoginMessage.INVALID_CREDENTIALS.getMessage(), authPage.getErrorInvalidCredentials(),
+                "Invalid credentials message should be displayed");
 
     }
 
@@ -39,11 +43,12 @@ public class AuthFormTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Story("Login validation")
     @Test
-    public void verifyLoginWithWrongEmail() {
+    public void verifyLoginWithWrongEmailTest() {
         authPage.setInputEmail("silantyevakatya1@gmail.com");
         authPage.setInputPassword("shelovespizza12");
         authPage.clickSubmitButton();
-        Assertions.assertEquals(LoginMessage.USER_NOT_FOUND_MESSAGE, authPage.getErrorMessageUserNotFound());
+        assertEquals(LoginMessage.USER_NOT_FOUND.getMessage(), authPage.getErrorMessageUserNotFound(),
+                "User not found message should be displayed");
     }
 
     @DisplayName("Verify invalid email credentials")
@@ -61,7 +66,8 @@ public class AuthFormTest extends BaseTest {
         authPage.setInputEmail(email);
         authPage.setInputPassword("user1234");
         authPage.clickSubmitButton();
-        Assertions.assertEquals(LoginMessage.INVALID_EMAIL_ERROR_MESSAGE, authPage.getErrorInvalidEmail());
+        assertEquals(LoginMessage.EMAIL_INVALID.getMessage(), authPage.getErrorInvalidEmail(),
+                "Invalid email message should be displayed");
 
     }
 
@@ -79,7 +85,8 @@ public class AuthFormTest extends BaseTest {
         authPage.setInputEmail(email);
         authPage.setInputPassword("user1234");
         authPage.clickSubmitButton();
-        Assertions.assertEquals(LoginMessage.INVALID_EMAIL_ERROR_MESSAGE, authPage.getErrorInvalidEmail());
+        assertEquals(LoginMessage.EMAIL_INVALID.getMessage(), authPage.getErrorInvalidEmail(),
+                "Email validation error should be displayed");
     }
 
     @DisplayName("Verify validation invalid email format")
@@ -94,7 +101,8 @@ public class AuthFormTest extends BaseTest {
         authPage.setInputEmail(email);
         authPage.setInputPassword("user1234");
         authPage.clickSubmitButton();
-        Assertions.assertEquals(LoginMessage.INVALID_FORMAT_EMAIL_MESSAGE, authPage.getErrorMessageInvalidEmailFormat());
+        assertEquals(LoginMessage.EMAIL_INVALID_FORMAT.getMessage(), authPage.getErrorMessageInvalidEmailFormat(),
+                "Invalid email format message should be displayed");
     }
 
     @DisplayName("Verify email max length validation")
@@ -107,7 +115,8 @@ public class AuthFormTest extends BaseTest {
         authPage.setInputEmail(email);
         authPage.setInputPassword("user1234");
         authPage.clickSubmitButton();
-        Assertions.assertEquals(LoginMessage.INVALID_FORMAT_EMAIL_MESSAGE, authPage.getErrorMessageInvalidEmailFormat());
+        assertEquals(LoginMessage.EMAIL_INVALID_FORMAT.getMessage(), authPage.getErrorMessageInvalidEmailFormat(),
+              "Invalid email format message should be displayed"  );
     }
 
     @DisplayName("Verify email validation with tab and newline characters")
@@ -122,7 +131,8 @@ public class AuthFormTest extends BaseTest {
         authPage.setInputEmail(email);
         authPage.setInputPassword("user1234");
         authPage.clickSubmitButton();
-        Assertions.assertEquals(LoginMessage.INVALID_EMAIL_ERROR_MESSAGE, authPage.getErrorInvalidEmail());
+        assertEquals(LoginMessage.EMAIL_INVALID.getMessage(), authPage.getErrorInvalidEmail(),
+                "Invalid email message should be displayed");
     }
 
     @DisplayName("Verify email validation with 256 characters -UI-LOG-018")
@@ -133,7 +143,8 @@ public class AuthFormTest extends BaseTest {
         authPage.setInputEmail(email);
         authPage.setInputPassword("user1234");
         authPage.clickSubmitButton();
-        Assertions.assertEquals(LoginMessage.MAX_LENGTH_EMAIL_ERROR_MESSAGE, authPage.getErrorMessageMaxLengthEmail());
+        assertEquals(LoginMessage.EMAIL_MAX_LENGTH.getMessage(), authPage.getErrorMessageMaxLengthEmail(),
+                "Invalid email length message should be displayed");
     }
 
     @DisplayName("Verify empty email validation -UI-LOG-019")
@@ -144,7 +155,8 @@ public class AuthFormTest extends BaseTest {
         authPage.setInputEmail("");
         authPage.setInputPassword("user1234");
         authPage.clickSubmitButton();
-        Assertions.assertEquals(LoginMessage.EMAIL_REQUIRED_MESSAGE, authPage.getErrorMessageEmptyInputEmail());
+        assertEquals(LoginMessage.EMAIL_REQUIRED.getMessage(), authPage.getErrorMessageEmptyInputEmail(),
+                "Empty email message should be displayed");
     }
 
     @DisplayName("Verify password validation by length")
@@ -161,7 +173,8 @@ public class AuthFormTest extends BaseTest {
         authPage.setInputEmail("test@test.com");
         authPage.setInputPassword(password);
         authPage.clickSubmitButton();
-        Assertions.assertEquals(LoginMessage.MIN_LENGTH_PASSWORD_ERROR_MESSAGE, authPage.getErrorLengthPassword());
+        assertEquals(LoginMessage.PASSWORD_MIN_LENGTH.getMessage(), authPage.getErrorLengthPassword(),
+                "Password min length message should be displayed");
 
     }
 
@@ -173,11 +186,10 @@ public class AuthFormTest extends BaseTest {
         authPage.setInputEmail("user@user.com");
         authPage.setInputPassword("user12");
         authPage.clickSubmitButton();
-        Assertions.assertTrue(authPage.isPasswordValidationErrorNotDisplayed());
+        assertTrue(authPage.isPasswordValidationErrorNotDisplayed(),"Password validation error should disappear");
 
     }
 
-    //В системе присутвует разночтение бэка и фронта на валидацию пароля.
     @DisplayName("Verify password validation for 7-character password -UI-LOG-024")
     @Severity(SeverityLevel.NORMAL)
     @Story("Password validation")
@@ -186,7 +198,8 @@ public class AuthFormTest extends BaseTest {
         authPage.setInputEmail("user@user.com");
         authPage.setInputPassword("user123");
         authPage.clickSubmitButton();
-        Assertions.assertEquals(LoginMessage.PASSWORD_TOO_SHORT, authPage.getErrorShortPassword());
+        assertEquals(LoginMessage.PASSWORD_TOO_SHORT.getMessage(), authPage.getErrorShortPassword(),
+        "Password too short message should be displayed");
     }
 
     @DisplayName("Verify password max length validation -UI-LOG-025")
@@ -198,7 +211,8 @@ public class AuthFormTest extends BaseTest {
         authPage.setInputEmail("user@user.com");
         authPage.setInputPassword(password);
         authPage.clickSubmitButton();
-        Assertions.assertEquals(LoginMessage.MAX_LENGTH_PASSWORD_ERROR_MESSAGE, authPage.getErrorPasswordMaxLength());
+        assertEquals(LoginMessage.PASSWORD_MAX_LENGTH.getMessage(), authPage.getErrorPasswordMaxLength(),
+                "Password max length message should be displayed");
     }
 
     @DisplayName("Verify password with only spaces -UI-LOG-026")
@@ -209,7 +223,8 @@ public class AuthFormTest extends BaseTest {
         authPage.setInputEmail("user@user.com");
         authPage.setInputPassword("       ");
         authPage.clickSubmitButton();
-        Assertions.assertEquals(LoginMessage.EMPTY_PASSWORD_ERROR_MESSAGE, authPage.getErrorMessageEmptyInputPassword());
+        assertEquals(LoginMessage.PASSWORD_REQUIRED.getMessage(), authPage.getErrorMessageEmptyInputPassword(),
+                "Empty password message should be displayed");
     }
 
     @DisplayName("Verify auth page title -UI-LOG-027")
@@ -217,7 +232,7 @@ public class AuthFormTest extends BaseTest {
     @Story("UI elements")
     @Test
     public void authPageTitleTest() {
-        Assertions.assertEquals("Войти", authPage.getAuthTitle());
+        assertEquals("Войти", authPage.getAuthTitle(), "Auth title should be displayed");
     }
 
     @DisplayName("Verify auth page footer title -UI-LOG-028")
@@ -225,7 +240,7 @@ public class AuthFormTest extends BaseTest {
     @Story("UI elements")
     @Test
     public void authPageFooterTitleTest() {
-        Assertions.assertEquals("Нет аккаунта?", authPage.getFooterAuthTitle());
+        assertEquals("Нет аккаунта?", authPage.getFooterAuthTitle(), "Footer title should be displayed");
     }
 
     @DisplayName("Verify email placeholder text -UI-LOG-029")
@@ -233,7 +248,7 @@ public class AuthFormTest extends BaseTest {
     @Story("UI elements")
     @Test
     public void placeholderTextInEmailInputTest() {
-        Assertions.assertEquals("name@example.com", authPage.getEmailPlaceholder());
+        assertEquals("name@example.com", authPage.getEmailPlaceholder(), "Email placeholder should be displayed");
 
     }
 
@@ -243,9 +258,9 @@ public class AuthFormTest extends BaseTest {
     @Test
     public void passwordVisibilityToggleTest() {
         authPage.setInputPassword("12345678");
-        Assertions.assertEquals("password", authPage.getPasswordFieldType());
+        assertEquals("password", authPage.getPasswordFieldType());
         authPage.clickTogglePasswordButton();
-        Assertions.assertEquals("text", authPage.getPasswordFieldType());
+        assertEquals("text", authPage.getPasswordFieldType(), "Password visibility should be displayed");
     }
 
     @DisplayName("Verify recover password modal is closed after clicking Close button  -UI-LOG-031")
@@ -254,7 +269,7 @@ public class AuthFormTest extends BaseTest {
     @Test
     public void modalWindowLoginNotDisplayedTest() {
         authPage.clickCloseButton();
-        Assertions.assertTrue(authPage.isModalLoginInvisible());
+        assertTrue(authPage.isModalLoginInvisible(), "Modal Window should be displayed");
 
     }
 }
