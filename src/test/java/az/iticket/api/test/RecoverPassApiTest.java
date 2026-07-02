@@ -2,7 +2,7 @@ package az.iticket.api.test;
 
 import az.iticket.api.client.RecoverPassApi;
 import az.iticket.api.data.RecoverPassDataFactory;
-import az.iticket.api.message.RecoverPassMessage;
+import az.iticket.api.message.RecoverPassApiMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +15,7 @@ public class RecoverPassApiTest {
         RecoverPassApi.recoverPassword(RecoverPassDataFactory.getEmptyEmail())
                 .then()
                 .statusCode(422)
-                .body("response[0].messages[0]", equalTo(RecoverPassMessage.EMPTY_EMAIL_ERROR_MESSAGE));
+                .body("response[0].messages[0]", equalTo(RecoverPassApiMessage.EMAIL_REQUIRED.getMessage()));
 
     }
 
@@ -25,7 +25,7 @@ public class RecoverPassApiTest {
         RecoverPassApi.recoverPassword(RecoverPassDataFactory.getMessageRegisrtedUser())
                 .then()
                 .statusCode(200)
-                .body("response[0].messages[0]", equalTo(RecoverPassMessage.RESET_LINK_SUCCESS_MESSAGE));
+                .body("response[0].messages[0]", equalTo(RecoverPassApiMessage.RESET_LINK_SUCCESS.getMessage()));
     }
 
     @DisplayName("Invalid email without @ symbol returns format error -API-RCP-003")
@@ -34,7 +34,7 @@ public class RecoverPassApiTest {
         RecoverPassApi.recoverPassword(RecoverPassDataFactory.getInvalidEmailMessageWithoutAtSymbols())
                 .then()
                 .statusCode(422)
-                .body("response[0].messages[0]", equalTo(RecoverPassMessage.INVALID_FORMAT_EMAIL_MESSAGE));
+                .body("response[0].messages[0]", equalTo(RecoverPassApiMessage.EMAIL_INVALID_FORMAT.getMessage()));
     }
 
     @DisplayName("Invalid email with double @ symbol returns format error -API-RCP-004")
@@ -43,7 +43,7 @@ public class RecoverPassApiTest {
         RecoverPassApi.recoverPassword(RecoverPassDataFactory.getInvalidEmailMessageWithDoubleAtSymbols())
                 .then()
                 .statusCode(422)
-                .body("response[0].messages[0]", equalTo(RecoverPassMessage.INVALID_FORMAT_EMAIL_MESSAGE));
+                .body("response[0].messages[0]", equalTo(RecoverPassApiMessage.EMAIL_INVALID_FORMAT.getMessage()));
     }
 
     @DisplayName("Invalid email without domain returns format error -API-RCP-005")
@@ -52,7 +52,7 @@ public class RecoverPassApiTest {
         RecoverPassApi.recoverPassword(RecoverPassDataFactory.getInvalidEmailMessageWithoutDomainPart())
                 .then()
                 .statusCode(422)
-                .body("response[0].messages[0]", equalTo(RecoverPassMessage.INVALID_FORMAT_EMAIL_MESSAGE));
+                .body("response[0].messages[0]", equalTo(RecoverPassApiMessage.EMAIL_INVALID_FORMAT.getMessage()));
     }
 
     @DisplayName("Invalid email without username returns format error -API-RCP-006")
@@ -61,7 +61,7 @@ public class RecoverPassApiTest {
         RecoverPassApi.recoverPassword(RecoverPassDataFactory.getInvalidEmailWithoutUsername())
                 .then()
                 .statusCode(422)
-                .body("response[0].messages[0]", equalTo(RecoverPassMessage.INVALID_FORMAT_EMAIL_MESSAGE));
+                .body("response[0].messages[0]", equalTo(RecoverPassApiMessage.EMAIL_INVALID_FORMAT.getMessage()));
     }
 
     @DisplayName("Invalid email with dot after @ returns format error -API-RCP-007")
@@ -70,7 +70,7 @@ public class RecoverPassApiTest {
         RecoverPassApi.recoverPassword(RecoverPassDataFactory.getInvalidEmailWithDotAfterAtSymbols())
                 .then()
                 .statusCode(422)
-                .body("response[0].messages[0]", equalTo(RecoverPassMessage.INVALID_FORMAT_EMAIL_MESSAGE));
+                .body("response[0].messages[0]", equalTo(RecoverPassApiMessage.EMAIL_INVALID_FORMAT.getMessage()));
     }
 
     @DisplayName("Email with Cyrillic characters is rejected -API-RCP-008")
@@ -79,7 +79,7 @@ public class RecoverPassApiTest {
         RecoverPassApi.recoverPassword(RecoverPassDataFactory.getInvalidEmailWithCyrillicUsername())
                 .then()
                 .statusCode(422)
-                .body("response[0].messages[0]", equalTo(RecoverPassMessage.INVALID_FORMAT_EMAIL_MESSAGE));
+                .body("response[0].messages[0]", equalTo(RecoverPassApiMessage.EMAIL_INVALID_FORMAT.getMessage()));
     }
 
     @DisplayName("Email without domain suffix is rejected -API-RCP-009")
@@ -88,7 +88,7 @@ public class RecoverPassApiTest {
         RecoverPassApi.recoverPassword(RecoverPassDataFactory.getInvalidEmailWithoutDomainSuffixIsRejected())
                 .then()
                 .statusCode(422)
-                .body("response[0].messages[0]", equalTo(RecoverPassMessage.INVALID_FORMAT_EMAIL_MESSAGE));
+                .body("response[0].messages[0]", equalTo(RecoverPassApiMessage.EMAIL_INVALID_FORMAT.getMessage()));
     }
 
     @DisplayName("Invalid email with dot before @ returns format error -API-RCP-010")
@@ -97,7 +97,7 @@ public class RecoverPassApiTest {
         RecoverPassApi.recoverPassword(RecoverPassDataFactory.getInvalidEmailWithDotBeforeAtSymbols())
                 .then()
                 .statusCode(422)
-                .body("response[0].messages[0]", equalTo(RecoverPassMessage.INVALID_FORMAT_EMAIL_MESSAGE));
+                .body("response[0].messages[0]", equalTo(RecoverPassApiMessage.EMAIL_INVALID_FORMAT.getMessage()));
     }
 
     @DisplayName("Email with tab characters is rejected -API-RCP-012")
@@ -106,7 +106,7 @@ public class RecoverPassApiTest {
         RecoverPassApi.recoverPassword(RecoverPassDataFactory.getInvalidEmailMessageWithTabCharacters())
                 .then()
                 .statusCode(422)
-                .body("response[0].messages[0]", equalTo(RecoverPassMessage.INVALID_FORMAT_EMAIL_MESSAGE));
+                .body("response[0].messages[0]", equalTo(RecoverPassApiMessage.EMAIL_INVALID_FORMAT.getMessage()));
 
     }
 
@@ -116,7 +116,7 @@ public class RecoverPassApiTest {
         RecoverPassApi.recoverPassword(RecoverPassDataFactory.getInvalidEmailMessageWithNewLineCharacters())
                 .then()
                 .statusCode(422)
-                .body("response[0].messages[0]", equalTo(RecoverPassMessage.INVALID_FORMAT_EMAIL_MESSAGE));
+                .body("response[0].messages[0]", equalTo(RecoverPassApiMessage.EMAIL_INVALID_FORMAT.getMessage()));
     }
 
     @DisplayName("Email with leading space is accepted -API-RCP-014")
@@ -125,7 +125,7 @@ public class RecoverPassApiTest {
         RecoverPassApi.recoverPassword(RecoverPassDataFactory.getInvalidEmailWithStartingSpaces())
                 .then()
                 .statusCode(200)
-                .body("response[0].messages[0]", equalTo(RecoverPassMessage.RESET_LINK_SUCCESS_MESSAGE));
+                .body("response[0].messages[0]", equalTo(RecoverPassApiMessage.RESET_LINK_SUCCESS.getMessage()));
 
     }
 
@@ -135,7 +135,7 @@ public class RecoverPassApiTest {
         RecoverPassApi.recoverPassword(RecoverPassDataFactory.getInvalidEmailWithContainsMiddlwSpaces())
                 .then()
                 .statusCode(422)
-                .body("response[0].messages[0]", equalTo(RecoverPassMessage.INVALID_FORMAT_EMAIL_MESSAGE));
+                .body("response[0].messages[0]", equalTo(RecoverPassApiMessage.EMAIL_INVALID_FORMAT.getMessage()));
     }
 
     @DisplayName("Email with trailing space is accepted -API-RCP-016")
@@ -144,7 +144,7 @@ public class RecoverPassApiTest {
         RecoverPassApi.recoverPassword(RecoverPassDataFactory.getInvalidEmailWithEndingSpaces())
                 .then()
                 .statusCode(200)
-                .body("response[0].messages[0]", equalTo(RecoverPassMessage.RESET_LINK_SUCCESS_MESSAGE));
+                .body("response[0].messages[0]", equalTo(RecoverPassApiMessage.RESET_LINK_SUCCESS.getMessage()));
     }
 
     @DisplayName("Email with only spaces returns empty email error -API-RCP-017")
@@ -153,7 +153,7 @@ public class RecoverPassApiTest {
         RecoverPassApi.recoverPassword(RecoverPassDataFactory.getInvalidEmailWithOnlySpaces())
                 .then()
                 .statusCode(422)
-                .body("response[0].messages[0]", equalTo(RecoverPassMessage.EMPTY_EMAIL_ERROR_MESSAGE));
+                .body("response[0].messages[0]", equalTo(RecoverPassApiMessage.EMAIL_REQUIRED.getMessage()));
     }
 
     @DisplayName("Unregistered email still returns success response -API-RCP-018")
@@ -162,7 +162,7 @@ public class RecoverPassApiTest {
         RecoverPassApi.recoverPassword(RecoverPassDataFactory.getMessageNotRegisteredUser())
                 .then()
                 .statusCode(200)
-                .body("response[0].messages[0]", equalTo(RecoverPassMessage.RESET_LINK_SUCCESS_MESSAGE));
+                .body("response[0].messages[0]", equalTo(RecoverPassApiMessage.RESET_LINK_SUCCESS.getMessage()));
     }
 
     @DisplayName("email exceeding max length returns validation errors -API-RCP-019")
@@ -171,11 +171,11 @@ public class RecoverPassApiTest {
         RecoverPassApi.recoverPassword(RecoverPassDataFactory.getEmailMaxLength())
                 .then()
                 .statusCode(422)
-                .body("response[0].messages[0]", equalTo(RecoverPassMessage.INVALID_FORMAT_EMAIL_MESSAGE))
-                .body("response[0].messages[1]", equalTo(RecoverPassMessage.MAX_LENGTH_EMAIL_MESSAGE));
+                .body("response[0].messages[0]", equalTo(RecoverPassApiMessage.EMAIL_INVALID_FORMAT.getMessage()))
+                .body("response[0].messages[1]", equalTo(RecoverPassApiMessage.EMAIL_MAX_LENGTH.getMessage()));
 
     }
-
 }
+
 
 
