@@ -39,131 +39,131 @@ public class AuthPage extends BasePage {
 
     @Step("Get authentication modal title")
     public String getAuthTitle() {
-        String authTitle = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(AUTH_MODAL_TITLE))).getText();
+        String authTitle = waitForVisibility(AUTH_MODAL_TITLE).getText();
         log.info("Auth title: {}", authTitle);
         return authTitle;
     }
 
     @Step("Enter email '{email}'")
     public void setInputEmail(String email) {
-        WebElement inputEmail = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(INPUT_EMAIL)));
+        WebElement inputEmail = waitForClickable(INPUT_EMAIL);
         inputEmail.sendKeys(email);
         log.info("User entered email: {}", email);
     }
 
     @Step("Enter password '{password}'")
     public void setInputPassword(String password) {
-        WebElement inputPassword = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(INPUT_PASSWORD)));
+        WebElement inputPassword = waitForClickable(INPUT_PASSWORD);
         inputPassword.sendKeys(password);
         log.info("User entered password: {}", password);
     }
 
     @Step("Click login button")
     public void clickSubmitButton() {
-        driver.findElement(By.xpath(LOGIN_BUTTON)).click();
-        log.info("User clicked submit button");
+        waitForClickable(LOGIN_BUTTON).click();
+        log.info("User clicked login button");
     }
 
-    @Step("Click 'Forgot password' button")
+    @Step("Click forgot password button")
     public void clickForgotPasswordButton() {
-        WebElement forgotPasswordButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(FORGOT_PASSWORD_BUTTON)));
+        WebElement forgotPasswordButton = waitForClickable(FORGOT_PASSWORD_BUTTON);
         log.info("User clicked forgot password button");
         forgotPasswordButton.click();
     }
 
     @Step("Click registration button")
     public void clickRegisterButton() {
-        WebElement button = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(REGISTRATION_BUTTON)));
+        WebElement button = waitForClickable(REGISTRATION_BUTTON);
         log.info("User clicked registration button");
         button.click();
     }
 
     @Step("Click modal close button")
     public void clickCloseButton() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(MODAL_CLOSE_BUTTON))).click();
+        waitForClickable(MODAL_CLOSE_BUTTON).click();
         log.info("User clicked close button");
     }
 
     @Step("Get email required error message")
     public String getErrorMessageEmptyInputEmail() {
-        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INVALID_EMAIL_ERROR_MESSAGE))).getText();
-        log.info("Error message: {}",text);
+        String text = waitForVisibility(INVALID_EMAIL_ERROR_MESSAGE).getText();
+        log.info("Error message: {}", text);
         return text;
     }
 
-    @Step("GGet invalid email format error message")
+    @Step("Get invalid email format error message")
     public String getErrorMessageInvalidEmailFormat() {
-        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INVALID_EMAIL_FORMAT_MESSAGE))).getText();
-        log.info("Error message: {}",text);
+        String text = waitForVisibility(INVALID_EMAIL_FORMAT_MESSAGE).getText();
+        log.info("Error message: {}", text);
         return text;
     }
 
     @Step("Get password required error message")
     public String getErrorMessageEmptyInputPassword() {
-        String  text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(EMPTY_PASSWORD_ERROR_MESSAGE))).getText();
+        String  text = waitForVisibility(EMPTY_PASSWORD_ERROR_MESSAGE).getText();
         log.info("Error message: {}", text);
         return text;
     }
 
     @Step("Get authentication footer title")
     public String getFooterAuthTitle() {
-        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(LOGIN_FOOTER_TITLE))).getText();
+        String text = waitForVisibility(LOGIN_FOOTER_TITLE).getText();
         log.info("Footer title: {}", text);
         return text;
     }
 
     @Step("Get invalid email error message")
     public String getErrorInvalidEmail() {
-        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INVALID_EMAIL_ERROR_MESSAGE))).getText();
+        String text = waitForVisibility(INVALID_EMAIL_ERROR_MESSAGE).getText();
         log.info("Error message: {}", text);
         return text;
     }
 
     @Step("et password minimum length error message")
     public String getErrorShortPassword() {
-        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(PASSWORD_SHORT_ERROR_MESSAGE))).getText();
+        String text = waitForVisibility(PASSWORD_SHORT_ERROR_MESSAGE).getText();
         log.info("Error message: {}", text);
         return text;
     }
 
     @Step("Get invalid credentials error message")
     public String getErrorInvalidCredentials() {
-        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INVALID_CREDENTIALS_ERROR_MESSAGE))).getText();
+        String text = waitForVisibility(INVALID_CREDENTIALS_ERROR_MESSAGE).getText();
         log.info("Error message: {}", text);
         return text;
     }
 
     @Step("Get password format error message")
     public String getErrorLengthPassword() {
-        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(PASSWORD_INVALID_FORMAT_ERROR_MESSAGE))).getText();
+        String text = waitForVisibility(PASSWORD_INVALID_FORMAT_ERROR_MESSAGE).getText();
         log.info("Error message: {}", text);
         return text;
     }
 
     @Step("Get password maximum length error message")
     public String getErrorPasswordMaxLength() {
-        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(MAX_LENGTH_PASSWORD_ERROR_MESSAGE))).getText();
+        String text = waitForVisibility(MAX_LENGTH_PASSWORD_ERROR_MESSAGE).getText();
         log.info("Error message: {}", text);
         return text;
     }
 
     @Step("Get user not found error message")
     public String getErrorMessageUserNotFound() {
-        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(USER_NOT_FOUND_MESSAGE))).getText();
+        String text = waitForVisibility(USER_NOT_FOUND_MESSAGE).getText();
         log.info("Error message: {}", text);
         return text;
     }
 
     @Step("Get email input placeholder")
     public String getEmailPlaceholder() {
-        String placeholder =wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INPUT_EMAIL))).getAttribute("placeholder");
+        String placeholder = waitForVisibility(INPUT_EMAIL).getAttribute("placeholder");
         log.info("Email placeholder: {}", placeholder);
         return placeholder;
     }
 
     @Step("Get email maximum length error message")
     public String getErrorMessageMaxLengthEmail() {
-        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(MAX_LENGTH_EMAIL_ERROR_MESSAGE))).getText();
+        String text = waitForVisibility(MAX_LENGTH_EMAIL_ERROR_MESSAGE).getText();
         log.info("Error message: {}", text);
         return text;
     }
@@ -184,13 +184,17 @@ public class AuthPage extends BasePage {
 
     @Step("Click toggle password visibility button")
     public void clickTogglePasswordButton() {
-        driver.findElement(By.xpath(PASSWORD_TOGGLE_BUTTON)).click();
+        waitForVisibility(PASSWORD_TOGGLE_BUTTON).click();
+        log.info("User clicked password visibility toggle button");
     }
 
     @Step("Get password field input type")
     public String getPasswordFieldType() {
-        return driver.findElement(By.xpath(INPUT_PASSWORD)).getAttribute("type");
+      String type = waitForVisibility(INPUT_PASSWORD).getAttribute("type");
+      log.info("Password field type: {}", type);
+      return type;
     }
 }
+
 
 
