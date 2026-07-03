@@ -62,7 +62,7 @@ public class AuthDataFactory {
                 faker.internet().password());
     }
 
-    public static LoginRequest emailUserNameCyrilic() {
+    public static LoginRequest emailUserNameCyrillic() {
         return new LoginRequest(
                 "юзер@gmail.com",
                 faker.internet().password());
@@ -158,6 +158,13 @@ public class AuthDataFactory {
         request.setEmail(faker.internet().emailAddress());
         return request;
     }
+
+    public static LoginRequest withInvalidCredentials() {
+        return new LoginRequest(
+                faker.internet().emailAddress(),
+                faker.internet().password());
+    }
 }
+
 
 
