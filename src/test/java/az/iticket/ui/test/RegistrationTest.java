@@ -11,6 +11,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 @Epic("Authentication")
 @Feature("Registration")
@@ -32,13 +34,13 @@ public class RegistrationTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Story("First Name Field Validation")
     @Test
-    public void verifyUserRegistrationWithValidData() {
+    public void verifyUserRegistrationWithValidDataTest() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
     }
 
     @DisplayName("Validation error appears when first name is empty -UI-REG-002")
@@ -52,7 +54,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.EMPTY_FIRST_NAME_INPUT_MESSAGE, registrationPage.getEmptyEmailErrorMessage());
+        assertEquals(RegistrationMessage.FIRST_NAME_REQUIRED.getMessage(), registrationPage.getEmptyEmailErrorMessage());
     }
 
     @DisplayName("Registration succeeds with Cyrillic first name -UI-REG-003")
@@ -66,7 +68,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
     }
 
     @DisplayName("Registration succeeds with hyphenated first name -UI-REG-004")
@@ -80,7 +82,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
     }
 
     @DisplayName("Registration succeeds with one characters first name -UI-REG-005")
@@ -93,7 +95,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
     }
 
     @DisplayName("Registration succeeds with 254 characters first name -UI-REG-006 -UI-REG-006")
@@ -107,7 +109,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
 
     }
 
@@ -122,7 +124,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
     }
 
     @DisplayName("Validation error appears when first name exceeds maximum length (256 characters) -UI-REG-008")
@@ -136,7 +138,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.MAX_LENGTH_FIRST_NAME_MESSAGE, registrationPage.getMaxLengthFistNameErrorMessage());
+        assertEquals(RegistrationMessage.FIRST_NAME_MAX_LENGTH.getMessage(), registrationPage.getMaxLengthFistNameErrorMessage());
     }
 
     @DisplayName("Registration succeeds with special characters as first name -UI-REG-009")
@@ -149,7 +151,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
 
     }
 
@@ -163,7 +165,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
     }
 
     @DisplayName("Registration succeeds with space in the middle of first name -UI-REG-011")
@@ -176,7 +178,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
     }
 
     @DisplayName("Registration succeeds with trailing space in first name -UI-REG-012")
@@ -189,7 +191,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
     }
 
     @DisplayName("Validation error appears when first name contains only spaces -UI-REG-013")
@@ -202,7 +204,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.FIRST_NAME_REQUIRED_MESSAGE, registrationPage.getFirstNameRequiredErrorMessage());
+        assertEquals(RegistrationMessage.FIRST_NAME_REQUIRED.getMessage(), registrationPage.getFirstNameRequiredErrorMessage());
     }
 
     @DisplayName("Validation error appears when last name is empty -UI-REG-014")
@@ -215,7 +217,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.EMPTY_LAST_NAME_INPUT_MESSAGE, registrationPage.getEmptyLastNameErrorMessage());
+        assertEquals(RegistrationMessage.LAST_NAME_EMPTY.getMessage(), registrationPage.getEmptyLastNameErrorMessage());
     }
 
     @DisplayName("Registration succeeds with Cyrillic last name -UI-REG-015")
@@ -228,7 +230,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
     }
 
     @DisplayName("Registration succeeds with single-character last name -UI-REG-016")
@@ -241,7 +243,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
     }
 
     @DisplayName("Registration succeeds with 254-character last name -UI-REG-017")
@@ -255,7 +257,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
     }
 
     @DisplayName("Registration succeeds with 255-character last name (max boundary) -UI-REG-018")
@@ -269,7 +271,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
     }
 
     @DisplayName("Validation error appears when last name exceeds maximum length (256 characters) -UI-REG-019")
@@ -283,7 +285,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.MAX_LENGTH_LAST_NAME_MESSAGE, registrationPage.getLongLastNameErrorMessage());
+        assertEquals(RegistrationMessage.LAST_NAME_MAX_LENGTH.getMessage(), registrationPage.getLongLastNameErrorMessage());
     }
 
     @DisplayName("Registration succeeds with special characters as last name -UI-REG-020")
@@ -296,7 +298,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
 
     }
 
@@ -310,7 +312,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
     }
 
     @DisplayName("Registration succeeds with leading space in last name -UI-REG-022")
@@ -323,7 +325,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
     }
 
     @DisplayName("Registration succeeds with space in the middle of last name -UI-REG-023")
@@ -336,7 +338,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
     }
 
     @DisplayName("Registration succeeds with trailing space in last name -UI-REG-024")
@@ -349,7 +351,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
     }
 
     @DisplayName("Validation error appears when last name contains only spaces -UI-REG-025")
@@ -362,7 +364,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.LAST_NAME_REQUIRED_MESSAGE, registrationPage.getLastNameRequiredErrorMessage());
+        assertEquals(RegistrationMessage.LAST_NAME_REQUIRED.getMessage(), registrationPage.getLastNameRequiredErrorMessage());
     }
 
     @DisplayName("Validation error appears when phone number is too short -UI-LOG-026")
@@ -375,7 +377,7 @@ public class RegistrationTest extends BaseTest {
                 "5",
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.INVALID_CREDENTIALS_PHONE_NUMBER_MESSAGE, registrationPage.getInvalidCredentialPhoneNumberErrorMessage());
+        assertEquals(RegistrationMessage.INVALID_PHONE.getMessage(), registrationPage.getInvalidCredentialPhoneNumberErrorMessage());
     }
 
     @DisplayName("Validation error appears for phone number with 6 digits (prefix +994 excluded) -UI-REG-027")
@@ -388,7 +390,7 @@ public class RegistrationTest extends BaseTest {
                 "55",
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.INVALID_CREDENTIALS_PHONE_NUMBER_MESSAGE, registrationPage.getInvalidCredentialPhoneNumberErrorMessage());
+        assertEquals(RegistrationMessage.INVALID_PHONE.getMessage(), registrationPage.getInvalidCredentialPhoneNumberErrorMessage());
     }
 
     @DisplayName("Registration succeeds with minimum valid phone number (7 digits, prefix +994) -UI-REG-028")
@@ -401,7 +403,7 @@ public class RegistrationTest extends BaseTest {
                 "555",
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
 
     }
 
@@ -415,7 +417,7 @@ public class RegistrationTest extends BaseTest {
                 "5078390399",
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
 
     }
 
@@ -429,7 +431,7 @@ public class RegistrationTest extends BaseTest {
                 "507839039393939999",
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.INVALID_CREDENTIALS_PHONE_NUMBER_MESSAGE, registrationPage.getInvalidCredentialPhoneNumberErrorMessage());
+        assertEquals(RegistrationMessage.INVALID_PHONE.getMessage(), registrationPage.getInvalidCredentialPhoneNumberErrorMessage());
     }
 
     @DisplayName("Validation error appears when email field is empty -UI-REG-031")
@@ -442,7 +444,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 "",
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.EMAIL_REQUIRED_ERROR_MESSAGE, registrationPage.getInvalidEmailCredentialsErrorMessage());
+        assertEquals(RegistrationMessage.EMAIL_REQUIRED.getMessage(), registrationPage.getInvalidEmailCredentialsErrorMessage());
     }
 
     @DisplayName("Validation error appears when email is already registered -UI-REG-032")
@@ -455,7 +457,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 "y22888836@gmail.com",
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.EMAIL_ALREADY_EXITS_ERROR_MESSAGE, registrationPage.getErrorMessageEmailAlreadyExists());
+        assertEquals(RegistrationMessage.EMAIL_ALREADY_EXISTS.getMessage(), registrationPage.getErrorMessageEmailAlreadyExists());
     }
 
     @DisplayName("Registration succeeds with dot in email username -UI-REG-033")
@@ -468,7 +470,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmailWithDot(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
     }
 
     @DisplayName("Registration succeeds with plus in email username -UI-REG-034")
@@ -481,7 +483,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getUserWithEmailContainingPlus(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
     }
 
     @DisplayName("Registration succeeds with subdomain in email -UI-REG-035")
@@ -494,7 +496,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmailWithSubDomain(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
     }
 
     @DisplayName("Validation error appears when email is missing @ symbol -UI-REG-036")
@@ -507,7 +509,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmailWithoutAt(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.INVALID_EMAIL_CREDENTIALS_MESSAGE, registrationPage.getInvalidEmailCredentialsErrorMessage());
+        assertEquals(RegistrationMessage.INVALID_EMAIL.getMessage(), registrationPage.getInvalidEmailCredentialsErrorMessage());
     }
 
     @DisplayName("Validation error appears when email is missing domain part -UI-REG-037")
@@ -520,7 +522,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmailWithoutDomen(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.INVALID_EMAIL_CREDENTIALS_MESSAGE, registrationPage.getInvalidEmailCredentialsErrorMessage());
+        assertEquals(RegistrationMessage.INVALID_EMAIL.getMessage(), registrationPage.getInvalidEmailCredentialsErrorMessage());
     }
 
     @DisplayName("Validation error appears when email is missing username part -UI-REG-038")
@@ -533,7 +535,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmailWithoutUserName(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.INVALID_EMAIL_CREDENTIALS_MESSAGE, registrationPage.getInvalidEmailCredentialsErrorMessage());
+        assertEquals(RegistrationMessage.INVALID_EMAIL.getMessage(), registrationPage.getInvalidEmailCredentialsErrorMessage());
     }
 
     @DisplayName("Validation error appears when email contains multiple @ symbols -UI-REG-039")
@@ -546,7 +548,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 "gshyofyqrnelomfhla@@kjkpc.net",
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.INVALID_EMAIL_CREDENTIALS_MESSAGE, registrationPage.getInvalidEmailCredentialsErrorMessage());
+        assertEquals(RegistrationMessage.INVALID_EMAIL.getMessage(), registrationPage.getInvalidEmailCredentialsErrorMessage());
     }
 
     @DisplayName("Registration succeeds with leading space in email -UI-REG-040")
@@ -559,7 +561,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmailContainsLeadingSpace(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
     }
 
     @DisplayName("Validation error appears when email contains space in the middle -UI-REG-041")
@@ -572,7 +574,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmailContainsSpaceInMiddle(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.INVALID_EMAIL_CREDENTIALS_MESSAGE, registrationPage.getInvalidEmailCredentialsErrorMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getInvalidEmailCredentialsErrorMessage());
     }
 
     @DisplayName("Registration succeeds with ending space in email -UI-REG-042")
@@ -585,7 +587,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmailContainsEndingSpace(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
     }
 
     @DisplayName("Validation error appears when email contains only spaces -UI-REG-043")
@@ -596,9 +598,9 @@ public class RegistrationTest extends BaseTest {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
-                "           ",
+                "     ",
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.INVALID_EMAIL_CREDENTIALS_MESSAGE, registrationPage.getInvalidEmailCredentialsErrorMessage());
+        assertEquals(RegistrationMessage.INVALID_EMAIL.getMessage(), registrationPage.getInvalidEmailCredentialsErrorMessage());
     }
 
     @DisplayName("Validation error appears when email contains tab characters -UI-REG-044")
@@ -611,7 +613,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmailWithTabCharacters(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.INVALID_EMAIL_CREDENTIALS_MESSAGE, registrationPage.getInvalidEmailCredentialsErrorMessage());
+        assertEquals(RegistrationMessage.INVALID_EMAIL.getMessage(), registrationPage.getInvalidEmailCredentialsErrorMessage());
 
     }
 
@@ -625,7 +627,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmailWithNewLineCharacters(),
                 UserDataFactory.getPassword());
-        Assertions.assertEquals(RegistrationMessage.INVALID_EMAIL_CREDENTIALS_MESSAGE, registrationPage.getInvalidEmailCredentialsErrorMessage());
+        assertEquals(RegistrationMessage.INVALID_EMAIL.getMessage(), registrationPage.getInvalidEmailCredentialsErrorMessage());
     }
 
     @DisplayName("Validation error appears when email exceeds maximum allowed length -UI-REG-046")
@@ -638,7 +640,7 @@ public class RegistrationTest extends BaseTest {
              UserDataFactory.getPhoneNumberAz(),
              UserDataFactory.getMaxLengthEmail(),
              UserDataFactory.getPassword());
-     Assertions.assertEquals(RegistrationMessage.MAX_LENGTH_EMAIL_MESSAGE, registrationPage.getMaxLengthEmailErrorMessage());
+     assertEquals(RegistrationMessage.MAX_EMAIL_LENGTH.getMessage(), registrationPage.getMaxLengthEmailErrorMessage());
     }
 
     @DisplayName("Validation error appears when password field is empty -UI-REG-047")
@@ -651,7 +653,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 "");
-        Assertions.assertEquals(RegistrationMessage.INVALID_CREDENTIALS_PASSWORD_ERROR_MESSAGE, registrationPage.getEmptyPasswordErrorMessage());
+        assertEquals(RegistrationMessage.MIN_PASSWORD_LENGTH.getMessage(), registrationPage.getEmptyPasswordErrorMessage());
     }
 
     @DisplayName("Validation error appears when password is 1 character long -UI-REG-48")
@@ -665,7 +667,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 shortPassword);
-        Assertions.assertEquals(RegistrationMessage.INVALID_CREDENTIALS_PASSWORD_ERROR_MESSAGE, registrationPage.getShortPasswordErrorMessage());
+        assertEquals(RegistrationMessage.MIN_PASSWORD_LENGTH.getMessage(), registrationPage.getShortPasswordErrorMessage());
     }
 
     @DisplayName("Validation error appears when password is 7 characters -UI-REG-049")
@@ -679,7 +681,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 invalidPassword);
-        Assertions.assertEquals(RegistrationMessage.INVALID_CREDENTIALS_PASSWORD_ERROR_MESSAGE, registrationPage.getShortPasswordErrorMessage());
+        assertEquals(RegistrationMessage.MIN_PASSWORD_LENGTH.getMessage(), registrationPage.getShortPasswordErrorMessage());
 
     }
 
@@ -694,7 +696,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 minLengthPassword);
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
     }
 
     @DisplayName("Registration succeeds with 9-character password -UI-REG-051")
@@ -708,7 +710,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 validPassword);
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
     }
 
     @DisplayName("Registration succeeds with 254-character password -UI-REG-052")
@@ -722,7 +724,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 validPassword);
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
 
     }
 
@@ -737,7 +739,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 validPassword);
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
     }
 
     @DisplayName("Validation error appears when password exceeds maximum length (256 characters) -UI-REG-054")
@@ -751,7 +753,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 invalidPassword);
-        Assertions.assertEquals(RegistrationMessage.LONG_PASSWORD_ERROR_MESSAGE, registrationPage.getErrorMessageLongPassword());
+        assertEquals(RegistrationMessage.MAX_PASSWORD_LENGTH.getMessage(), registrationPage.getErrorMessageLongPassword());
 
     }
 
@@ -766,7 +768,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 symbolsPassword);
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
 
     }
 
@@ -781,7 +783,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 digitsPassword);
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
 
     }
 
@@ -796,7 +798,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 leadingSpacesPassword);
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
     }
 
     @DisplayName("Registration succeeds with spaces in the middle of password -UI-REG-058")
@@ -810,7 +812,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 middleSpacesPassword);
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
 
     }
 
@@ -825,7 +827,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 endingSpacesPassword);
-        Assertions.assertEquals(RegistrationMessage.SUCCESS_MESSAGE_REGISTER_MESSAGE, registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
 
     }
 
@@ -839,7 +841,7 @@ public class RegistrationTest extends BaseTest {
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 "          ");
-        Assertions.assertEquals(RegistrationMessage.EMPTY_PASSWORD_ERROR_MESSAGE, registrationPage.getErrorMessageEmptyPassword());
+        assertEquals(RegistrationMessage.PASSWORD_REQUIRED.getMessage(), registrationPage.getErrorMessageEmptyPassword());
     }
 
     @DisplayName("Registration page displays correct title text -UI-REG-061")
@@ -848,7 +850,7 @@ public class RegistrationTest extends BaseTest {
     @Test
     public void verifyRegistrationPageTitleTest() {
         registrationPage.getTitle();
-        Assertions.assertEquals("Регистрация", registrationPage.getTitle());
+        assertEquals("Регистрация", registrationPage.getTitle());
     }
 
     @DisplayName("Registration page displays correct footer text -UI-REG-062")
@@ -857,7 +859,7 @@ public class RegistrationTest extends BaseTest {
     @Test
     public void verifyRegistrationFooterTitleTest() {
         registrationPage.getFooterTitle();
-        Assertions.assertEquals("Уже зарегистрирован?", registrationPage.getFooterTitle());
+        assertEquals("Уже зарегистрирован?", registrationPage.getFooterTitle());
     }
 
     @DisplayName("Clicking login link opens login modal from registration page -UI-REG-063")
@@ -874,7 +876,7 @@ public class RegistrationTest extends BaseTest {
     @Story("UI Elements")
     @Test
     public void getPlaceholderFirstNameInputTest() {
-        Assertions.assertEquals("Введите имя", registrationPage.getPlaceholderFirstNameInputText());
+        assertEquals("Введите имя", registrationPage.getPlaceholderFirstNameInputText());
     }
 
     @DisplayName("Last name input displays correct placeholder text -UI-REG-065")
@@ -882,7 +884,7 @@ public class RegistrationTest extends BaseTest {
     @Story("UI Elements")
     @Test
     public void getPlaceholderLastNameInputTest() {
-        Assertions.assertEquals("Введите фамилию", registrationPage.getPlaceholderLastNameInputText());
+        assertEquals("Введите фамилию", registrationPage.getPlaceholderLastNameInputText());
     }
 
 
@@ -891,7 +893,7 @@ public class RegistrationTest extends BaseTest {
     @Story("UI Elements")
     @Test
     public void getPlaceholderEmailInputTest() {
-        Assertions.assertEquals("name@example.com", registrationPage.getPlaceholderEmailInputText());
+        assertEquals("name@example.com", registrationPage.getPlaceholderEmailInputText());
     }
 
     @DisplayName("Clicking close button dismisses the registration modal -UI-REG-067")
