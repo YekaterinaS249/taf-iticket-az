@@ -12,6 +12,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 @Epic("Authentication")
 @Feature("Recovery Password")
 @Owner("Silantyeva Yekaterina")
@@ -32,7 +35,8 @@ public class RecoverPasswordTest extends BaseTest {
     @Story("UI Elements")
     @Test
     public void getTitleTest() {
-        Assertions.assertEquals("Забыли пароль?", recoverPasswordPage.getTitle());
+        assertEquals("Забыли пароль?", recoverPasswordPage.getTitle(),
+                "Title should be displayed");
     }
 
     @DisplayName("Verify email validation for invalid email formats")
@@ -50,7 +54,8 @@ public class RecoverPasswordTest extends BaseTest {
     public void invalidFormatsEmailTest(String testId, String email) {
         recoverPasswordPage.setInputEmail(email);
         recoverPasswordPage.clickResetPasswordButton();
-        Assertions.assertEquals(RecoverPassMessage.INVALID_EMAIL_ERROR_MESSAGE, recoverPasswordPage.getErrorMessageInvalidEmail());
+        assertEquals(RecoverPassMessage.INVALID_EMAIL.getMessage(), recoverPasswordPage.getErrorMessageInvalidEmail(),
+                "Invalid email error should be displayed");
     }
 
     @DisplayName("Verify email validation for tab and newline characters")
@@ -64,7 +69,8 @@ public class RecoverPasswordTest extends BaseTest {
     public void emailWithTabAndNewLineCharactersTest(String testId, String email) {
         recoverPasswordPage.setInputEmail(email);
         recoverPasswordPage.clickResetPasswordButton();
-        Assertions.assertEquals(RecoverPassMessage.INVALID_EMAIL_ERROR_MESSAGE, recoverPasswordPage.getErrorMessageInvalidEmail());
+        assertEquals(RecoverPassMessage.INVALID_EMAIL.getMessage(), recoverPasswordPage.getErrorMessageInvalidEmail(),
+                "Invalid email error should be displayed");
     }
 
     @DisplayName("Verify email validation for emails containing spaces")
@@ -77,10 +83,11 @@ public class RecoverPasswordTest extends BaseTest {
             "UI-RCP-012, 'user@user.com ",
             "UI-RCP-013, '       '"
     })
-    public void emailContainsSpacesTest(String testId,String email){
+    public void emailContainsSpacesTest(String testId, String email) {
         recoverPasswordPage.setInputEmail(email);
         recoverPasswordPage.clickResetPasswordButton();
-        Assertions.assertEquals(RecoverPassMessage.INVALID_EMAIL_ERROR_MESSAGE, recoverPasswordPage.getErrorMessageInvalidEmail());
+        assertEquals(RecoverPassMessage.INVALID_EMAIL.getMessage(), recoverPasswordPage.getErrorMessageInvalidEmail(),
+                "Invalid email error should be displayed");
     }
 
     @DisplayName("Verify email validation for incorrect email structure")
@@ -94,28 +101,31 @@ public class RecoverPasswordTest extends BaseTest {
     public void invalidFormatEmailTest(String testId, String email) {
         recoverPasswordPage.setInputEmail(email);
         recoverPasswordPage.clickResetPasswordButton();
-        Assertions.assertEquals(RecoverPassMessage.INVALID_FORMAT_EMAIL_ERROR_MESSAGE, recoverPasswordPage.getErrorMessageInvalidFormatEmail());
+        assertEquals(RecoverPassMessage.INVALID_EMAIL_FORMAT.getMessage(), recoverPasswordPage.getErrorMessageInvalidFormatEmail(),
+                "Invalid email format message should be displayed");
     }
 
     @DisplayName("Verify validation message for empty email input -UI-RCP-016")
     @Severity(SeverityLevel.CRITICAL)
     @Story("Email Validation")
     @Test
-    public void emptyEmailTest(){
+    public void emptyEmailTest() {
         recoverPasswordPage.setInputEmail("");
         recoverPasswordPage.clickResetPasswordButton();
-        Assertions.assertEquals(RecoverPassMessage.EMAIL_REQUIRED_ERROR_MESSAGE, recoverPasswordPage.getEmailRequiredErrorMessage());
+        assertEquals(RecoverPassMessage.EMAIL_REQUIRED.getMessage(), recoverPasswordPage.getEmailRequiredErrorMessage(),
+                "Email required message should be displayed");
     }
 
     @DisplayName("Verify validation message for email exceeding maximum length -UI-RCP-017")
     @Severity(SeverityLevel.NORMAL)
     @Story("Email Validation")
     @Test
-    public void emailMaxLengthTest(){
+    public void emailMaxLengthTest() {
         String email = "a".repeat(246) + "@gmail.com";
         recoverPasswordPage.setInputEmail(email);
         recoverPasswordPage.clickResetPasswordButton();
-        Assertions.assertEquals(RecoverPassMessage.MAX_LENGTH_EMAIL_ERROR_MESSAGE, recoverPasswordPage.getMaxLengthEmailErrorMessage());
+        assertEquals(RecoverPassMessage.MAX_EMAIL_LENGTH.getMessage(), recoverPasswordPage.getMaxLengthEmailErrorMessage(),
+                "Email length should be maximum length error message");
     }
 
     @DisplayName("Verify success message after password reset request for registered user -UI-RCP-018")
@@ -125,7 +135,8 @@ public class RecoverPasswordTest extends BaseTest {
     public void successMessageTest() {
         recoverPasswordPage.setInputEmail("omnqqmvgtlixqnwjtp@jbsze.com");
         recoverPasswordPage.clickResetPasswordButton();
-        Assertions.assertEquals(RecoverPassMessage.RESET_LINK_SENT_MESSAGE, recoverPasswordPage.getSuccessMessageSendEmail());
+        assertEquals(RecoverPassMessage.RESET_LINK_SENT.getMessage(), recoverPasswordPage.getSuccessMessageSendEmail(),
+                "Success message should be displayed");
 
     }
 
@@ -136,7 +147,8 @@ public class RecoverPasswordTest extends BaseTest {
     public void resetPasswordNotRegisterUser() {
         recoverPasswordPage.setInputEmail("ecrxsrutjwlvbxfovx@vtmpj.com");
         recoverPasswordPage.clickResetPasswordButton();
-        Assertions.assertEquals(RecoverPassMessage.RESET_LINK_SENT_MESSAGE, recoverPasswordPage.getSuccessMessageSendEmail());
+        assertEquals(RecoverPassMessage.RESET_LINK_SENT.getMessage(), recoverPasswordPage.getSuccessMessageSendEmail(),
+                "Success message should be displayed");
     }
 
     @DisplayName("Verify login modal is displayed after clicking Back to Login button -UI-RCP-020")
@@ -145,7 +157,7 @@ public class RecoverPasswordTest extends BaseTest {
     @Test
     public void loginModalLoginWindowAfterClickEnterButton() {
         recoverPasswordPage.clickBackToEnterButton();
-        Assertions.assertTrue(recoverPasswordPage.visibleLoginWindowAfterClickEnterButton());
+        assertTrue(recoverPasswordPage.visibleLoginWindowAfterClickEnterButton(), "Login Window should be displayed");
     }
 
     @DisplayName("Verify recover password modal is closed after clicking Close button -UI-RCP-021")
@@ -154,22 +166,25 @@ public class RecoverPasswordTest extends BaseTest {
     @Test
     public void invisibleResetPasswordModalWindow() {
         recoverPasswordPage.clickCloseButton();
-        Assertions.assertTrue(recoverPasswordPage.isRecoverPasswordModalWindowInvisible());
+        assertTrue(recoverPasswordPage.isRecoverPasswordModalWindowInvisible(), "Modal Window should be displayed");
     }
 
     @DisplayName("Verify recover password informational message -UI-RCP-022")
     @Severity(SeverityLevel.MINOR)
     @Story("UI Elements")
     @Test
-    public void resetPasswordMessageTest(){
-        Assertions.assertEquals(RecoverPassMessage.RESET_PASSWORD_MESSAGE, recoverPasswordPage.getResetPasswordMessage());
+    public void resetPasswordMessageTest() {
+        assertEquals(RecoverPassMessage.RESET_PASSWORD.getMessage(), recoverPasswordPage.getResetPasswordMessage(),
+                "Reset password message should be displayed");
     }
 
     @DisplayName("Verify email input placeholder text -UI-RCP-023")
     @Severity(SeverityLevel.MINOR)
     @Story("UI Elements")
     @Test
-    public void placeholderEmailTest(){
-        Assertions.assertEquals("name@example.com",recoverPasswordPage.getEmailPlaceholderText());
+    public void placeholderEmailTest() {
+        assertEquals("name@example.com", recoverPasswordPage.getEmailPlaceholderText(),
+                "Email placeholder text should be displayed");
     }
 }
+
