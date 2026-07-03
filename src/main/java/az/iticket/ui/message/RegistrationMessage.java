@@ -1,19 +1,58 @@
 package az.iticket.ui.message;
 
-public class RegistrationMessage {
-    public static final String SUCCESS_MESSAGE_REGISTER_MESSAGE = "Подтвердите свой e-mail, чтобы продолжить";
-    public static final String EMPTY_FIRST_NAME_INPUT_MESSAGE = "Имя обязательно";
-    public static final String MAX_LENGTH_FIRST_NAME_MESSAGE = "Количество символов в поле имя не может превышать 255.";
-    public static final String FIRST_NAME_REQUIRED_MESSAGE = "Поле имя обязательно для заполнения.";
-    public static final String EMPTY_LAST_NAME_INPUT_MESSAGE = "Фамилия обязательна";
-    public static final String MAX_LENGTH_LAST_NAME_MESSAGE = "Количество символов в поле фамилия не может превышать 255.";
-    public static final String LAST_NAME_REQUIRED_MESSAGE = "Поле фамилия обязательно для заполнения.";
-    public static final String INVALID_CREDENTIALS_PHONE_NUMBER_MESSAGE = "Неверный номер телефона";
-    public static final String EMAIL_REQUIRED_ERROR_MESSAGE = "Email обязателен";
-    public static final String EMAIL_ALREADY_EXITS_ERROR_MESSAGE = "Такое значение поля e-mail адрес уже существует.";
-    public static final String MAX_LENGTH_EMAIL_MESSAGE = "Количество символов в поле e-mail адрес не может превышать 255.";
-    public static final String INVALID_EMAIL_CREDENTIALS_MESSAGE = "Неверный email";
-    public static final String EMPTY_PASSWORD_ERROR_MESSAGE = "Поле пароль обязательно для заполнения.";
-    public static final String INVALID_CREDENTIALS_PASSWORD_ERROR_MESSAGE = "Пароль должен быть не менее 8 символов";
-    public static final String LONG_PASSWORD_ERROR_MESSAGE = "Количество символов в поле пароль не может превышать 255.";
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.Properties;
+
+public enum RegistrationMessage {
+
+    SUCCESS_REGISTER("success.message.register"),
+    FIRST_NAME_EMPTY("first.name.empty.input"),
+    FIRST_NAME_MAX_LENGTH("first.name.max.length"),
+    FIRST_NAME_REQUIRED("first.name.required"),
+    LAST_NAME_EMPTY("last.name.empty.input"),
+    LAST_NAME_MAX_LENGTH("last.name.max.length"),
+    LAST_NAME_REQUIRED("last.name.required"),
+    INVALID_PHONE("phone.invalid"),
+    EMAIL_REQUIRED("email.required"),
+    EMAIL_ALREADY_EXISTS("email.already.exists"),
+    MAX_EMAIL_LENGTH("email.max.length"),
+    INVALID_EMAIL("email.invalid"),
+    PASSWORD_REQUIRED("password.required"),
+    MIN_PASSWORD_LENGTH("password.min.length"),
+    MAX_PASSWORD_LENGTH("password.max.length");
+
+    private static final Properties PROPERTIES = new Properties();
+
+    static {
+        try (InputStream input = RegistrationMessage.class.getClassLoader()
+                .getResourceAsStream("registration.ui_ru.properties")) {
+
+            if (input == null) {
+                throw new RuntimeException(
+                        "Properties file not found: registration.ui_ru.properties");
+            }
+
+            try (InputStreamReader reader =
+                         new InputStreamReader(input, StandardCharsets.UTF_8)) {
+                PROPERTIES.load(reader);
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(
+                    "Failed to load registration.ui_ru.properties", e);
+        }
+    }
+
+    private final String key;
+
+    RegistrationMessage(String key) {
+        this.key = key;
+    }
+
+    public String getMessage() {
+        return PROPERTIES.getProperty(key);
+    }
 }
