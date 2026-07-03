@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import static io.restassured.RestAssured.given;
 
 @Slf4j
-public class AuthApi {
+public class LoginApi {
     public static Response login(LoginRequest request) {
         log.info("Login request: {}", request.toString());
         Response response =  given()
