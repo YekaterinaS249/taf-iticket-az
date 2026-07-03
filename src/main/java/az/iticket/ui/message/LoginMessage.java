@@ -1,15 +1,51 @@
 package az.iticket.ui.message;
 
-public class LoginMessage {
-    public static final String EMAIL_REQUIRED_MESSAGE = "Email обязателен";
-    public static final String INVALID_EMAIL_ERROR_MESSAGE = "Неверный email";
-    public static final String INVALID_FORMAT_EMAIL_MESSAGE = "Поле e-mail адрес должно быть действительным электронным адресом.";
-    public static final String USER_NOT_FOUND_MESSAGE = "Пользователь не найден";
-    public static final String INVALID_CREDENTIALS_ERROR_MESSAGE = "Неверное имя пользователя или пароль.";
-    public static final String MIN_LENGTH_PASSWORD_ERROR_MESSAGE = "Пароль должен быть не менее 6 символов";
-    public static final String MAX_LENGTH_PASSWORD_ERROR_MESSAGE = "Количество символов в поле пароль не может превышать 255.";
-    public static final String EMPTY_PASSWORD_ERROR_MESSAGE = "Поле пароль обязательно для заполнения.";
-    public static final String MAX_LENGTH_EMAIL_ERROR_MESSAGE = "Количество символов в поле e-mail адрес не может превышать 255.";
-    public static final String PASSWORD_TOO_SHORT = "Количество символов в поле пароль должно быть не меньше 8.";
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.Properties;
 
+public enum LoginMessage {
+
+    EMAIL_REQUIRED("email.required"),
+    EMAIL_INVALID("email.invalid"),
+    EMAIL_INVALID_FORMAT("email.invalid.format"),
+    USER_NOT_FOUND("user.not.found"),
+    INVALID_CREDENTIALS("invalid.credentials"),
+    PASSWORD_MIN_LENGTH("password.min.length"),
+    PASSWORD_MAX_LENGTH("password.max.length"),
+    PASSWORD_REQUIRED("password.required"),
+    EMAIL_MAX_LENGTH("email.max.length"),
+    PASSWORD_TOO_SHORT("password.too.short");
+
+    private static final Properties PROPERTIES = new Properties();
+
+    static {
+        try (InputStream input = LoginMessage.class.getClassLoader()
+                .getResourceAsStream("login.ui_ru.properties")) {
+
+            if (input == null) {
+                throw new RuntimeException("Файл login.ui_ru.properties не найден в src/test/resources");
+            }
+
+            try (InputStreamReader reader =
+                         new InputStreamReader(input, StandardCharsets.UTF_8)) {
+                PROPERTIES.load(reader);
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private final String key;
+
+    LoginMessage(String key) {
+        this.key = key;
+    }
+
+    public String getMessage() {
+        return PROPERTIES.getProperty(key);
+    }
 }
