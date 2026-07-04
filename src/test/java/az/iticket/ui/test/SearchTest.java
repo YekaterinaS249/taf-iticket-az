@@ -12,6 +12,9 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 @Epic("Search")
 @Feature("Search Autocomplete")
 @Owner("Silantyeva Yekaterina")
@@ -27,156 +30,174 @@ public class SearchTest extends BaseTest {
     @DisplayName("Search input is displayed on the page -UI-SRH-001")
     @Story("Search input display")
     @Test
-    public void searchInputIsDisplayedTest() {
-        Assertions.assertTrue(searchPage.isSearchInputDisplayed());
+    public void shouldDisplaySearchInput() {
+        assertTrue(searchPage.isSearchInputDisplayed(),
+                "Search input should be displayed");
     }
 
     @DisplayName("Search input placeholder contains correct text  -UI-SRH-002")
     @Story("Search input display")
     @Test
-    public void searchInputPlaceholderTextTest() {
-        Assertions.assertEquals("Ищите мероприятия или места", searchPage.getSearchInputPlaceholder());
+    public void shouldDisplayCorrectSearchInputPlaceholder() {
+        assertEquals("Ищите мероприятия или места", searchPage.getSearchInputPlaceholder(),
+                "Search input placeholder should match the expected text");
     }
 
     @DisplayName("Search icon is displayed on the page -UI-SRH-003")
     @Story("Search input display")
     @Test
-    public void searchIconIsDisplayedTest() {
-        Assertions.assertTrue(searchPage.isSearchIconDisplayed());
+    public void shouldDisplaySearchIcon() {
+        assertTrue(searchPage.isSearchIconDisplayed(),
+                "Search icon should be displayed");
     }
 
     @DisplayName("Clicking the search icon opens the dropdown  -UI-SRH-004")
     @Story("Search dropdown")
     @Test
     public void clickSearchIconOpenDropdownTest() {
-        Assertions.assertTrue(searchPage.isSearchDropdownDisplayed());
+        assertTrue(searchPage.isSearchDropdownDisplayed());
     }
 
     @DisplayName("Clicking the search input opens the dropdown  -UI-SRH-005")
     @Story("Search dropdown")
     @Test
-    public void clickSearchInputOpenDropdownTest() {
+    public void shouldOpenDropdownWhenClickingSearchIcon() {
         searchPage.setSearchInput("");
-        Assertions.assertTrue(searchPage.isSearchDropdownDisplayed());
+        assertTrue(searchPage.isSearchDropdownDisplayed(),
+                "Search dropdown should be displayed");
     }
 
     @DisplayName("Dropdown contains the 'Top events' header -UI-SRH-006")
     @Story("Top events section")
     @Test
-    public void dropdownContainsTopEventHeaderTest() {
-        Assertions.assertTrue(searchPage.isTopEventHeaderDisplayed());
+    public void shouldDisplayTopEventHeader() {
+        assertTrue(searchPage.isTopEventHeaderDisplayed(),
+              "Top Event header should be displayed");
     }
 
     @DisplayName("Top events' header contains correct text -UI-SRH-007")
     @Story("Top events section")
     @Test
-    public void topEventHeaderTextTest() {
-        Assertions.assertEquals("Топ мероприятия", searchPage.getTopEventHeaderText());
+    public void shouldDisplayCorrectTopEventHeaderText() {
+        assertEquals("Топ мероприятия", searchPage.getTopEventHeaderText(),
+                "Top Event header text should match the expected value");
     }
 
     @DisplayName("Dropdown contains the 'Top venues' header -UI-SRH-008")
     @Story("Top venues section")
     @Test
-    public void dropdownContainsTopPlaceEventHeaderTest() {
-        Assertions.assertTrue(searchPage.isTopPlaceHeaderDisplayed());
+    public void shouldDisplayTopPlaceHeader() {
+        assertTrue(searchPage.isTopPlaceHeaderDisplayed(),
+                "Top Place header should be displayed");
 
     }
 
     @DisplayName("'Top venues' header contains correct text -UI-SRH-009")
     @Story("Top venues section")
     @Test
-    public void topPlaceHeaderTextTest() {
-        Assertions.assertEquals("Топ площадки", searchPage.getTopPlaceHeaderText());
+    public void shouldDisplayCorrectTopPlaceHeaderText() {
+        assertEquals("Топ площадки", searchPage.getTopPlaceHeaderText(),
+                "Top Place header text should match the expected value");
     }
 
     @DisplayName("Event items list is not empty -UI-SRH-010")
     @Story("Top events section")
     @Test
-    public void eventItemsIsNotEmptyTest() {
-        Assertions.assertFalse(searchPage.getEventItems().isEmpty());
+    public void shouldDisplayEventItems() {
+        Assertions.assertFalse(searchPage.getEventItems().isEmpty(),
+                "Event items list should not be empty");
     }
 
     @DisplayName("Clicking the first event item navigates to the event page -UI-SRH-011")
     @Story("Navigation from search results")
     @Test
-    public void clickFirstEventItemNavigationsToEventPageTest() {
+    public void shouldNavigateToEventPageWhenClickingFirstEventItem() {
         String expectedHref = searchPage.getFirstEventItemsHref();
         searchPage.clickFirstEventItem();
-        Assertions.assertTrue(searchPage.isUrlChanged(expectedHref));
+        assertTrue(searchPage.isUrlChanged(expectedHref),
+                "User should be redirected to the event page");
     }
 
     @DisplayName("Clicking the first place item navigates to the venue page -UI-SRH-012")
     @Story("Navigation from search results")
     @Test
-    public void clickFirstPlaceItemNavigationsToVenuePageTest() {
+    public void shouldNavigateToVenuePageWhenClickingFirstPlaceItem() {
         String expectedHref = searchPage.getFirstPlaceItemsHref();
         searchPage.clickFirstPlaceItem();
-        Assertions.assertTrue(searchPage.isUrlChangedToVenue(expectedHref));
+        assertTrue(searchPage.isUrlChangedToVenue(expectedHref),
+                "User should be redirected to the venue page");
     }
 
     @DisplayName("Search query returns results  -UI-SRH-013")
     @Story("Search results")
     @Test
-    public void searchInputReturnResultsTest() {
+    public void shouldReturnSearchResults() {
         searchPage.setSearchInput("концерт");
-        Assertions.assertFalse(searchPage.getEventItems().isEmpty());
+        Assertions.assertFalse(searchPage.getEventItems().isEmpty(),
+                "Search results should not be empty");
     }
 
     @DisplayName("Clearing the search input resets the entered value  -UI-SRH-014")
     @Story("Clear search input")
     @Test
-    public void searchInputClearResultsTest() {
+    public void shouldClearSearchInput() {
         searchPage.setSearchInput("концерт");
         searchPage.clearSearchInput();
-        Assertions.assertEquals("", searchPage.getSearchInputValue());
+        assertEquals("", searchPage.getSearchInputValue(),
+                "Search input should be empty");
     }
 
     @DisplayName("Clicking outside the dropdown closes it -UI-SRH-015")
     @Story("Search dropdown")
     @Test
-    public void clickOutsideClosesDropdownTest() {
+    public void shouldCloseDropdownWhenClickingOutside() {
         searchPage.clickOutsideDropdown();
-        Assertions.assertTrue(searchPage.isSearchDropdownClosed());
+        assertTrue(searchPage.isSearchDropdownClosed(),
+                "Search dropdown should be closed");
     }
 
     @DisplayName("Search results contain the search query '{0}' -UI-SRH-016")
     @Story("Search results")
     @ParameterizedTest
     @ValueSource(strings = {"Jazz", "цирк", "театр", "cinema"})
-    public void searchResultContainsSearchQueryTest(String query) {
+    public void shouldReturnResultsContainingSearchQuery(String query) {
         searchPage.setSearchInput(query);
         List<String> results = searchPage.getEventItemText();
         for (String result : results) {
-            Assertions.assertTrue(result.toLowerCase().contains(query.toLowerCase()));
+            assertTrue(result.toLowerCase().contains(query.toLowerCase()),
+                    "Search result should contain the entered query");
         }
     }
 
     @DisplayName("Search with a non-existent query returns no results -UI-SRH-017")
     @Story("Search results")
     @Test
-    public void searchNoResultsTest() {
+    public void shouldReturnNoResultsForUnknownQuery() {
         searchPage.setSearchInput("qwerty");
         List<String> results = searchPage.getEventItemText();
-        Assertions.assertTrue(results.isEmpty());
+        assertTrue(results.isEmpty(),
+                "Search results should be empty");
     }
 
     @DisplayName("Clearing the search input resets to the default state -UI-SRH-018")
     @Story("Clear search input")
     @Test
-    public void clearSearchInputResetsToDefaultTest() {
+    public void shouldResetSearchToDefaultStateAfterClearingInput() {
         searchPage.setSearchInput("концерт");
         searchPage.clearSearchInput();
-        Assertions.assertTrue(searchPage.isTopEventHeaderDisplayed());
+        assertTrue(searchPage.isTopEventHeaderDisplayed(),
+                "Top Event header should be displayed after clearing the search input");
     }
 
     @DisplayName("Search by partial word returns results -UI-SRH-019")
     @Story("Partial search")
     @Test
-    public void searchByPartialWordTest() {
+    public void shouldReturnResultsForPartialSearchQuery() {
         String query = "теа";
         searchPage.setSearchInput(query);
-        Assertions.assertFalse(searchPage.getFirstEventItemText().isEmpty());
-
+        Assertions.assertFalse(searchPage.getFirstEventItemText().isEmpty(),
+                "Search should return results for a partial query");
     }
 }
+
 
