@@ -8,11 +8,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 public enum RecoverPassMessage {
-    RESET_LINK_SENT("reset.link.sent.message"),
-    EMAIL_REQUIRED("email.required.error.message"),
-    INVALID_EMAIL("invalid.email.error.message"),
-    INVALID_EMAIL_FORMAT("invalid.format.email.error.message"),
-    MAX_EMAIL_LENGTH("max.length.email.error.message"),
+    RESET_LINK_SENT("reset.link.success"),
+    EMAIL_REQUIRED("email.required"),
+    INVALID_EMAIL("email.invalid"),
+    INVALID_EMAIL_FORMAT("email.invalid.format"),
+    MAX_EMAIL_LENGTH("email.max.length"),
     RESET_PASSWORD("reset.password.message");
 
     private static final Properties PROPERTIES = new Properties();
