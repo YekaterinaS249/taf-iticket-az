@@ -33,75 +33,74 @@ public class RecoverPasswordPage extends BasePage {
     }
 
     @Step("Get recover password title")
-    public String getTitle() {
-        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(RESET_PASSWORD_TITLE))).getText();
+    public String getRecoverPasswordTitleTest() {
+        String text = waitForVisibility(RESET_PASSWORD_TITLE).getText();
         log.info("title: {}", text);
         return text;
     }
 
     @Step("Enter email: {email}")
     public void setInputEmail(String email) {
-       WebElement inputEmail = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INPUT_EMAIL)));
+       WebElement inputEmail = waitForVisibility(INPUT_EMAIL);
         log.info("User entered email: {}", email);
         inputEmail.sendKeys(email);
     }
 
     @Step("Click on reset password button")
     public void clickResetPasswordButton() {
-        driver.findElement(By.xpath(RESET_PASSWORD_BUTTON)).click();
+        click(RESET_PASSWORD_BUTTON);
         log.info("User clicked reset password button");
     }
 
     @Step("Click on te back to enter button")
     public void clickBackToEnterButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(BACK_TO_ENTER_BUTTON))).click();
+       click(BACK_TO_ENTER_BUTTON);
         log.info("User clicked enter button");
     }
 
     @Step("Click close button")
     public void clickCloseButton() {
-        WebElement closeButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(CLOSE_MODAL_BUTTON)));
+        click(CLOSE_MODAL_BUTTON);
         log.info("User clicked close button");
-        closeButton.click();
     }
 
     @Step("Get reset password message")
     public String getResetPasswordMessage() {
-        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(RESET_PASSWORD_MESSAGE))).getText();
+        String text = waitForVisibility(RESET_PASSWORD_MESSAGE).getText();
         log.info("get reset password message: {}", text);
         return text;
     }
 
     @Step("Get empty email error")
     public String getEmailRequiredErrorMessage() {
-        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(EMAIL_REQUIRED_ERROR_MESSAGE))).getText();
+        String text = waitForVisibility(EMAIL_REQUIRED_ERROR_MESSAGE).getText();
         log.info("Empty email error: {}", text);
         return text;
     }
 
     @Step("Get error message invalid credentials email")
-    public String getErrorMessageInvalidEmail() {
-        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INVALID_EMAIL_ERROR_MESSAGE))).getText();
+    public String getInvalidEmailErrorMessage() {
+        String text = waitForVisibility(INVALID_EMAIL_ERROR_MESSAGE).getText();
         log.info("error invalid email: {}", text);
         return text;
     }
 
     @Step("Get error message invalid format email")
-    public String getErrorMessageInvalidFormatEmail() {
-        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INVALID_FORMAT_EMAIL_MESSAGE))).getText();
+    public String getInvalidEmailFormatErrorMessage() {
+        String text = waitForVisibility(INVALID_FORMAT_EMAIL_MESSAGE).getText();
         log.info("error invalid format email: {}", text);
         return text;
     }
 
     @Step("Get success message send email")
     public String getSuccessMessageSendEmail() {
-        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(SUCCESS_SEND_EMAIL_MESSAGE))).getText();
+        String text = waitForVisibility(SUCCESS_SEND_EMAIL_MESSAGE).getText();
         log.info("success message send email: {}", text);
         return text;
     }
 
     @Step("Login modal is visible")
-    public boolean visibleLoginWindowAfterClickEnterButton() {
+    public boolean isRecoverPasswordModalInvisible() {
         boolean isDisplayed = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(LOGIN_MODAL))).isDisplayed();
         log.info("login window: {}", isDisplayed);
         return isDisplayed;
@@ -128,5 +127,7 @@ public class RecoverPasswordPage extends BasePage {
         return placeholder;
     }
 }
+
+
 
 
