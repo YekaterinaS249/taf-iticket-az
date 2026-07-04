@@ -123,7 +123,7 @@ public class RegistrationPage extends BasePage {
     }
 
     @Step("Get long last name error message")
-    public String getLongLastNameErrorMessage() {
+    public String getMaxLengthLastNameErrorMessage() {
         String text = waitForVisibility(MAX_LENGTH_LAST_NAME_MESSAGE).getText();
         log.info("Long email error message: {}", text);
         return text;
