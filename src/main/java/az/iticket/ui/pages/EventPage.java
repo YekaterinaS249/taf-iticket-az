@@ -21,7 +21,7 @@ public class EventPage extends BasePage {
     }
 
     @Step("Get prices of all sessions")
-    public List<String> getAllSessionPrice() {
+    public List<String> getAllSessionPrices() {
         List<String> prices = driver.findElements(By.xpath(SESSION_PRICE))
                 .stream()
                 .map(WebElement::getText)
@@ -32,18 +32,19 @@ public class EventPage extends BasePage {
 
     @Step("Get price of first session")
     public String getFirstSessionPrice() {
-        String price = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(FIRST_SESSION_PRICE))).getText();
+        String price = waitForVisibility(FIRST_SESSION_PRICE).getText();
         log.info("Session price found: {}", price);
         return price;
     }
 
     @Step("Check first session price is displayed")
     public boolean isFirstSessionPriceDisplayed() {
-       boolean price =  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(FIRST_SESSION_PRICE))).isDisplayed();
-       log.info("Session price found: {}", price);
-        return price;
+        boolean isDisplayed = waitForVisibility(FIRST_SESSION_PRICE).isDisplayed();
+        log.info("Session price found: {}", isDisplayed);
+        return isDisplayed;
     }
 }
+
 
 
 
