@@ -28,6 +28,10 @@ public abstract class BasePage {
         return wait.until(
                 ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
     }
+
+    protected void click(String xpath) {
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath))).click();
+    }
 }
 
 
