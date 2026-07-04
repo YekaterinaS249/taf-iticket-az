@@ -17,7 +17,7 @@ public class HomeTest extends BaseTest {
     @Story("Verify copyright text")
     @Severity(SeverityLevel.NORMAL)
     @Test
-    public void shouldReturnCopyrightTextTest() {
+    public void shouldReturnCopyrightTextT() {
         assertEquals("© 2016–2026 iTicket.GLOBAL. Все права защищены.",
                 homePage.getCopyrightText(),
                 "Copyright text should match the expected value.");
@@ -27,7 +27,7 @@ public class HomeTest extends BaseTest {
     @Story("Verify login button visibility")
     @Severity(SeverityLevel.CRITICAL)
     @Test
-    public void shouldDisplayLoginButtonTest() {
+    public void shouldDisplayLoginButton() {
         assertTrue(homePage.isAuthButtonDisplayed(),
                 "Login button should be displayed on the Home page.");
     }
@@ -36,7 +36,7 @@ public class HomeTest extends BaseTest {
     @Story("Verify search input is displayed")
     @Severity(SeverityLevel.CRITICAL)
     @Test
-    public void shouldDisplaySearchInputTest() {
+    public void shouldDisplaySearchInput() {
         assertTrue(homePage.isSearchInputDisplayed(),
                 "Search input should be displayed on the Home page.");
     }
@@ -45,7 +45,7 @@ public class HomeTest extends BaseTest {
     @Story("Verify copyright visibility")
     @Severity(SeverityLevel.NORMAL)
     @Test
-    public void shouldDisplayCopyrightTextTest() {
+    public void shouldDisplayCopyrightText() {
         assertTrue(homePage.isCopyrightDisplayed(),
                 "Copyright text should be displayed on the Home page.");
 
