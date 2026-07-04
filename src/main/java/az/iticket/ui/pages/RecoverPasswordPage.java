@@ -33,7 +33,7 @@ public class RecoverPasswordPage extends BasePage {
     }
 
     @Step("Get recover password title")
-    public String getRecoverPasswordTitleTest() {
+    public String getRecoverPasswordTitle() {
         String text = waitForVisibility(RESET_PASSWORD_TITLE).getText();
         log.info("title: {}", text);
         return text;
