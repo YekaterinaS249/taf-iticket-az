@@ -63,7 +63,7 @@ public class UserDataFactory {
         return faker.internet().emailAddress().replace("@", "");
     }
 
-    public static String getEmailWithoutDomen() {
+    public static String getEmailWithoutDomain() {
         return faker.name().username() + "@";
     }
 
