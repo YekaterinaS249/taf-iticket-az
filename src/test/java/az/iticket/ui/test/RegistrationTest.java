@@ -34,82 +34,88 @@ public class RegistrationTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Story("First Name Field Validation")
     @Test
-    public void verifyUserRegistrationWithValidDataTest() {
+    public void shouldRegisterSuccessfullyWithValidData() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
     }
 
     @DisplayName("Validation error appears when first name is empty -UI-REG-002")
     @Severity(SeverityLevel.CRITICAL)
     @Story("First Name Field Validation")
     @Test
-    public void submitRegistrationFormWithEmptyFirstNameTest() {
+    public void shouldDisplayFirstNameRequiredErrorForEmptyFirstName() {
         registrationPage.fillRegistrationForm(
                 "",
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.FIRST_NAME_REQUIRED.getMessage(), registrationPage.getEmptyEmailErrorMessage());
+        assertEquals(RegistrationMessage.FIRST_NAME_REQUIRED.getMessage(), registrationPage.getEmptyEmailErrorMessage(),
+                "First name required error should be displayed");
     }
 
     @DisplayName("Registration succeeds with Cyrillic first name -UI-REG-003")
     @Severity(SeverityLevel.NORMAL)
     @Story("First Name Field Validation")
     @Test
-    public void submitRegistrationFormWithCyrillicFirstNameTest() {
+    public void shouldRegisterSuccessfullyWithCyrillicFirstName() {
         registrationPage.fillRegistrationForm(
                 UserDataFactory.getFirstNameRu(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
     }
 
     @DisplayName("Registration succeeds with hyphenated first name -UI-REG-004")
     @Severity(SeverityLevel.NORMAL)
     @Story("First name Field Validation")
     @Test
-    public void submitRegistrationFormWithHyphenatedFirstNameTest() {
+    public void shouldRegisterSuccessfullyWithHyphenatedFirstName() {
         registrationPage.fillRegistrationForm(
                 "Anna-Maria",
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
     }
 
     @DisplayName("Registration succeeds with one characters first name -UI-REG-005")
     @Severity(SeverityLevel.NORMAL)
     @Story("First name Field Validation")
     @Test
-    public void submitRegistrationFormWithOneCharacterFirstNameTest() {
+    public void shouldRegisterSuccessfullyWithOneCharacterFirstName() {
         registrationPage.fillRegistrationForm("K",
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
     }
 
     @DisplayName("Registration succeeds with 254 characters first name -UI-REG-006 -UI-REG-006")
     @Severity(SeverityLevel.NORMAL)
     @Story("First name Field Validation")
     @Test
-    public void submitRegistrationFormWith254CharactersTest() {
+    public void shouldRegisterSuccessfullyWith254CharacterFirstName() {
         String firstName = UserDataFactory.getFirstNameByLength(254);
         registrationPage.fillRegistrationForm(firstName,
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
 
     }
 
@@ -117,41 +123,44 @@ public class RegistrationTest extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("First name Field Validation")
     @Test
-    public void submitRegistrationFormWith255CharactersTest() {
+    public void sshouldRegisterSuccessfullyWith255CharacterFirstName() {
         String firstName = UserDataFactory.getFirstNameByLength(255);
         registrationPage.fillRegistrationForm(firstName,
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
     }
 
     @DisplayName("Validation error appears when first name exceeds maximum length (256 characters) -UI-REG-008")
     @Severity(SeverityLevel.CRITICAL)
     @Story("First name Field Validation")
     @Test
-    public void submitRegistrationFormWith256CharactersTest() {
+    public void shouldDisplayFirstNameMaxLengthErrorFor256Characters() {
         String firstName = UserDataFactory.getFirstNameTooLong(256);
         registrationPage.fillRegistrationForm(firstName,
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.FIRST_NAME_MAX_LENGTH.getMessage(), registrationPage.getMaxLengthFistNameErrorMessage());
+        assertEquals(RegistrationMessage.FIRST_NAME_MAX_LENGTH.getMessage(), registrationPage.getMaxLengthFistNameErrorMessage(),
+                "First name max length error should be displayed");
     }
 
     @DisplayName("Registration succeeds with special characters as first name -UI-REG-009")
     @Severity(SeverityLevel.MINOR)
     @Story("First name Field Validation")
     @Test
-    public void submitRegistrationFormWithSymbolsTest() {
+    public void shouldRegisterSuccessfullyWithSpecialCharactersFirstName() {
         registrationPage.fillRegistrationForm("!@#$%^&*()",
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
 
     }
 
@@ -159,146 +168,157 @@ public class RegistrationTest extends BaseTest {
     @Severity(SeverityLevel.MINOR)
     @Story("First name Field Validation")
     @Test
-    public void submitRegistrationFormWithDigitsTest() {
+    public void shouldRegisterSuccessfullyWithDigitsOnlyFirstName() {
         registrationPage.fillRegistrationForm("12345678910",
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
     }
 
     @DisplayName("Registration succeeds with space in the middle of first name -UI-REG-011")
     @Severity(SeverityLevel.MINOR)
     @Story("First name Field Validation")
     @Test
-    public void submitRegistrationFormWithSpaceInFirstNameTest() {
+    public void shouldRegisterSuccessfullyWithSpaceInMiddleOfFirstName() {
         registrationPage.fillRegistrationForm("Anas tasiya",
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
     }
 
     @DisplayName("Registration succeeds with trailing space in first name -UI-REG-012")
     @Severity(SeverityLevel.MINOR)
     @Story("First name Field Validation")
     @Test
-    public void submitRegistrationFormWithFirstNameEndingSpacesTest() {
+    public void shouldRegisterSuccessfullyWithTrailingSpaceInFirstName() {
         registrationPage.fillRegistrationForm("Yekaterina ",
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
     }
 
     @DisplayName("Validation error appears when first name contains only spaces -UI-REG-013")
     @Severity(SeverityLevel.CRITICAL)
     @Story("First name Field Validation")
     @Test
-    public void submitRegistrationFormWithOnlySpacesTest() {
-        registrationPage.fillRegistrationForm("         ",
+    public void shouldDisplayFirstNameRequiredErrorForSpacesOnlyFirstName() {
+        registrationPage.fillRegistrationForm("      ",
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.FIRST_NAME_REQUIRED.getMessage(), registrationPage.getFirstNameRequiredErrorMessage());
+        assertEquals(RegistrationMessage.FIRST_NAME_REQUIRED.getMessage(), registrationPage.getFirstNameRequiredErrorMessage(),
+                "First name required error should be displayed");
     }
 
     @DisplayName("Validation error appears when last name is empty -UI-REG-014")
     @Severity(SeverityLevel.CRITICAL)
     @Story("Last name Field Validation")
     @Test
-    public void submitRegistrationFormWithEmptyLastNameTest() {
+    public void shouldRegisterSuccessfullyWithHyphenatedLastName() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 "",
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.LAST_NAME_EMPTY.getMessage(), registrationPage.getEmptyLastNameErrorMessage());
+        assertEquals(RegistrationMessage.LAST_NAME_EMPTY.getMessage(), registrationPage.getEmptyLastNameErrorMessage(),
+                "Last name required error should be displayed");
     }
 
     @DisplayName("Registration succeeds with Cyrillic last name -UI-REG-015")
     @Severity(SeverityLevel.MINOR)
     @Story("Last name Filed Validation")
     @Test
-    public void submitRegistrationFormWithHyphenatedLastNameTest() {
+    public void shouldDisplayLastNameRequiredErrorForEmptyLastName() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 "Martin-Clark",
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
     }
 
     @DisplayName("Registration succeeds with single-character last name -UI-REG-016")
     @Severity(SeverityLevel.MINOR)
     @Story("Last name Field Validation")
     @Test
-    public void submitRegistrationFormWithOneCharacterLastNameTest() {
+    public void shouldRegisterSuccessfullyWithOneCharacterLastName() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 "L",
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
     }
 
     @DisplayName("Registration succeeds with 254-character last name -UI-REG-017")
     @Severity(SeverityLevel.NORMAL)
     @Story("Last name Filed Validation")
     @Test
-    public void submitRegistrationFormWithAllCharactersLastNameTest() {
+    public void shouldRegisterSuccessfullyWith254CharacterLastName() {
         String lastName = UserDataFactory.getLastNameByLength(254);
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 lastName,
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
     }
 
     @DisplayName("Registration succeeds with 255-character last name (max boundary) -UI-REG-018")
     @Severity(SeverityLevel.NORMAL)
     @Story("Last name Field Validation")
     @Test
-    public void submitRegistrationFormWithAllCharactersLastNameWith255Test() {
+    public void shouldRegisterSuccessfullyWith255CharacterLastName() {
         String lastName = UserDataFactory.getLastNameByLength(255);
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 lastName,
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
     }
 
     @DisplayName("Validation error appears when last name exceeds maximum length (256 characters) -UI-REG-019")
     @Severity(SeverityLevel.CRITICAL)
     @Story("Last name Filed Validation")
     @Test
-    public void submitRegistrationFormWithAllCharactersLastNameWith256Test() {
+    public void shouldDisplayLastNameMaxLengthErrorFor256Characters() {
         String lastName = UserDataFactory.getLastNameTooLong(256);
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 lastName,
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.LAST_NAME_MAX_LENGTH.getMessage(), registrationPage.getLongLastNameErrorMessage());
+        assertEquals(RegistrationMessage.LAST_NAME_MAX_LENGTH.getMessage(), registrationPage.getMaxLengthLastNameErrorMessage(),
+                "Last name maximum length error should be displayed");
     }
 
     @DisplayName("Registration succeeds with special characters as last name -UI-REG-020")
     @Severity(SeverityLevel.MINOR)
     @Story("Last name Filed Validation")
     @Test
-    public void submitRegistrationFormWithOnlySymbolsLastNameTest() {
+    public void shouldRegisterSuccessfullyWithSpecialCharactersLastName() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 "!!!@@@@###$$$$%%%",
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
 
     }
 
@@ -306,104 +326,112 @@ public class RegistrationTest extends BaseTest {
     @Severity(SeverityLevel.MINOR)
     @Story("Last name Field validation")
     @Test
-    public void submitRegistrationFormWithOnlyDigitsLastNameTest() {
+    public void shouldRegisterSuccessfullyWithDigitsOnlyLastName() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 "1122334455667788",
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
     }
 
     @DisplayName("Registration succeeds with leading space in last name -UI-REG-022")
     @Severity(SeverityLevel.MINOR)
     @Story("Last name Field Validation")
     @Test
-    public void submitRegistrationFormWithLeadingSpaceLastNameTest() {
+    public void shouldRegisterSuccessfullyWithLeadingSpaceInLastName() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 " Akberov",
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
     }
 
     @DisplayName("Registration succeeds with space in the middle of last name -UI-REG-023")
     @Severity(SeverityLevel.MINOR)
     @Story("Last name Field Validation")
     @Test
-    public void submitRegistrationFormWithSpacesInLastNameTest() {
+    public void shouldRegisterSuccessfullyWithSpaceInMiddleOfLastName() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 "Iva nov",
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
     }
 
     @DisplayName("Registration succeeds with trailing space in last name -UI-REG-024")
     @Severity(SeverityLevel.MINOR)
     @Story("Last name Field Validation")
     @Test
-    public void submitRegistrationFormWithSpacesInFirstNameTest() {
+    public void shouldRegisterSuccessfullyWithTrailingSpaceInLastName() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 "Aliyev ",
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
     }
 
     @DisplayName("Validation error appears when last name contains only spaces -UI-REG-025")
     @Severity(SeverityLevel.CRITICAL)
     @Story("Last name Field Validation")
     @Test
-    public void submitRegistrationFormWithOnlySpacesInFirstNameTest() {
+    public void shouldDisplayLastNameRequiredErrorForSpacesOnlyLastName() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 "          ",
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.LAST_NAME_REQUIRED.getMessage(), registrationPage.getLastNameRequiredErrorMessage());
+        assertEquals(RegistrationMessage.LAST_NAME_REQUIRED.getMessage(), registrationPage.getLastNameRequiredErrorMessage(),
+                "Last name required error should be displayed");
     }
 
     @DisplayName("Validation error appears when phone number is too short -UI-LOG-026")
     @Severity(SeverityLevel.CRITICAL)
     @Story("Phone number Field Validation")
     @Test
-    public void submitRegistrationFormWithShortPhoneNumberTest() {
+    public void shouldDisplayInvalidPhoneErrorForTooShortPhoneNumber() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 "5",
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.INVALID_PHONE.getMessage(), registrationPage.getInvalidCredentialPhoneNumberErrorMessage());
+        assertEquals(RegistrationMessage.INVALID_PHONE.getMessage(), registrationPage.getInvalidCredentialPhoneNumberErrorMessage(),
+                "Invalid phone number error should be displayed");
     }
 
     @DisplayName("Validation error appears for phone number with 6 digits (prefix +994 excluded) -UI-REG-027")
     @Story("Phone number Field Validation")
     @Severity(SeverityLevel.NORMAL)
     @Test
-    public void submitRegistrationFormWithValidPhoneNumberTest() {
+    public void shouldDisplayInvalidPhoneErrorForSixDigitPhoneNumber() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 "55",
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.INVALID_PHONE.getMessage(), registrationPage.getInvalidCredentialPhoneNumberErrorMessage());
+        assertEquals(RegistrationMessage.INVALID_PHONE.getMessage(), registrationPage.getInvalidCredentialPhoneNumberErrorMessage(),
+                "Invalid phone number error should be displayed");
     }
 
     @DisplayName("Registration succeeds with minimum valid phone number (7 digits, prefix +994) -UI-REG-028")
     @Story("Phone number Field Validation")
     @Severity(SeverityLevel.NORMAL)
     @Test
-    public void submitRegistrationFormWithValidPhoneNumberWith7CharactersTest() {
+    public void shouldRegisterSuccessfullyWithMinimumValidPhoneNumber() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 "555",
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
 
     }
 
@@ -411,13 +439,14 @@ public class RegistrationTest extends BaseTest {
     @Story("Phone number Field Validation")
     @Severity(SeverityLevel.NORMAL)
     @Test
-    public void submitRegistrationFormWithInvalidPhoneNumberWith14CharacterTest() {
+    public void shouldRegisterSuccessfullyWith14DigitPhoneNumber() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 "5078390399",
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
 
     }
 
@@ -425,195 +454,210 @@ public class RegistrationTest extends BaseTest {
     @Story("Phone number Field Validation")
     @Severity(SeverityLevel.CRITICAL)
     @Test
-    public void submitRegistrationFormWithInvalidPhoneNumberLengthTest() {
+    public void shouldDisplayInvalidPhoneErrorForTooLongPhoneNumber() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 "507839039393939999",
                 UserDataFactory.getEmail(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.INVALID_PHONE.getMessage(), registrationPage.getInvalidCredentialPhoneNumberErrorMessage());
+        assertEquals(RegistrationMessage.INVALID_PHONE.getMessage(), registrationPage.getInvalidCredentialPhoneNumberErrorMessage(),
+                "Invalid phone number error should be displayed");
     }
 
     @DisplayName("Validation error appears when email field is empty -UI-REG-031")
     @Severity(SeverityLevel.CRITICAL)
     @Story("Email Field Validation")
     @Test
-    public void verifyValidationWithEmptyEmailInputTest() {
+    public void shouldDisplayEmailRequiredErrorForEmptyEmail() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 "",
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.EMAIL_REQUIRED.getMessage(), registrationPage.getInvalidEmailCredentialsErrorMessage());
+        assertEquals(RegistrationMessage.EMAIL_REQUIRED.getMessage(), registrationPage.getInvalidEmailCredentialsErrorMessage(),
+                "Email required error should be displayed");
     }
 
     @DisplayName("Validation error appears when email is already registered -UI-REG-032")
     @Severity(SeverityLevel.CRITICAL)
     @Story("Email Field Validation")
     @Test
-    public void verifyValidationRegistrationWithRegisterEmailTest() {
+    public void shouldDisplayEmailAlreadyExistsErrorForRegisteredEmail() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 "y22888836@gmail.com",
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.EMAIL_ALREADY_EXISTS.getMessage(), registrationPage.getErrorMessageEmailAlreadyExists());
+        assertEquals(RegistrationMessage.EMAIL_ALREADY_EXISTS.getMessage(), registrationPage.getErrorMessageEmailAlreadyExists(),
+                "Email already exists error should be displayed");
     }
 
     @DisplayName("Registration succeeds with dot in email username -UI-REG-033")
     @Severity(SeverityLevel.NORMAL)
     @Story("Email Field Validation")
     @Test
-    public void verifyEmailValidationWithDotInUsernameTest() {
+    public void shouldRegisterSuccessfullyWithDotInEmailUsername() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmailWithDot(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
     }
 
     @DisplayName("Registration succeeds with plus in email username -UI-REG-034")
     @Severity(SeverityLevel.NORMAL)
     @Story("Email Field Validation")
     @Test
-    public void verifyEmailValidationWithContainsPlusTest() {
+    public void shouldRegisterSuccessfullyWithPlusInEmailUsername() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getUserWithEmailContainingPlus(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
     }
 
     @DisplayName("Registration succeeds with subdomain in email -UI-REG-035")
     @Severity(SeverityLevel.NORMAL)
     @Story("Email Field Validation")
     @Test
-    public void verifyEmailValidationWithSubDomainTest() {
+    public void shouldRegisterSuccessfullyWithSubdomainInEmail() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmailWithSubDomain(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
     }
 
     @DisplayName("Validation error appears when email is missing @ symbol -UI-REG-036")
     @Severity(SeverityLevel.CRITICAL)
     @Story("Email Field Validation")
     @Test
-    public void verifyEmailValidationWithoutAtSymbolsTest() {
+    public void shouldDisplayInvalidEmailErrorForEmailWithoutAtSymbol() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmailWithoutAt(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.INVALID_EMAIL.getMessage(), registrationPage.getInvalidEmailCredentialsErrorMessage());
+        assertEquals(RegistrationMessage.INVALID_EMAIL.getMessage(), registrationPage.getInvalidEmailCredentialsErrorMessage(),
+                "Invalid email error should be displayed");
     }
 
     @DisplayName("Validation error appears when email is missing domain part -UI-REG-037")
     @Severity(SeverityLevel.CRITICAL)
     @Story("Email Field Validation")
     @Test
-    public void verifyEmailValidationWithoutDomainTest() {
+    public void shouldDisplayInvalidEmailErrorForEmailWithoutDomain() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
-                UserDataFactory.getEmailWithoutDomen(),
+                UserDataFactory.getEmailWithoutDomain(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.INVALID_EMAIL.getMessage(), registrationPage.getInvalidEmailCredentialsErrorMessage());
+        assertEquals(RegistrationMessage.INVALID_EMAIL.getMessage(), registrationPage.getInvalidEmailCredentialsErrorMessage(),
+                "Invalid email error should be displayed");
     }
 
     @DisplayName("Validation error appears when email is missing username part -UI-REG-038")
     @Severity(SeverityLevel.CRITICAL)
     @Story("Email Field Validation")
     @Test
-    public void verifyEmailValidationWithoutUserNameTest() {
+    public void shouldDisplayInvalidEmailErrorForEmailWithoutUsername() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmailWithoutUserName(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.INVALID_EMAIL.getMessage(), registrationPage.getInvalidEmailCredentialsErrorMessage());
+        assertEquals(RegistrationMessage.INVALID_EMAIL.getMessage(), registrationPage.getInvalidEmailCredentialsErrorMessage(),
+                "Invalid email error should be displayed");
     }
 
     @DisplayName("Validation error appears when email contains multiple @ symbols -UI-REG-039")
     @Severity(SeverityLevel.NORMAL)
     @Story("Email Field Validation")
     @Test
-    public void verifyEmailValidationWithDoubleAtSymbolsTest() {
+    public void shouldDisplayInvalidEmailErrorForEmailWithDoubleAtSymbol() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 "gshyofyqrnelomfhla@@kjkpc.net",
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.INVALID_EMAIL.getMessage(), registrationPage.getInvalidEmailCredentialsErrorMessage());
+        assertEquals(RegistrationMessage.INVALID_EMAIL.getMessage(), registrationPage.getInvalidEmailCredentialsErrorMessage(),
+                "Invalid email error should be displayed");
     }
 
     @DisplayName("Registration succeeds with leading space in email -UI-REG-040")
     @Severity(SeverityLevel.MINOR)
     @Story("Email Field Validation")
     @Test
-    public void verifyEmailValidationWithContainsStartingSpacesTest() {
+    public void shouldRegisterSuccessfullyWithLeadingSpaceInEmail() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmailContainsLeadingSpace(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
     }
 
     @DisplayName("Validation error appears when email contains space in the middle -UI-REG-041")
     @Severity(SeverityLevel.NORMAL)
     @Story("Email Field Validation")
     @Test
-    public void verifyEmailValidationWithContainsMiddleSpacesTest() {
+    public void shouldDisplayInvalidEmailErrorForEmailWithSpaceInMiddle() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmailContainsSpaceInMiddle(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getInvalidEmailCredentialsErrorMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getInvalidEmailCredentialsErrorMessage(),
+                "Invalid email error should be displayed");
     }
 
     @DisplayName("Registration succeeds with ending space in email -UI-REG-042")
     @Severity(SeverityLevel.MINOR)
     @Story("Email Field Validation")
     @Test
-    public void verifyEmailValidationWithEndingSpacesTest() {
+    public void shouldRegisterSuccessfullyWithTrailingSpaceInEmail() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmailContainsEndingSpace(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
     }
 
     @DisplayName("Validation error appears when email contains only spaces -UI-REG-043")
     @Severity(SeverityLevel.CRITICAL)
     @Story("Email Field Validation")
     @Test
-    public void verifyEmailValidationWithOnlySpacesTest() {
+    public void shouldDisplayInvalidEmailErrorForSpacesOnlyEmail() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 "     ",
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.INVALID_EMAIL.getMessage(), registrationPage.getInvalidEmailCredentialsErrorMessage());
+        assertEquals(RegistrationMessage.INVALID_EMAIL.getMessage(), registrationPage.getInvalidEmailCredentialsErrorMessage(),
+                "Invalid email error should be displayed");
     }
 
     @DisplayName("Validation error appears when email contains tab characters -UI-REG-044")
     @Severity(SeverityLevel.MINOR)
     @Story("Email Field Validation")
     @Test
-    public void verifyEmailValidationWithTabCharactersTest() {
+    public void shouldDisplayInvalidEmailErrorForEmailWithTabCharacters() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmailWithTabCharacters(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.INVALID_EMAIL.getMessage(), registrationPage.getInvalidEmailCredentialsErrorMessage());
+        assertEquals(RegistrationMessage.INVALID_EMAIL.getMessage(), registrationPage.getInvalidEmailCredentialsErrorMessage(),
+                "Invalid email error should be displayed");
 
     }
 
@@ -621,67 +665,72 @@ public class RegistrationTest extends BaseTest {
     @Severity(SeverityLevel.MINOR)
     @Story("Email Field Validation")
     @Test
-    public void verifyEmailValidationWithNewLineCharactersTest() {
+    public void shouldDisplayInvalidEmailErrorForEmailWithNewLineCharacters() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmailWithNewLineCharacters(),
                 UserDataFactory.getPassword());
-        assertEquals(RegistrationMessage.INVALID_EMAIL.getMessage(), registrationPage.getInvalidEmailCredentialsErrorMessage());
+        assertEquals(RegistrationMessage.INVALID_EMAIL.getMessage(), registrationPage.getInvalidEmailCredentialsErrorMessage(),
+                "Invalid email error should be displayed");
     }
 
     @DisplayName("Validation error appears when email exceeds maximum allowed length -UI-REG-046")
     @Severity(SeverityLevel.MINOR)
     @Story("Email Field Validation")
     @Test
-    public void verifyEmailValidationWithMaxLengthEmailTest() {
-     registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
-             UserDataFactory.getLastName(),
-             UserDataFactory.getPhoneNumberAz(),
-             UserDataFactory.getMaxLengthEmail(),
-             UserDataFactory.getPassword());
-     assertEquals(RegistrationMessage.MAX_EMAIL_LENGTH.getMessage(), registrationPage.getMaxLengthEmailErrorMessage());
+    public void shouldDisplayEmailMaxLengthErrorForTooLongEmail() {
+        registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
+                UserDataFactory.getLastName(),
+                UserDataFactory.getPhoneNumberAz(),
+                UserDataFactory.getMaxLengthEmail(),
+                UserDataFactory.getPassword());
+        assertEquals(RegistrationMessage.MAX_EMAIL_LENGTH.getMessage(), registrationPage.getMaxLengthEmailErrorMessage(),
+                "Maximum allowed length error should be displayed");
     }
 
     @DisplayName("Validation error appears when password field is empty -UI-REG-047")
     @Severity(SeverityLevel.CRITICAL)
     @Story("Password Field Validation")
     @Test
-    public void verifyEmailValidationEmptyPasswordTest() {
+    public void shouldDisplayPasswordMinLengthErrorForEmptyPassword() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 "");
-        assertEquals(RegistrationMessage.MIN_PASSWORD_LENGTH.getMessage(), registrationPage.getEmptyPasswordErrorMessage());
+        assertEquals(RegistrationMessage.MIN_PASSWORD_LENGTH.getMessage(), registrationPage.getEmptyPasswordErrorMessage(),
+                "Password min length error should be displayed");
     }
 
     @DisplayName("Validation error appears when password is 1 character long -UI-REG-48")
     @Severity(SeverityLevel.CRITICAL)
     @Story("Password field Validation")
     @Test
-    public void verifyEmailValidationShortPasswordTest() {
+    public void shouldDisplayPasswordMinLengthErrorForOneCharacterPassword() {
         String shortPassword = UserDataFactory.getPasswordByLength(1);
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 shortPassword);
-        assertEquals(RegistrationMessage.MIN_PASSWORD_LENGTH.getMessage(), registrationPage.getShortPasswordErrorMessage());
+        assertEquals(RegistrationMessage.MIN_PASSWORD_LENGTH.getMessage(), registrationPage.getShortPasswordErrorMessage(),
+                "Password min length error should be displayed");
     }
 
     @DisplayName("Validation error appears when password is 7 characters -UI-REG-049")
     @Severity(SeverityLevel.CRITICAL)
     @Story("Password Field Validation")
     @Test
-    public void verifyValidationInvalidPasswordLength() {
+    public void shouldDisplayPasswordMinLengthErrorForSevenCharacterPassword() {
         String invalidPassword = UserDataFactory.getPasswordByLength(7);
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 invalidPassword);
-        assertEquals(RegistrationMessage.MIN_PASSWORD_LENGTH.getMessage(), registrationPage.getShortPasswordErrorMessage());
+        assertEquals(RegistrationMessage.MIN_PASSWORD_LENGTH.getMessage(), registrationPage.getShortPasswordErrorMessage(),
+                "Password min length error should be displayed");
 
     }
 
@@ -689,35 +738,37 @@ public class RegistrationTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Story("Password Field Validation")
     @Test
-    public void verifyEmailValidationMinLength8SymbolsTest() {
+    public void shouldRegisterSuccessfullyWithMinimumValidPasswordLength() {
         String minLengthPassword = UserDataFactory.getPasswordByLength(8);
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 minLengthPassword);
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
     }
 
     @DisplayName("Registration succeeds with 9-character password -UI-REG-051")
     @Severity(SeverityLevel.NORMAL)
     @Story("Password Field Validation")
     @Test
-    public void verifyEmailValidationPassword9SymbolsTest() {
+    public void shouldRegisterSuccessfullyWithNineCharacterPassword() {
         String validPassword = UserDataFactory.getPasswordByLength(9);
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 validPassword);
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
     }
 
     @DisplayName("Registration succeeds with 254-character password -UI-REG-052")
     @Severity(SeverityLevel.NORMAL)
     @Story("Password Field Validation")
     @Test
-    public void verifyEmailValidationPasswordWith254CharactersTest() {
+    public void shouldRegisterSuccessfullyWith254CharacterPassword() {
         String validPassword = UserDataFactory.getPasswordByLength(254);
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
@@ -732,28 +783,30 @@ public class RegistrationTest extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Password Field validation")
     @Test
-    public void verifyEmailValidationPasswordWith255CharactersTest() {
+    public void shouldRegisterSuccessfullyWith255CharacterPassword() {
         String validPassword = UserDataFactory.getPasswordByLength(255);
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 validPassword);
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
     }
 
     @DisplayName("Validation error appears when password exceeds maximum length (256 characters) -UI-REG-054")
     @Severity(SeverityLevel.CRITICAL)
     @Story("Password Field Validation")
     @Test
-    public void verifyEmailValidationPasswordWith256CharactersTest() {
+    public void shouldDisplayPasswordMaxLengthErrorFor256CharacterPassword() {
         String invalidPassword = UserDataFactory.getPasswordByLength(256);
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 invalidPassword);
-        assertEquals(RegistrationMessage.MAX_PASSWORD_LENGTH.getMessage(), registrationPage.getErrorMessageLongPassword());
+        assertEquals(RegistrationMessage.MAX_PASSWORD_LENGTH.getMessage(), registrationPage.getErrorMessageLongPassword(),
+                "Password min length error should be displayed");
 
     }
 
@@ -761,7 +814,7 @@ public class RegistrationTest extends BaseTest {
     @Severity(SeverityLevel.MINOR)
     @Story("Password Filed Validation")
     @Test
-    public void verifyEmailValidationPasswordWithOnlySymbolsTest() {
+    public void  shouldRegisterSuccessfullyWithSpecialCharactersPassword() {
         String symbolsPassword = UserDataFactory.getSpecialSymbolsPassword(8);
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
@@ -776,14 +829,15 @@ public class RegistrationTest extends BaseTest {
     @Severity(SeverityLevel.MINOR)
     @Story("Password Field Validation")
     @Test
-    public void verifyEmailValidationPasswordWithOnlyDigitsTest() {
+    public void shouldRegisterSuccessfullyWithDigitsOnlyPassword() {
         String digitsPassword = UserDataFactory.getOnlyDigitsPassword(8);
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 digitsPassword);
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
 
     }
 
@@ -791,28 +845,30 @@ public class RegistrationTest extends BaseTest {
     @Severity(SeverityLevel.MINOR)
     @Story("Password Field Validation")
     @Test
-    public void verifyEmailValidationPasswordWithLeadingSpacesTest() {
+    public void shouldRegisterSuccessfullyWithLeadingSpaceInPassword() {
         String leadingSpacesPassword = UserDataFactory.getPasswordWithLeadingPassword();
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 leadingSpacesPassword);
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
     }
 
     @DisplayName("Registration succeeds with spaces in the middle of password -UI-REG-058")
     @Severity(SeverityLevel.MINOR)
     @Story("Password Field VValidation")
     @Test
-    public void verifyEmailValidationPasswordWithMiddleSpacesTest() {
+    public void shouldRegisterSuccessfullyWithSpaceInMiddleOfPassword() {
         String middleSpacesPassword = UserDataFactory.getPasswordWithMiddlePassword();
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 middleSpacesPassword);
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
 
     }
 
@@ -820,14 +876,15 @@ public class RegistrationTest extends BaseTest {
     @Severity(SeverityLevel.MINOR)
     @Story("Password Field Validation")
     @Test
-    public void verifyEmailValidationPasswordWithEndingSpacesTest() {
+    public void shouldRegisterSuccessfullyWithTrailingSpaceInPassword() {
         String endingSpacesPassword = UserDataFactory.getPasswordWithEndingPassword();
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 endingSpacesPassword);
-        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage());
+        assertEquals(RegistrationMessage.SUCCESS_REGISTER.getMessage(), registrationPage.getSuccessMessage(),
+                "Success message should be displayed");
 
     }
 
@@ -835,56 +892,62 @@ public class RegistrationTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Story("Password Field Password")
     @Test
-    public void verifyEmailValidationPasswordOnlySpacesTest() {
+    public void shouldDisplayPasswordRequiredErrorForSpacesOnlyPassword() {
         registrationPage.fillRegistrationForm(UserDataFactory.getFirstName(),
                 UserDataFactory.getLastName(),
                 UserDataFactory.getPhoneNumberAz(),
                 UserDataFactory.getEmail(),
                 "          ");
-        assertEquals(RegistrationMessage.PASSWORD_REQUIRED.getMessage(), registrationPage.getErrorMessageEmptyPassword());
+        assertEquals(RegistrationMessage.PASSWORD_REQUIRED.getMessage(), registrationPage.getErrorMessageEmptyPassword(),
+                "Password required error should be displayed");
     }
 
     @DisplayName("Registration page displays correct title text -UI-REG-061")
     @Severity(SeverityLevel.TRIVIAL)
     @Story("UI Elements")
     @Test
-    public void verifyRegistrationPageTitleTest() {
-        registrationPage.getTitle();
-        assertEquals("Регистрация", registrationPage.getTitle());
+    public void shouldDisplayRegistrationPageTitle() {
+        registrationPage.getRegistrationTitle();
+        assertEquals("Регистрация", registrationPage.getRegistrationTitle(),
+                "Registration page title should be displayed");
     }
 
     @DisplayName("Registration page displays correct footer text -UI-REG-062")
     @Severity(SeverityLevel.TRIVIAL)
     @Story("UI Elements")
     @Test
-    public void verifyRegistrationFooterTitleTest() {
-        registrationPage.getFooterTitle();
-        assertEquals("Уже зарегистрирован?", registrationPage.getFooterTitle());
+    public void shouldDisplayRegistrationFooterTitle() {
+        registrationPage.getRegistrationFooterTitle();
+        assertEquals("Уже зарегистрирован?", registrationPage.getRegistrationFooterTitle(),
+                "Registration footer title should be displayed");
     }
 
     @DisplayName("Clicking login link opens login modal from registration page -UI-REG-063")
     @Severity(SeverityLevel.NORMAL)
     @Story("UI Elements")
     @Test
-    public void verifyNavigationToLoginPageFromRegistrationPageTest() {
+    public void shouldOpenLoginModalFromRegistrationPage() {
         registrationPage.clickLoginButton();
-        Assertions.assertTrue(registrationPage.isModalLoginDisplayed());
+        Assertions.assertTrue(registrationPage.isModalLoginDisplayed(),
+                "Login modal should be displayed");
     }
 
     @DisplayName("First name input displays correct placeholder text -UI-REG-064")
     @Severity(SeverityLevel.TRIVIAL)
     @Story("UI Elements")
     @Test
-    public void getPlaceholderFirstNameInputTest() {
-        assertEquals("Введите имя", registrationPage.getPlaceholderFirstNameInputText());
+    public void shouldDisplayFirstNamePlaceholderText() {
+        assertEquals("Введите имя", registrationPage.getPlaceholderFirstNameInputText(),
+                "First name placeholder should be displayed");
     }
 
     @DisplayName("Last name input displays correct placeholder text -UI-REG-065")
     @Severity(SeverityLevel.TRIVIAL)
     @Story("UI Elements")
     @Test
-    public void getPlaceholderLastNameInputTest() {
-        assertEquals("Введите фамилию", registrationPage.getPlaceholderLastNameInputText());
+    public void shouldDisplayLastNamePlaceholderText() {
+        assertEquals("Введите фамилию", registrationPage.getPlaceholderLastNameInputText(),
+                "Last name placeholder should be displayed");
     }
 
 
@@ -892,28 +955,32 @@ public class RegistrationTest extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("UI Elements")
     @Test
-    public void getPlaceholderEmailInputTest() {
-        assertEquals("name@example.com", registrationPage.getPlaceholderEmailInputText());
+    public void shouldDisplayEmailPlaceholderText() {
+        assertEquals("name@example.com", registrationPage.getPlaceholderEmailInputText(),
+                "Email placeholder should be displayed");
     }
 
     @DisplayName("Clicking close button dismisses the registration modal -UI-REG-067")
     @Severity(SeverityLevel.NORMAL)
     @Story("UI Elements")
     @Test
-    public void dropDownSelectorDisplayedTest() {
-        Assertions.assertTrue(registrationPage.isDropDownSelectorDisplayed());
+    public void shouldDisplayCountryCodeDropdownSelector() {
+        Assertions.assertTrue(registrationPage.isDropDownSelectorDisplayed(),
+                "Country code dropdown should be displayed");
     }
 
     @DisplayName("Clicking close button dismisses the registration modal -UI-REG-067")
     @Severity(SeverityLevel.NORMAL)
     @Story("UI ELements")
     @Test
-    public void verifyCloseButtonTest() {
+    public void shouldCloseRegistrationModalOnCloseButtonClick() {
         registrationPage.clickCloseModalButton();
-        Assertions.assertTrue(registrationPage.isModalRegistrationInvisible());
+        Assertions.assertTrue(registrationPage.isModalRegistrationInvisible(),
+                "Registration modal should be visible");
 
     }
 }
+
 
 
 
