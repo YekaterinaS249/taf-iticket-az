@@ -126,13 +126,17 @@ mvn clean install
  
 ## Запуск тестов
 
+```bash
 mvn test
+```
 
 ---
 
 ## Формирование Allure отчета
 
+```bash
 allure serve target/allure-results
+```
 
 ---
 
