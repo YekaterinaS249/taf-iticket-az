@@ -30,33 +30,36 @@ public class EventPriceTest extends BaseTest {
     @DisplayName("First session price is displayed on the event page -UI-PRC-004")
     @Story("Price display")
     @Test
-    public void searchResultPriceIsDisplayedTest() {
+    public void shouldDisplayFirstSessionPrice() {
         searchPage.clickSearchIcon();
         searchPage.setSearchInput("театр");
         searchPage.clickFirstEventItem();
-        Assertions.assertTrue(eventPage.isFirstSessionPriceDisplayed());
+        Assertions.assertTrue(eventPage.isFirstSessionPriceDisplayed(),
+                "First session price should be displayed");
     }
 
     @DisplayName("First session price contains the currency symbol -UI-PRC-002")
     @Story("Price currency")
     @Test
-    public void searchResultPriceContainsCurrencyTest() {
+    public void shouldDisplayCurrencySymbolForFirstSessionPrice() {
         searchPage.clickSearchIcon();
         searchPage.setSearchInput("театр");
         searchPage.clickFirstEventItem();
-        Assertions.assertTrue(eventPage.getFirstSessionPrice().contains("₼"));
+        Assertions.assertTrue(eventPage.getFirstSessionPrice().contains("₼"),
+                "First session price should contain the currency symbol");
     }
 
     @DisplayName("All session prices contain the currency symbol -UI-PRC-003")
+    @Story("Price currency")
     @Test
-    public void searchResultAllPricesContainCurrencyTest() {
+    public void shouldDisplayCurrencySymbolForAllSessionPrices() {
         searchPage.clickSearchIcon();
         searchPage.setSearchInput("театр");
         searchPage.clickFirstEventItem();
-        List<String> prices = eventPage.getAllSessionPrice();
+        List<String> prices = eventPage.getAllSessionPrices();
         for (String price : prices) {
-            Assertions.assertTrue(price.contains("₼"));
-
+            Assertions.assertTrue(price.contains("₼"),
+                    "Each session price should contain the currency symbol");
         }
     }
 }
