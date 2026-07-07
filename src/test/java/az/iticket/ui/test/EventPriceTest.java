@@ -14,6 +14,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 @Epic("Event Details")
 @Feature("Session Pricing")
 @Owner("Silantyeva Yekaterina")
@@ -34,7 +36,7 @@ public class EventPriceTest extends BaseTest {
         searchPage.clickSearchIcon();
         searchPage.setSearchInput("театр");
         searchPage.clickFirstEventItem();
-        Assertions.assertTrue(eventPage.isFirstSessionPriceDisplayed(),
+        assertTrue(eventPage.isFirstSessionPriceDisplayed(),
                 "First session price should be displayed");
     }
 
@@ -45,7 +47,7 @@ public class EventPriceTest extends BaseTest {
         searchPage.clickSearchIcon();
         searchPage.setSearchInput("театр");
         searchPage.clickFirstEventItem();
-        Assertions.assertTrue(eventPage.getFirstSessionPrice().contains("₼"),
+        assertTrue(eventPage.getFirstSessionPrice().contains("₼"),
                 "First session price should contain the currency symbol");
     }
 
@@ -58,7 +60,7 @@ public class EventPriceTest extends BaseTest {
         searchPage.clickFirstEventItem();
         List<String> prices = eventPage.getAllSessionPrices();
         for (String price : prices) {
-            Assertions.assertTrue(price.contains("₼"),
+            assertTrue(price.contains("₼"),
                     "Each session price should contain the currency symbol");
         }
     }
